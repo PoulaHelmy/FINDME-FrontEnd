@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { DynamicFormComponent } from '@@shared/pages/dynamicForms/dynamic-form/dynamic-form.component';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { FieldConfig } from '@@shared/models/field.interface';
-import { SnackbarService } from '@@shared/pages/snackbar/snackbar.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ItemsService } from '@@core/services/items.service';
+import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
+import {DynamicFormComponent} from '@@shared/pages/dynamicForms/dynamic-form/dynamic-form.component';
+import {FormGroup, FormBuilder} from '@angular/forms';
+import {Subscription} from 'rxjs';
+import {FieldConfig} from '@@shared/models/field.interface';
+import {SnackbarService} from '@@shared/pages/snackbar/snackbar.service';
+import {Router, ActivatedRoute} from '@angular/router';
+import {ItemsService} from '@@core/services/items.service';
 
 @Component({
   selector: 'app-update-options',
@@ -27,12 +27,13 @@ export class UpdateOptionsComponent implements OnInit, OnDestroy {
     private router: Router,
     private actRoute: ActivatedRoute,
     private itemService: ItemsService
-  ) {}
+  ) {
+  }
 
   /****************** ngOnInit Function************************/
   ngOnInit(): void {
     this.actRoute.data.subscribe((res) => {
-      console.log('rererer', res);
+      // console.log('rererer', res);
       this.item_id = res['item'][0]['item_id'];
       const btn = {
         type: 'button',
@@ -78,5 +79,6 @@ export class UpdateOptionsComponent implements OnInit, OnDestroy {
   } //end of submit
 
   /****************** ngOnDestroy Function************************/
-  ngOnDestroy(): void {} //end of ngOnDestroy
+  ngOnDestroy(): void {
+  } //end of ngOnDestroy
 } //end of Calss

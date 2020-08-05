@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   FormGroup,
   FormControl,
   Validators,
   FormBuilder,
 } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from 'app/@auth/services/auth.service';
-import { SnackbarService } from '@@shared/pages/snackbar/snackbar.service';
-import { ConfirmedValidator } from '@@shared/validatores/confirmed.validator';
+import {Router, ActivatedRoute} from '@angular/router';
+import {AuthService} from 'app/@auth/services/auth.service';
+import {SnackbarService} from '@@shared/pages/snackbar/snackbar.service';
+import {ConfirmedValidator} from '@@shared/validatores/confirmed.validator';
 
 @Component({
   selector: 'app-change-password',
@@ -21,13 +21,15 @@ export class ChangePasswordComponent implements OnInit {
   passwordToken: string;
   email: string;
   data: {};
+
   constructor(
     private authService: AuthService,
     private router: Router,
     private snackbarService: SnackbarService,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.resetForm = this.fb.group(
@@ -54,9 +56,11 @@ export class ChangePasswordComponent implements OnInit {
   get getConfPass() {
     return this.resetForm.get('confirmPassword');
   }
+
   get getPassword() {
     return this.resetForm.get('password');
   }
+
   get getOLdPassword() {
     return this.resetForm.get('old_password');
   }
@@ -72,8 +76,8 @@ export class ChangePasswordComponent implements OnInit {
       .changePassword(this.data)
       .toPromise()
       .then((res) => {
-        console.log('res', res);
-        console.log('this.data', this.data);
+        // console.log('res', res);
+        // console.log('this.data', this.data);
         this.snackbarService.show('Password Changed Successfully');
         this.authService.logout().subscribe((result) => {
           localStorage.removeItem('access_token');

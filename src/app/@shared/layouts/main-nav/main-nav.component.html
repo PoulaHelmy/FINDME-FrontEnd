@@ -30,32 +30,47 @@
           [routerLink]="['/dashboard']"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
-          ><mat-icon color="primary">dashboard</mat-icon
-          ><span class="mx-2">Dashboard</span></mat-list-item
+        >
+          <mat-icon color="primary">dashboard
+          </mat-icon
+          >
+          <span class="mx-2">Dashboard</span></mat-list-item
         >
         <mat-list-item
           [routerLink]="['/dashboard/items']"
           routerLinkActive="active"
-          ><mat-icon color="primary" class="mx-1">bookmarks</mat-icon
-          ><span class="mx-2">Items</span></mat-list-item
+        >
+          <mat-icon color="primary" class="mx-1">bookmarks
+          </mat-icon
+          >
+          <span class="mx-2">Items</span></mat-list-item
         >
         <mat-list-item
           routerLink="/dashboard/requests"
           routerLinkActive="active"
-          ><mat-icon color="primary">compare_arrows</mat-icon
-          ><span class="mx-2">My Requests</span></mat-list-item
+        >
+          <mat-icon color="primary">compare_arrows
+          </mat-icon
+          >
+          <span class="mx-2">My Requests</span></mat-list-item
         >
         <mat-list-item
           routerLink="/dashboard/increquests"
           routerLinkActive="active"
-          ><mat-icon color="primary">swap_vert</mat-icon
-          ><span class="mx-2">Incoming Requests</span></mat-list-item
+        >
+          <mat-icon color="primary">swap_vert
+          </mat-icon
+          >
+          <span class="mx-2">Incoming Requests</span></mat-list-item
         >
         <mat-list-item
           routerLink="/dashboard/matching"
           routerLinkActive="active"
-          ><mat-icon color="primary">done_all</mat-icon
-          ><span class="mx-2">My-Matchs</span></mat-list-item
+        >
+          <mat-icon color="primary">done_all
+          </mat-icon
+          >
+          <span class="mx-2">My-Matchs</span></mat-list-item
         >
       </mat-nav-list>
     </div>
@@ -72,7 +87,7 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
       </div>
-      <span>FindME</span>
+      <a routerLink="/" class="findme__logo">FindME</a>
       <div class="spacer"></div>
 
       <div class="right-options">
@@ -85,7 +100,8 @@
           <mat-icon
             [matBadge]="notificationsNumber != 0 ? notificationsNumber : ''"
             matBadgeColor="warn"
-            >notifications</mat-icon
+          >notifications
+          </mat-icon
           >
         </button>
         <mat-menu #notificationsMenu="matMenu" class="my-menu">
@@ -97,7 +113,8 @@
               (click)="markAsReaded(notification['id'])"
             >
               <mat-icon class="mat-18">{{ notification["icon"] }}</mat-icon
-              >{{ notification["body"] }}
+              >
+              {{ notification["body"] }}
             </button>
           </ng-container>
         </mat-menu>
@@ -158,7 +175,7 @@
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
     <span class="findlogo">Find<span style="color: #00BFA6;"> Me </span></span>
   </a>
-  <div class="navIco d-flex justify-content-center align-items-center px-2 ">  
+  <div class="navIco d-flex justify-content-center align-items-center px-2 ">
     <div style="background-color: white;" class="rounded-circle notif">
       <button mat-icon-button [matMenuTriggerFor]="notificationsMenu" aria-label="Example icon-button with a menu">
         <mat-icon style="color: #212121;" [matBadge]="notificationsNumber != '0' ? notificationsNumber : ''" matBadgeColor="warn">notifications
@@ -178,11 +195,11 @@
         <i style="color: white;" class="fa fa-power-off fa-2x nOut"></i>
       </a>
     </div>
-    
+
   </div>
-  
-    
- 
+
+
+
 
 </nav>
 <nav class="main-menu py-5">
@@ -232,7 +249,7 @@
       </a>
     </li>
     <li class="px-2">
-    
+
   </li>
   </ul>
 </nav>

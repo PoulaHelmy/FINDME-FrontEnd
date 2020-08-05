@@ -1,10 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { ItemsService } from '@@core/services/items.service';
-import { SnackbarService } from '@@shared/pages/snackbar/snackbar.service';
-import { ConfirmDialogService } from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
-import { RequestsService } from '@@core/services/requests.service';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {SnackbarService} from '@@shared/pages/snackbar/snackbar.service';
+import {ConfirmDialogService} from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
+import {RequestsService} from '@@core/services/requests.service';
 
 @Component({
   selector: 'app-inc-requests-details',
@@ -26,7 +24,8 @@ export class IncRequestsDetailsComponent implements OnInit, OnDestroy {
     private reqServ: RequestsService,
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((res) => {
@@ -40,7 +39,7 @@ export class IncRequestsDetailsComponent implements OnInit, OnDestroy {
       this.dialogService.confirmed().subscribe((confirmed) => {
         if (confirmed) {
           this.reqServ
-            .approveRequest({ req_id: id, status: status })
+            .approveRequest({req_id: id, status: status})
             .toPromise()
             .then((res) => {
               this.snackbarService.show(
@@ -56,7 +55,7 @@ export class IncRequestsDetailsComponent implements OnInit, OnDestroy {
       });
     } else {
       this.reqServ
-        .approveRequest({ req_id: id, status: 1 })
+        .approveRequest({req_id: id, status: 1})
         .toPromise()
         .then((res) => {
           this.snackbarService.show('Request Approved Successfully', 'success');
@@ -68,5 +67,6 @@ export class IncRequestsDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+  }
 } //end of class

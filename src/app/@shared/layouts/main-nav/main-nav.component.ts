@@ -6,10 +6,6 @@ import {AuthService} from 'app/@auth/services/auth.service';
 import {Router, ActivatedRoute} from '@angular/router';
 import {SnackbarService} from '@@shared/pages/snackbar/snackbar.service';
 import {OverlayContainer} from '@angular/cdk/overlay';
-import {ThemeService} from '@@core/services/theme-service.service';
-import {FormControl} from '@angular/forms';
-import {Item} from '@@shared/models/item';
-import {HttpClient} from '@angular/common/http';
 import {ItemsService} from '@@core/services/items.service';
 import {NotificationsService} from '@@core/services/notifications.service';
 
@@ -78,7 +74,7 @@ export class MainNavComponent implements OnInit {
     });
     /*---------------- For notification-------------------*/
     this.notificationServ.getAllNotifictions().subscribe((res) => {
-      console.log(res);
+      // console.log(res);
       this.notificationsNumber = res.length;
       res.forEach((element) => {
         let elementData = [];

@@ -7,7 +7,7 @@ export const environment = {
     indexName: 'getstarted_actors',
     urlSync: false,
   },
-  firebaseConfig : {
+  firebaseConfig: {
     apiKey: 'AIzaSyDzTHd1Z4Fifhw3e2JTc8Z4D58ZwOR01Tc',
     authDomain: 'findme-272806.firebaseapp.com',
     databaseURL: 'https://findme-272806.firebaseio.com',
@@ -18,7 +18,7 @@ export const environment = {
     measurementId: 'G-5DZVTS8PL8'
   },
   azure: {
-    endpoint: 'https://findme.cognitiveservices.azure.com/face/v1.0',
+    endpoint: 'https://eastus.api.cognitive.microsoft.com',
   },
   remoteConfig: false, // for performance don't load settings from remote
   apiUrl: 'http://findme.test',

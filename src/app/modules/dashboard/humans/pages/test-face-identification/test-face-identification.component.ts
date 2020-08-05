@@ -1,16 +1,17 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FaceApiService } from 'app/modules/dashboard/humans/services/face-api.service';
-import { ToastrService, Toast } from 'ngx-toastr';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {FaceApiService} from 'app/modules/dashboard/humans/services/face-api.service';
+import {ToastrService, Toast} from 'ngx-toastr';
 import {
   FormGroup,
   Validators,
   FormBuilder,
   FormControl,
 } from '@angular/forms';
-import { ItemsService } from '@@core/services/items.service';
-import { delay, switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import {ItemsService} from '@@core/services/items.service';
+import {delay, switchMap} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+
 @Component({
   selector: 'app-test-face-identification',
   templateUrl: './test-face-identification.component.html',
@@ -32,7 +33,8 @@ export class TestFaceIdentificationComponent implements OnInit {
     private actRoute: ActivatedRoute,
     private fb: FormBuilder,
     private itemServ: ItemsService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.faceForm = this.fb.group({
@@ -44,15 +46,15 @@ export class TestFaceIdentificationComponent implements OnInit {
     this.isLoadingResults = true;
     this.toastr.success(
       ' ',
-      'Upload Image Process May by Take Alot Of Time...'
+      'Upload Image Process May by Take A lot Of Time...'
     );
     this.faceApi.detect(this.b64toFile(this.images[0])).subscribe(
       (res) => {
-        this.faceApi.identify(3, [res[0]['faceId']]).subscribe((result) => {
+        this.faceApi.identify('maingroup', [res[0]['faceId']]).subscribe((result) => {
           if (result[0]['candidates'][0]) {
             this.isLoadingResults = false;
             this.faceApi
-              .getPerson(3, result[0]['candidates'][0]['personId'])
+              .getPerson('maingroup', result[0]['candidates'][0]['personId'])
               .subscribe((data) => {
                 this.toastr.success(
                   ' ',
@@ -84,6 +86,7 @@ export class TestFaceIdentificationComponent implements OnInit {
       }
     );
   }
+
   /****************** File uploading Function************************/
   onFileChange(event) {
     if (event.target.files && event.target.files[0]) {
@@ -97,6 +100,7 @@ export class TestFaceIdentificationComponent implements OnInit {
       }
     }
   }
+
   b64toFile(dataURI): File {
     // convert the data URL to a byte string
     const byteString = atob(dataURI.split(',')[1]);
@@ -112,7 +116,7 @@ export class TestFaceIdentificationComponent implements OnInit {
     }
 
     // Create a blob that looks like a file.
-    const blob = new Blob([ab], { type: mimeString });
+    const blob = new Blob([ab], {type: mimeString});
     blob['lastModifiedDate'] = new Date().toISOString();
     blob['name'] = 'file';
 
@@ -126,6 +130,6 @@ export class TestFaceIdentificationComponent implements OnInit {
         break;
     }
     // cast to a File
-    return <File>blob;
+    return <File> blob;
   }
 } //end of Class

@@ -1,26 +1,25 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from './material/material.module';
-import { HttpClientModule } from '@angular/common/http';
-import { SharedRoutingModule } from './shared-routing.module';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { FilterPipePipe } from './pipes/filter-pipe.pipe';
-import { ConfirmDialogComponent } from '@@shared/pages/dialogs/confirm-dialog/confirm-dialog.component';
-import { ConfirmDialogService } from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
-import { SnackbarComponent } from './pages/snackbar/snackbar.component';
-import { InputComponent } from './pages/dynamicForms/input.component';
-import { ButtonComponent } from './pages/dynamicForms/button.component';
-import { DateComponent } from './pages/dynamicForms/date.component';
-import { SelectComponent } from './pages/dynamicForms/select.component';
-import { RadiobuttonComponent } from './pages/dynamicForms/radiobutton.component';
-import { CheckboxComponent } from './pages/dynamicForms/checkbox.component';
-import { DynamicFieldDirective } from './directives/dynamic-field/dynamic-field.directive';
-import { DynamicFormComponent } from './pages/dynamicForms/dynamic-form/dynamic-form.component';
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
-import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
-import { MainNavComponent } from './layouts/main-nav/main-nav.component';
-import { ImgDefualtPipe } from './pipes/img-defualt.pipe';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MaterialModule} from './material/material.module';
+import {HttpClientModule} from '@angular/common/http';
+import {SharedRoutingModule} from './shared-routing.module';
+import {NotFoundComponent} from './pages/not-found/not-found.component';
+import {FilterPipePipe} from './pipes/filter-pipe.pipe';
+import {ConfirmDialogComponent} from '@@shared/pages/dialogs/confirm-dialog/confirm-dialog.component';
+import {ConfirmDialogService} from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
+import {SnackbarComponent} from './pages/snackbar/snackbar.component';
+import {InputComponent} from './pages/dynamicForms/input.component';
+import {ButtonComponent} from './pages/dynamicForms/button.component';
+import {DateComponent} from './pages/dynamicForms/date.component';
+import {SelectComponent} from './pages/dynamicForms/select.component';
+import {RadiobuttonComponent} from './pages/dynamicForms/radiobutton.component';
+import {CheckboxComponent} from './pages/dynamicForms/checkbox.component';
+import {DynamicFieldDirective} from './directives/dynamic-field/dynamic-field.directive';
+import {DynamicFormComponent} from './pages/dynamicForms/dynamic-form/dynamic-form.component';
+import {BlankLayoutComponent} from './layouts/blank-layout/blank-layout.component';
+import {MainNavComponent} from './layouts/main-nav/main-nav.component';
+import {ImgDefualtPipe} from './pipes/img-defualt.pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +35,6 @@ import { ImgDefualtPipe } from './pipes/img-defualt.pipe';
     CheckboxComponent,
     DynamicFieldDirective,
     DynamicFormComponent,
-    AuthLayoutComponent,
     BlankLayoutComponent,
     MainNavComponent,
     ImgDefualtPipe,
@@ -63,7 +61,6 @@ import { ImgDefualtPipe } from './pipes/img-defualt.pipe';
     CheckboxComponent,
     DynamicFieldDirective,
     DynamicFormComponent,
-    AuthLayoutComponent,
     BlankLayoutComponent,
     MainNavComponent,
     ImgDefualtPipe,
@@ -78,4 +75,5 @@ import { ImgDefualtPipe } from './pipes/img-defualt.pipe';
     CheckboxComponent,
   ],
 })
-export class SharedModule {}
+export class SharedModule {
+}

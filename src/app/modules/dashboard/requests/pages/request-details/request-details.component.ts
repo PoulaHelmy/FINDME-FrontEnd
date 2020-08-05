@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { ItemsService } from '@@core/services/items.service';
-import { SnackbarService } from '@@shared/pages/snackbar/snackbar.service';
-import { ConfirmDialogService } from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ItemsService} from '@@core/services/items.service';
+import {SnackbarService} from '@@shared/pages/snackbar/snackbar.service';
+import {ConfirmDialogService} from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
 
 @Component({
   selector: 'app-request-details',
@@ -25,7 +24,8 @@ export class RequestDetailsComponent implements OnInit, OnDestroy {
     private snackbarService: SnackbarService,
     private router: Router,
     private dialogService: ConfirmDialogService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((res) => {
@@ -54,5 +54,6 @@ export class RequestDetailsComponent implements OnInit, OnDestroy {
     // this.apiserv.deleteCheck(id, value);
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+  }
 } //end of class

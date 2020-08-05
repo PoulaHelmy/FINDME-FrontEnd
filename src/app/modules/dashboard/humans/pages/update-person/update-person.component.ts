@@ -1,18 +1,20 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { SnackbarService } from '@@shared/pages/snackbar/snackbar.service';
-import { ConfirmDialogService } from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
-import { DatePipe } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ItemsService } from '@@core/services/items.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FaceApiService } from 'app/modules/dashboard/humans/services/face-api.service';
+import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {SnackbarService} from '@@shared/pages/snackbar/snackbar.service';
+import {ConfirmDialogService} from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
+import {DatePipe} from '@angular/common';
+import {Router, ActivatedRoute} from '@angular/router';
+import {ItemsService} from '@@core/services/items.service';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {FaceApiService} from 'app/modules/dashboard/humans/services/face-api.service';
+
 const httpOptions = {
   headers: new HttpHeaders({
     'X-Algolia-Application-Id': 'plBIPOQ7X7HA',
     'X-Algolia-API-Key': 'ce287ed40c8a6f4d8579799492461dd7',
   }),
 };
+
 @Component({
   selector: 'app-update-person',
   templateUrl: './update-person.component.html',
@@ -36,6 +38,7 @@ export class UpdatePersonComponent implements OnInit {
     cancelText: 'Cancel And Review this Data',
     confirmText: 'Confirm And Continue',
   };
+
   /****************** constructor Function************************/
   constructor(
     private fb: FormBuilder,
@@ -47,7 +50,8 @@ export class UpdatePersonComponent implements OnInit {
     private http: HttpClient,
     private faceApi: FaceApiService,
     private actRoute: ActivatedRoute
-  ) {}
+  ) {
+  }
 
   /****************** ngOnInit Function************************/
   ngOnInit(): void {
@@ -73,7 +77,7 @@ export class UpdatePersonComponent implements OnInit {
 
     this.personsForm.controls.location.valueChanges.subscribe((res) => {
       if (res !== '' && res !== null && res !== ' ') {
-        let data = { query: res, type: 'address' };
+        let data = {query: res, type: 'address'};
         this.http
           .post(
             'https://places-dsn.algolia.net/1/places/query',
@@ -117,7 +121,7 @@ export class UpdatePersonComponent implements OnInit {
     this.dialogService.confirmed().subscribe((confirmed) => {
       if (confirmed) {
         this.isLoadingResults = true;
-        this.faceApi.getPersonsByGroup(3).subscribe((res) => {
+        this.faceApi.getPersonsByGroup('maingroup').subscribe((res) => {
           res.forEach((person) => {
             if (person['name'] === this.data['name']) {
               personId = person['personId'];
@@ -158,5 +162,6 @@ export class UpdatePersonComponent implements OnInit {
   } //end of submit
 
   /****************** DEstroy Function************************/
-  ngOnDestroy(): void {} //end of destroy
+  ngOnDestroy(): void {
+  } //end of destroy
 } //end of Class

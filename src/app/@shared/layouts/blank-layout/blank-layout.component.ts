@@ -1,44 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
-import { AuthService } from 'app/@auth/services/auth.service';
-import { shareReplay } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { SnackbarService } from '@@shared/pages/snackbar/snackbar.service';
+import {Component, AfterViewInit, HostListener, ViewChild, ElementRef} from '@angular/core';
+import {AuthService} from 'app/@auth/services/auth.service';
+import {shareReplay} from 'rxjs/operators';
+import {Router} from '@angular/router';
+import {SnackbarService} from '@@shared/pages/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-blank-layout',
   templateUrl: './blank-layout.component.html',
   styleUrls: ['./blank-layout.component.scss'],
 })
-export class BlankLayoutComponent implements OnInit {
+export class BlankLayoutComponent implements AfterViewInit {
   constructor(
     private authService: AuthService,
     private router: Router,
     private snackbar: SnackbarService
-  ) {}
-  isAuthenticated$ = this.authService.isAuthenticated$.pipe(shareReplay(1));
-
-  ngOnInit(): void {
-    $("a").click(function(){
-      $(window).scrollTop(0);
-    })
-
-    $(window).scroll(function(){
-      let windowScroll = $(window).scrollTop(); //el user nzl add a;
-      if(windowScroll > 1)
-          {
-              $("nav").css("backgroundColor","white");
-              $("nav").css("box-shadow","5px 10px 18px #888888");
-          }
-      else
-          {
-              $("nav").css("backgroundColor","transparent");
-              $("nav").css("box-shadow","0px 0px 0px #888888");
-
-
-          }
-  })
+  ) {
   }
+
+  isAuthenticated$ = this.authService.isAuthenticated$.pipe(shareReplay(1));
+  @ViewChild('stickyMenu') menuElement: ElementRef;
+  sticky = false;
+  elementPosition: any;
+
+  ngAfterViewInit() {
+    this.elementPosition = this.menuElement.nativeElement.offsetTop;
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  handleScroll() {
+    if (window.pageYOffset > this.elementPosition) {
+      this.sticky = true;
+    } else {
+      this.sticky = false;
+    }
+  }
+
   logout() {
     if (localStorage.getItem('isAuth') == 'false') {
       this.snackbar.show(
@@ -58,7 +54,34 @@ export class BlankLayoutComponent implements OnInit {
         .catch((err) => {
           this.snackbar.show(err['error']['message'], 'danger');
         })
-        .finally(() => {});
+        .finally(() => {
+        });
     }
   }
 }
+
+// import { DOCUMENT } from '@angular/common';
+
+// constructor(@Inject(DOCUMENT) private document: Document) { }
+//
+// @HostListener('window:scroll', [])
+// onWindowScroll() {
+//   if (document.body.scrollTop > 20 ||
+//     document.documentElement.scrollTop > 20) {
+//     document.getElementById('subTitle').classList.add('red');
+//     document.getElementById('paragraph').classList.add('green');
+//   }
+// }
+///////////////////////////////////////////////////////////////////
+// @HostListener('window:scroll', [])
+// onWindowScroll(event: Event) {
+//   //set up the div "id=nav"
+//   if (document.body.scrollTop > 3300 ||
+//     document.documentElement.scrollTop > 3300) {
+//     document.getElementById('nav').classList.add('scrolled');
+//   }
+//   else {
+//     document.getElementById('nav').classList.remove('scrolled');
+//     this.innerWidth = 'auto';
+//   }
+// }

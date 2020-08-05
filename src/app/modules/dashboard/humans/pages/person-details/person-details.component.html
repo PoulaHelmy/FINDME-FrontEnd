@@ -6,109 +6,129 @@
     <mat-card-header>
       <mat-card-title>Person Matched To The Image</mat-card-title>
       <mat-card-subtitle
-        >Please check The Data And Then You Can Make Request To This
-        Person</mat-card-subtitle
+      >Please check The Data And Then You Can Make Request To This
+        Person
+      </mat-card-subtitle
       >
     </mat-card-header>
     <mat-card-content>
       <div class="container my-4">
         <div class="row justify-content-center">
-          <div class="table-tag w-100">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>
+          <div class="col-12">
+            <mat-selection-list [multiple]="false">
+              <mat-list-option class="my-2 py-2">
+                <div class="items-list-contanier">
+                  <div class="right-content">
                     Person Status
-                  </td>
-                  <td>
+                  </div>
+                  <div class="left-content">
                     {{
-                      itemDetails["is_found"] === 1
-                        ? "Founded Person"
-                        : "Losted Person"
+                    itemDetails["is_found"] === 1
+                      ? "Founded Person"
+                      : "Losted Person"
                     }}
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>
+                  </div>
+                </div>
+              </mat-list-option>
+              <mat-divider></mat-divider>
+              <mat-list-option class="mat-list-option">
+                <div class="items-list-contanier">
+                  <div class="right-content">
                     Name
-                  </td>
-                  <td>{{ itemDetails["name"] }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>
+                  </div>
+                  <div class="left-content">
+                    {{ itemDetails["name"] }}
+                  </div>
+                </div>
+              </mat-list-option>
+              <mat-divider></mat-divider>
+              <mat-list-option class="mat-list-option">
+                <div class="items-list-contanier">
+                  <div class="right-content">
                     Gender
-                  </td>
-                  <td>{{ itemDetails["subcat"] }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">4</th>
-                  <td>
+                  </div>
+                  <div class="left-content">
+                    {{ itemDetails["subcat"] }}
+                  </div>
+                </div>
+              </mat-list-option>
+              <mat-divider></mat-divider>
+              <mat-list-option class="mat-list-option">
+                <div class="items-list-contanier">
+                  <div class="right-content">
                     Location
-                  </td>
-                  <td>{{ itemDetails["location"] }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">5</th>
-                  <td>
+                  </div>
+                  <div class="left-content">
+                    {{ itemDetails["location"] }}
+                  </div>
+                </div>
+              </mat-list-option>
+              <mat-divider></mat-divider>
+              <mat-list-option class="mat-list-option">
+                <div class="items-list-contanier">
+                  <div class="right-content">
                     Description
-                  </td>
-                  <td>{{ itemDetails["description"] }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">6</th>
-                  <td>
+                  </div>
+                  <div class="left-content">
+                    {{ itemDetails["description"] }}
+                  </div>
+                </div>
+              </mat-list-option>
+              <mat-divider></mat-divider>
+              <mat-list-option class="mat-list-option">
+                <div class="items-list-contanier">
+                  <div class="right-content">
                     Date
-                  </td>
-                  <td>{{ itemDetails["date"] }}</td>
-                </tr>
-                <tr
-                  *ngFor="
-                    let option of itemDetails['dynamicValues'];
-                    let i = index
-                  "
-                >
-                  <th scope="row">{{ i + 7 }}</th>
-                  <td>{{ option[0]["name"] }}</td>
-                  <td>{{ option[0]["value"] }}</td>
-                </tr>
-                <tr *ngFor="let image of itemDetails['images']; let i = index">
-                  <th scope="row">
-                    {{ i + 7 + itemDetails["optionsCount"] }}
-                  </th>
-                  <td>Image#{{ i + 1 }}</td>
-                  <td>
-                    <div class="col-md-6 my-2">
-                      <img
-                        [src]="image[0]['src']"
-                        class="img-fluid"
-                        style="max-width: 200px; max-height: 300px;"
-                      />
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <th scope="row">
-                    {{
-                      7 +
-                        itemDetails["imagesCount"] +
-                        itemDetails["optionsCount"]
-                    }}
-                  </th>
-                  <td>
+                  </div>
+                  <div class="left-content">
+                    {{ itemDetails["date"] }}
+                  </div>
+                </div>
+              </mat-list-option>
+              <mat-divider></mat-divider>
+              <mat-list-option class="mat-list-option"
+                               *ngFor="let option of itemDetails['dynamicValues'];let i = index">
+                <div class="items-list-contanier">
+                  <div class="right-content">
+                    {{ option[0]["name"] }}
+                  </div>
+                  <div class="left-content">
+                    {{ option[0]["value"] }}
+                  </div>
+                </div>
+                <mat-divider></mat-divider>
+              </mat-list-option>
+              <mat-divider></mat-divider>
+              <mat-list-option class="mat-list-option"
+                               *ngFor="  let question of itemDetails['AllQuestions']; let i = index  ">
+                <div class="items-list-contanier">
+                  <div class="right-content">
+                    Question#  {{  i + 1 }}
+                  </div>
+                  <div class="left-content">
+                    {{ question[0]["name"] }}
+                  </div>
+                </div>
+                <mat-divider></mat-divider>
+              </mat-list-option>
+              <mat-divider></mat-divider>
+              <mat-list-option class="mat-list-option">
+                <div class="items-list-contanier">
+                  <div class="right-content">
+                    Created_AT
+                  </div>
+                  <div class="left-content">
+                    {{ itemDetails["created_at"] | date }}
+                  </div>
+                </div>
+              </mat-list-option>
+              <mat-divider></mat-divider>
+              <mat-list-option class="mat-list-option">
+                <div class="items-list-contanier">
+                  <div class="right-content">
                     Actions
-                  </td>
-                  <td class="text-center">
+                  </div>
+                  <div class="left-content">
                     <button
                       class="matBtn"
                       color="accent"
@@ -120,20 +140,16 @@
                     >
                       Create Request
                     </button>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">
-                    {{
-                      8 +
-                        itemDetails["imagesCount"] +
-                        itemDetails["optionsCount"]
-                    }}
-                  </th>
-                  <td>
+                  </div>
+                </div>
+              </mat-list-option>
+              <mat-divider></mat-divider>
+              <mat-list-option class="mat-list-option">
+                <div class="items-list-contanier">
+                  <div class="right-content">
                     IF This Person Not Matching
-                  </td>
-                  <td class="text-center">
+                  </div>
+                  <div class="left-content">
                     <button
                       class="matBtn"
                       color="warn"
@@ -145,8 +161,169 @@
                     >
                       Add Person
                     </button>
-                  </td>
-                </tr>
+                  </div>
+                </div>
+              </mat-list-option>
+              <mat-divider></mat-divider>
+            </mat-selection-list>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <owl-carousel-o [options]="customOptions" (initialized)="getData($event)">
+              <ng-container *ngFor="let image of itemDetails['images']">
+                <ng-template carouselSlide [id]="image[0]['id']">
+                  <img
+                    matCardImage
+                    [src]="image[0]['src']"
+                    [alt]=""
+                    [title]=""
+                    class="img-fluid carusel-image"
+                  />
+                </ng-template>
+              </ng-container>
+            </owl-carousel-o>
+          </div>
+        </div>
+      </div>
+      <div class="container my-4">
+        <div class="row justify-content-center">
+          <div class="table-tag w-100">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Value</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>
+                  Person Status
+                </td>
+                <td>
+                  {{
+                  itemDetails["is_found"] === 1
+                    ? "Founded Person"
+                    : "Losted Person"
+                  }}
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>
+                  Name
+                </td>
+                <td>{{ itemDetails["name"] }}</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>
+                  Gender
+                </td>
+                <td>{{ itemDetails["subcat"] }}</td>
+              </tr>
+              <tr>
+                <th scope="row">4</th>
+                <td>
+                  Location
+                </td>
+                <td>{{ itemDetails["location"] }}</td>
+              </tr>
+              <tr>
+                <th scope="row">5</th>
+                <td>
+                  Description
+                </td>
+                <td>{{ itemDetails["description"] }}</td>
+              </tr>
+              <tr>
+                <th scope="row">6</th>
+                <td>
+                  Date
+                </td>
+                <td>{{ itemDetails["date"] }}</td>
+              </tr>
+              <tr
+                *ngFor="
+                    let option of itemDetails['dynamicValues'];
+                    let i = index
+                  "
+              >
+                <th scope="row">{{ i + 7 }}</th>
+                <td>{{ option[0]["name"] }}</td>
+                <td>{{ option[0]["value"] }}</td>
+              </tr>
+              <tr *ngFor="let image of itemDetails['images']; let i = index">
+                <th scope="row">
+                  {{ i + 7 + itemDetails["optionsCount"] }}
+                </th>
+                <td>Image#{{ i + 1 }}</td>
+                <td>
+                  <div class="col-md-6 my-2">
+                    <img
+                      [src]="image[0]['src']"
+                      class="img-fluid"
+                      style="max-width: 200px; max-height: 300px;"
+                    />
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <th scope="row">
+                  {{
+                  7 +
+                  itemDetails["imagesCount"] +
+                  itemDetails["optionsCount"]
+                  }}
+                </th>
+                <td>
+                  Actions
+                </td>
+                <td class="text-center">
+                  <button
+                    class="matBtn"
+                    color="accent"
+                    mat-raised-button
+                    aria-label="Request This Person"
+                    matTooltip="Request This Person"
+                    matTooltipPosition="left"
+                    (click)="makeRequest(itemDetails['id'])"
+                  >
+                    Create Request
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  {{
+                  8 +
+                  itemDetails["imagesCount"] +
+                  itemDetails["optionsCount"]
+                  }}
+                </th>
+                <td>
+                  IF This Person Not Matching
+                </td>
+                <td class="text-center">
+                  <button
+                    class="matBtn"
+                    color="warn"
+                    mat-raised-button
+                    aria-label="Add Person"
+                    matTooltip="Add Person"
+                    matTooltipPosition="left"
+                    [routerLink]="['/dashboard/humans/persons/create']"
+                  >
+                    Add Person
+                  </button>
+                </td>
+              </tr>
               </tbody>
             </table>
           </div>

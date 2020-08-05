@@ -1,25 +1,26 @@
 <!-------------------- nav ----------------------------->
 <nav
   class="navbar nav-tabs navbar-expand-lg navbar-light nav-color fixed-top p-3"
+  [class.sticky]="sticky"
+  #stickyMenu
 >
-<div class="navData">
-  <div class="findmeLogo" routerLink="../home">
-    <span>Find<span style="color: #00BFA6;">Me </span> </span>
-    <img src="../../../../assets/imgs/halloween.svg" />
+  <div class="navData">
+    <div class="findmeLogo" routerLink="../home">
+      <span>Find<span style="color: #00BFA6;">Me </span> </span>
+      <img src="../../../../assets/imgs/halloween.svg"/>
+    </div>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
   </div>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-</div>
-
 
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -30,7 +31,7 @@
           routerLink="../home"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
-          >Home</a
+        >Home</a
         >
       </li>
       <li class="nav-item">
@@ -39,7 +40,7 @@
           routerLink="about"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
-          >About</a
+        >About</a
         >
       </li>
       <li class="nav-item">
@@ -48,7 +49,7 @@
           routerLink="contact"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
-          >Contact</a
+        >Contact</a
         >
       </li>
 
@@ -112,7 +113,7 @@
       <div class="col-lg-3 col-md-6 col-sm-12">
 
         <div>
-          <h3 class="founder-head">Follow us<span class="colon-c">:</span> </h3>
+          <h3 class="founder-head">Follow us<span class="colon-c">:</span></h3>
           <a class="connections-links"> <i class="fab fa-2x fa-facebook icon-mine2 "></i> </a>
           <a class=" pl-4"> <i class="fab fa-2x fa-instagram icon-mine2"></i> </a>
           <h3 class="founder-head pt-3">A Question</h3>

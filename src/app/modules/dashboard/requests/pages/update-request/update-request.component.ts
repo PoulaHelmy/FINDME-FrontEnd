@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -6,10 +6,10 @@ import {
   Validators,
   FormArray,
 } from '@angular/forms';
-import { SnackbarService } from '@@shared/pages/snackbar/snackbar.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ItemsService } from '@@core/services/items.service';
-import { Subscription } from 'rxjs';
+import {SnackbarService} from '@@shared/pages/snackbar/snackbar.service';
+import {Router, ActivatedRoute} from '@angular/router';
+import {ItemsService} from '@@core/services/items.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-update-request',
@@ -23,13 +23,15 @@ export class UpdateRequestComponent implements OnInit, OnDestroy {
   data: {};
   newData = [];
   request_id;
+
   constructor(
     private fb: FormBuilder,
     private snackbarService: SnackbarService,
     private router: Router,
     private itemsService: ItemsService,
     private actRoute: ActivatedRoute
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.actRoute.data.subscribe((res) => {
@@ -62,32 +64,37 @@ export class UpdateRequestComponent implements OnInit, OnDestroy {
     this.requestForm.get('questions').patchValue(this.newData);
     this.request_id = this.actRoute.snapshot.params.id;
   }
+
   /****************** Get Questions************************/
   getquestions() {
     return this.requestForm.get('questions') as FormArray;
   }
+
   /****************** add Question************************/
   addQuestion() {
     this.questionItem = this.fb.group({
-      question: new FormControl({ vale: '', disabled: true }, [
+      question: new FormControl({vale: '', disabled: true}, [
         Validators.required,
       ]),
       answer: new FormControl('', [Validators.required]),
     });
     this.getquestions().push(this.questionItem);
   }
+
   /****************** remove  Question************************/
   removeQuestion(index: number) {
     this.getquestions().removeAt(index);
   }
+
   /****************** Get One Question************************/
   getOneQuestion(index) {
     return this.getquestions().at(index);
   }
+
   /**************** Submit Function************************/
 
   onSubmit() {
-    console.log('Form Data', this.requestForm.getRawValue());
+    // console.log('Form Data', this.requestForm.getRawValue());
     this.itemsService
       .updateItem(this.request_id, this.requestForm.getRawValue(), 'requests')
       .toPromise()
@@ -99,5 +106,7 @@ export class UpdateRequestComponent implements OnInit, OnDestroy {
         this.snackbarService.show(err['error']['message'], 'danger');
       });
   }
-  ngOnDestroy() {}
+
+  ngOnDestroy() {
+  }
 } //end of Class

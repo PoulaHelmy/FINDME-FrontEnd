@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-auth-main',
@@ -6,14 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./auth-main.component.scss'],
 })
 export class AuthMainComponent implements OnInit {
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit(): void {
-    console.log('dscsdsddsd');
   }
 }
+
 /*
-show user 
+show user
 {{url}}/api/auth/user
 {
     "success": true,

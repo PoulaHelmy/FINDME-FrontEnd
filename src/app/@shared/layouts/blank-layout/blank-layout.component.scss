@@ -1,112 +1,114 @@
-$firstColor:#00BFA6;
-$secondColor:#F9A826;
+$firstColor: #00BFA6;
+$secondColor: #F9A826;
 
-nav{
-    background-color: transparent;
-}
-.active
-{
-    color: $secondColor !important;
-    font-weight: bolder;
-}
-.navlink{
-    font-size: 28px;
-    color: black;
-    font-family: Big_Shoulders_Display;
-    text-decoration: none;
-}
-.navlink:hover
-{
-    font-weight: bolder;
-}
-.findmeLogo{
-    font-family: Big_Shoulders_Display;
-    font-size: 40px;
-    cursor: pointer;    
-    font-weight: bold;
+nav {
+  background-color: transparent;
 }
 
-.findmeLogo img{
-    width: 8%;
-    height: 8%;
+.sticky {
+  background-Color: white;
+  box-shadow: 5px 10px 18px #888888;
 }
-.findLogin
-{
-    border-radius: 12px;
-    border: 2px solid $firstColor;
-    background-color: whitesmoke;
-    color: gray ;
-    font-weight: bolder;
-    
+
+.active {
+  color: $secondColor !important;
+  font-weight: bolder;
+}
+
+.navlink {
+  font-size: 28px;
+  color: black;
+  font-family: Big_Shoulders_Display;
+  text-decoration: none;
+}
+
+.navlink:hover {
+  font-weight: bolder;
+}
+
+.findmeLogo {
+  font-family: Big_Shoulders_Display;
+  font-size: 40px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.findmeLogo img {
+  width: 8%;
+  height: 8%;
+}
+
+.findLogin {
+  border-radius: 12px;
+  border: 2px solid $firstColor;
+  background-color: whitesmoke;
+  color: gray;
+  font-weight: bolder;
+
 }
 
 /*--------------------------------------------------*/
 
 /*--------------------------------------------*/
-.icon-mine2
-{
-    color: $firstColor;
-    cursor: pointer;
-}
-.founder-head
-{
-    color: #2b4d46;
-    font-weight: bolder !important;
-}
-.connections
-{
-    background-color: #EFF2F7;
-}
-.connectionsp
-{
-    color: #495057;
-}
-.connections-links
-{
-    cursor: pointer;
-    text-decoration: none;
-    font-size: larger !important;
-}
-.connections-links:hover
-{
-    font-weight: bolder;
-}
-.colon-c
-{
-    font-size: 10;
-    font-weight: 900;
+.icon-mine2 {
+  color: $firstColor;
+  cursor: pointer;
 }
 
-.footer-p
-{
-    font-style: italic;
-    font-size: 13px;
-    color: #2b4d46;
+.founder-head {
+  color: #2b4d46;
+  font-weight: bolder !important;
 }
+
+.connections {
+  background-color: #EFF2F7;
+}
+
+.connectionsp {
+  color: #495057;
+}
+
+.connections-links {
+  cursor: pointer;
+  text-decoration: none;
+  font-size: larger !important;
+}
+
+.connections-links:hover {
+  font-weight: bolder;
+}
+
+.colon-c {
+  font-size: 10;
+  font-weight: 900;
+}
+
+.footer-p {
+  font-style: italic;
+  font-size: 13px;
+  color: #2b4d46;
+}
+
 /*-----------------------------------------*/
-@media screen and (max-width:1168px)
-{
+@media screen and (max-width: 1168px) {
 
-    nav
-    {
-        background-color: white !important;
-        display: flex !important;
-        justify-content: center !important;
-    } 
-    .navData
-    {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-    }
-    .findmeLogo img{
-        width: 0%;
-        height: 0%;
-    }
-    .nav-item
-    {
-        margin-top: 15px;
-    }
+  nav {
+    background-color: white !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+  .navData {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .findmeLogo img {
+    width: 0%;
+    height: 0%;
+  }
+  .nav-item {
+    margin-top: 15px;
+  }
 
 }
 

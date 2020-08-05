@@ -4,6 +4,18 @@
   text-align: left;
   padding: 15px;
 }
+
 .card-header h3 {
   display: inline-block;
+}
+
+.items-list-contanier {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .mat-list-option {
+    padding: 1rem;
+    margin-top: 10px;
+  }
 }

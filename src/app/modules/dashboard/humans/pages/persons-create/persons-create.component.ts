@@ -5,21 +5,23 @@ import {
   ViewChild,
   ElementRef,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SnackbarService } from '@@shared/pages/snackbar/snackbar.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ItemsService } from '@@core/services/items.service';
-import { ConfirmDialogService } from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
-import { DatePipe } from '@angular/common';
-import { Subscription, Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FaceApiService } from 'app/modules/dashboard/humans/services/face-api.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {SnackbarService} from '@@shared/pages/snackbar/snackbar.service';
+import {Router, ActivatedRoute} from '@angular/router';
+import {ItemsService} from '@@core/services/items.service';
+import {ConfirmDialogService} from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
+import {DatePipe} from '@angular/common';
+import {Subscription, Observable} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {FaceApiService} from 'app/modules/dashboard/humans/services/face-api.service';
+
 const httpOptions = {
   headers: new HttpHeaders({
     'X-Algolia-Application-Id': 'plBIPOQ7X7HA',
     'X-Algolia-API-Key': 'ce287ed40c8a6f4d8579799492461dd7',
   }),
 };
+
 @Component({
   selector: 'app-persons-create',
   templateUrl: './persons-create.component.html',
@@ -42,6 +44,7 @@ export class PersonsCreateComponent implements OnInit, OnDestroy {
     cancelText: 'Cancel And Review this Data',
     confirmText: 'Confirm And Continue',
   };
+
   /****************** constructor Function************************/
   constructor(
     private fb: FormBuilder,
@@ -52,7 +55,8 @@ export class PersonsCreateComponent implements OnInit, OnDestroy {
     private itemService: ItemsService,
     private http: HttpClient,
     private faceApi: FaceApiService
-  ) {}
+  ) {
+  }
 
   /****************** ngOnInit Function************************/
   ngOnInit(): void {
@@ -68,7 +72,7 @@ export class PersonsCreateComponent implements OnInit, OnDestroy {
 
     this.personsForm.controls.location.valueChanges.subscribe((res) => {
       if (res !== '' && res !== null && res !== ' ') {
-        let data = { query: res, type: 'address' };
+        let data = {query: res, type: 'address'};
         this.http
           .post(
             'https://places-dsn.algolia.net/1/places/query',
@@ -77,7 +81,7 @@ export class PersonsCreateComponent implements OnInit, OnDestroy {
           )
           .subscribe((locations) => {
             this.filteredOptions = locations['hits'];
-            console.log('dsddd ', this.filteredOptions);
+            // console.log('dsddd ', this.filteredOptions);
           });
       }
       //       The Algolia Places REST API supports HTTPS and is available via the https://places-dsn.algolia.net domain (leveraging our Distributed Search Network infrastructure).
@@ -109,7 +113,7 @@ export class PersonsCreateComponent implements OnInit, OnDestroy {
       name: this.personsForm.get('name').value,
       userData: this.personsForm.get('des').value,
     };
-    console.log('dsd ', this.data);
+    // console.log('dsd ', this.data);
 
     this.dialogService.open(this.options);
     this.dialogService.confirmed().subscribe((confirmed) => {
@@ -119,7 +123,7 @@ export class PersonsCreateComponent implements OnInit, OnDestroy {
           .addItem(this.data, 'items')
           .toPromise()
           .then((next) => {
-            this.faceApi.createPerson(3, newPersonData).subscribe((result) => {
+            this.faceApi.createPerson('maingroup', newPersonData).subscribe((result) => {
               this.isLoadingResults = false;
               this.snackbarService.show(
                 'Person Created successfully',
@@ -144,5 +148,6 @@ export class PersonsCreateComponent implements OnInit, OnDestroy {
   } //end of submit
 
   /****************** DEstroy Function************************/
-  ngOnDestroy(): void {} //end of destroy
+  ngOnDestroy(): void {
+  } //end of destroy
 } //end of Class

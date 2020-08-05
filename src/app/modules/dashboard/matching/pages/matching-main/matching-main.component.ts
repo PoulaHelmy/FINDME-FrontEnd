@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from '@@core/http/api.service';
-import { ToastrService, Toast } from 'ngx-toastr';
-import { ViewChild, OnDestroy } from '@angular/core';
-import { ConfirmDialogService } from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
-import { SnackbarService } from '@@shared/pages/snackbar/snackbar.service';
-import { Item } from '@@shared/models/item';
-import { ItemsService } from '@@core/services/items.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { OwlOptions } from 'ngx-owl-carousel-o';
+import {Component, OnInit} from '@angular/core';
+import {ApiService} from '@@core/http/api.service';
+import {ToastrService, Toast} from 'ngx-toastr';
+import {ViewChild, OnDestroy} from '@angular/core';
+import {ConfirmDialogService} from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
+import {SnackbarService} from '@@shared/pages/snackbar/snackbar.service';
+import {Item} from '@@shared/models/item';
+import {ItemsService} from '@@core/services/items.service';
+import {Router, ActivatedRoute} from '@angular/router';
+import {OwlOptions} from 'ngx-owl-carousel-o';
+
 @Component({
   selector: 'app-matching-main',
   templateUrl: './matching-main.component.html',
@@ -32,12 +33,11 @@ export class MatchingMainComponent implements OnInit {
     loop: true,
     mouseDrag: true,
     touchDrag: true,
-    pullDrag: false,
-    dots: false,
+    pullDrag: true,
+    dots: true,
     navSpeed: 700,
-    navText: ['Prev', 'Next'],
-
-    nav: true,
+    navText: ['', ''],
+    nav: true
   };
 
   constructor(
@@ -48,7 +48,8 @@ export class MatchingMainComponent implements OnInit {
     private itemService: ItemsService,
     private router: Router,
     private actRoute: ActivatedRoute
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.actRoute.data.subscribe(
@@ -56,8 +57,11 @@ export class MatchingMainComponent implements OnInit {
         this.items = res['item'];
         this.isLoadingResults = false;
       },
-      (err) => {}
+      (err) => {
+      }
     );
   }
-  ngOnDestroy() {}
+
+  ngOnDestroy() {
+  }
 } //end of Class

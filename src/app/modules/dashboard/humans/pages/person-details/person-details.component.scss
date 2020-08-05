@@ -22,6 +22,18 @@
   max-width: 360px;
   text-align: center;
 }
+
 .mat-card-content {
   text-align: center;
+}
+
+.items-list-contanier {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .mat-list-option {
+    padding: 1rem;
+    margin-top: 10px;
+  }
 }
