@@ -64,7 +64,7 @@ export class PersonDetailsComponent implements OnInit {
 
   getData(data: SlidesOutputData) {
     this.activeSlides = data;
-    console.log(this.activeSlides);
+    // console.log(this.activeSlides);
   }
 
   makeRequest(id) {

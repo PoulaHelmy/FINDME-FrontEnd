@@ -61,7 +61,7 @@ export class ItemDetailsComponent implements OnInit, OnDestroy {
 
   getData(data: SlidesOutputData) {
     this.activeSlides = data;
-    console.log(this.activeSlides);
+    // console.log(this.activeSlides);
   }
 
   ngOnInit() {
