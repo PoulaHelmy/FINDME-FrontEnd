@@ -13,21 +13,23 @@
         [routerLink]="['/dashboard/items/create']"
         routerLinkActive="router-link-active"
       >
-        <mat-icon>add_box</mat-icon>Add Item
+        <mat-icon>add_box</mat-icon>
+        Add Item
       </button>
       <button
         mat-button
         color="accent"
         aria-label="Add Person"
-        matTooltip="Add Item"
+        matTooltip="Add Person"
         matTooltipPosition="left"
         [routerLink]="['/dashboard/humans/persons/create']"
         routerLinkActive="router-link-active"
       >
-        <mat-icon>add_box</mat-icon>Add Person
+        <mat-icon>add_box</mat-icon>
+        Add Person
       </button>
     </mat-card-header>
-    <mat-card-content> </mat-card-content>
+    <mat-card-content></mat-card-content>
   </mat-card>
   <div class="example-loading-shade" *ngIf="isLoadingResults">
     <mat-spinner *ngIf="isLoadingResults" color="accent">
@@ -43,13 +45,16 @@
           <div class="spacer"></div>
           <mat-chip-list aria-label="Request Status">
             <mat-chip color="accent" *ngIf="item.is_found == 1" selected
-              >Found Item</mat-chip
+            >Found Item
+            </mat-chip
             >
             <mat-chip color="warn" *ngIf="item.is_found == 0" selected
-              >Lost Items</mat-chip
+            >Lost Items
+            </mat-chip
             >
             <mat-chip color="primary" *ngIf="item.is_found == -1" selected
-              >Returned Item</mat-chip
+            >Returned Item
+            </mat-chip
             >
           </mat-chip-list>
         </mat-card-header>
@@ -62,7 +67,7 @@
           height="300px"
           width="250px"
         />
-        <mat-card-content> </mat-card-content>
+        <mat-card-content></mat-card-content>
         <mat-card-actions class="d-flex justify-content-around">
           <button
             class="matBtn"

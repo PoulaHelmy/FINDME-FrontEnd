@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { environment as env } from '../../../environments/environment';
-import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
-import { ConfirmDialogService } from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
-import { SnackbarService } from '@@shared/pages/snackbar/snackbar.service';
-import { Router } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
+import {environment as env} from '../../../environments/environment';
+import {Observable, throwError} from 'rxjs';
+import {map, catchError} from 'rxjs/operators';
+import {ConfirmDialogService} from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
+import {SnackbarService} from '@@shared/pages/snackbar/snackbar.service';
+import {Router} from '@angular/router';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({'Content-Type': 'application/json'}),
 };
 const httpOptions2 = {
   headers: new HttpHeaders({
@@ -16,6 +16,7 @@ const httpOptions2 = {
     Authorization: `Bearer ${localStorage.getItem('access_token')}`,
   }),
 };
+
 @Injectable({
   providedIn: 'root',
 })
@@ -26,19 +27,22 @@ export class ApiService {
     cancelText: 'Cancel',
     confirmText: 'Confirm',
   };
+
   constructor(
     private http: HttpClient,
     private dialogService: ConfirmDialogService,
     private snackbarService: SnackbarService,
     private router: Router
-  ) {}
+  ) {
+  }
 
   doGet() {
     return this.http.get(`${env.apiRoot}/tags`, {
-      params: { page: '30' },
-      headers: { guest: 'True', Accept: 'application/json' },
+      params: {page: '30'},
+      headers: {guest: 'True', Accept: 'application/json'},
     });
   }
+
   getItem(id: string, endPoint: string): Observable<any> {
     return this.http.get<any>(`${env.apiRoot}/${endPoint}/${id}`).pipe(
       map((response) => {
@@ -47,6 +51,7 @@ export class ApiService {
       catchError((e) => throwError(e))
     );
   }
+
   getAllItems(endPoint: string): Observable<any[]> {
     return this.http.get<any[]>(`${env.apiRoot}/${endPoint}`).pipe(
       map((data) => {
@@ -55,6 +60,7 @@ export class ApiService {
       catchError((e) => throwError(e))
     );
   }
+
   deleteItem(id: number, endPoint: string) {
     return this.http
       .delete(`${env.apiRoot}/${endPoint}/${id}`, httpOptions)
@@ -65,6 +71,7 @@ export class ApiService {
         catchError((e) => throwError(e))
       );
   }
+
   getAllInputs(
     filter: string = '',
     order: string = 'id',
@@ -84,6 +91,7 @@ export class ApiService {
         .set('pageSize', pageSize.toString()),
     });
   }
+
   addItem(data: object, endPoint: string) {
     return this.http.post(`${env.apiRoot}/${endPoint}`, data, httpOptions).pipe(
       map((res) => {
@@ -92,6 +100,7 @@ export class ApiService {
       catchError((e) => throwError(e))
     );
   }
+
   updateItem(id: number, data: object, endPoint: string) {
     return this.http
       .patch(`${env.apiRoot}/${endPoint}/${id}`, data, httpOptions)
@@ -102,6 +111,7 @@ export class ApiService {
         catchError((e) => throwError(e))
       );
   }
+
   deleteCheck(id: number, apiEndpoint: string) {
     this.dialogService.open(this.options);
     this.dialogService.confirmed().subscribe((confirmed) => {
@@ -118,6 +128,7 @@ export class ApiService {
       }
     });
   }
+
   inputsSubcats(data: object) {
     return this.http
       .post(`${env.apiRoot}/subcategories/inputs`, data, httpOptions)
@@ -128,6 +139,7 @@ export class ApiService {
         catchError((e) => throwError(e))
       );
   }
+
   getAllInputsBySubcategory(id: string) {
     return this.http
       .get(`${env.apiRoot}/subcatsinputs/${id}`, httpOptions)
@@ -138,6 +150,7 @@ export class ApiService {
         catchError((e) => throwError(e))
       );
   }
+
   getItemOptionsValues(id: string) {
     return this.http
       .get(`${env.apiRoot}/auth/items/upoptions/${id}`, httpOptions)
@@ -148,6 +161,7 @@ export class ApiService {
         catchError((e) => throwError(e))
       );
   }
+
   getItemSubcatsAllData(data: object) {
     return this.http
       .post(`${env.apiRoot}/subcatalldata`, data, httpOptions)
@@ -167,6 +181,7 @@ export class ApiService {
       catchError((e) => throwError(e))
     );
   }
+
   getMatchedItems() {
     return this.http
       .get(`${env.apiRoot}/auth/matching/items`, httpOptions2)
