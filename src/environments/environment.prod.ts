@@ -18,7 +18,7 @@ export const environment = {
     measurementId: 'G-5DZVTS8PL8'
   },
   azure: {
-    endpoint: 'https://eastus.api.cognitive.microsoft.com',
+    endpoint: 'https://eastus.api.cognitive.microsoft.com/face/v1.0',
   },
   remoteConfig: false, // for performance don't load settings from remote
   apiUrl: 'http://findme.test',
