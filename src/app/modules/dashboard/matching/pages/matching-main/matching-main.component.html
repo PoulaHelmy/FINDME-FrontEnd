@@ -1,0 +1,101 @@
+<div class="container my-4">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Matching Items</mat-card-title>
+      <mat-card-subtitle
+        >All Of Matching Items Items and all Actions</mat-card-subtitle
+      >
+      <div class="spacer"></div>
+    </mat-card-header>
+    <mat-card-content> </mat-card-content>
+  </mat-card>
+  <div class="example-loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults" color="accent"> </mat-spinner>
+  </div>
+
+  <mat-grid-list cols="4" rowHeight="100px">
+    <ng-container *ngFor="let item of items; let i = index">
+      <mat-card class="my-2">
+        <mat-card-header>
+          <mat-card-title>
+            <button
+              mat-stroked-button
+              color="accent"
+              matTooltip="View Item"
+              matTooltipPosition="right"
+              [routerLink]="['/dashboard/items/view', item.item_id]"
+            >
+              {{ item.item_name }}
+            </button></mat-card-title
+          >
+          <mat-card-subtitle>
+            Matched With : {{ item.item_data["name"] }}
+          </mat-card-subtitle>
+          <div class="spacer"></div>
+          <mat-chip-list aria-label="Request Status">
+            <mat-chip color="accent" *ngIf="item.item_status == 1" selected
+              >Found</mat-chip
+            >
+            <mat-chip color="warn" *ngIf="item.item_status == 0" selected
+              >Lost</mat-chip
+            >
+            <mat-chip color="primary" *ngIf="item.item_status == -1" selected
+              >Archived</mat-chip
+            >
+          </mat-chip-list>
+        </mat-card-header>
+
+        <owl-carousel-o [options]="customOptions">
+          <ng-container *ngFor="let slide of item.item_data['images']">
+            <ng-template carouselSlide [id]="slide.id">
+              <img
+                matCardImage
+                [src]="slide[0]['src']"
+                [alt]="item.item_data['name']"
+                [title]="item.item_data['name']"
+                class="img-fluid carusel-image"
+              />
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+
+        <mat-card-content>
+          <mat-selection-list [multiple]="false">
+            <mat-list-option class="my-2">
+              Name : {{ item.item_data["name"] }}
+            </mat-list-option>
+            <mat-list-option class="my-2">
+              Location : {{ item.item_data["location"] }}
+            </mat-list-option>
+            <mat-list-option class="my-2">
+              Data : {{ item.item_data["date"] }}
+            </mat-list-option>
+            <mat-list-option class="my-2">
+              Description : {{ item.item_data["description"] }}
+            </mat-list-option>
+            <mat-list-option
+              class="my-2"
+              *ngFor="let objest of item.item_data['dynamicValues']"
+            >
+              {{ objest[0]["name"] }} : {{ objest[0]["value"] }}
+            </mat-list-option>
+          </mat-selection-list>
+        </mat-card-content>
+        <mat-card-actions class="d-flex justify-content-center">
+          <button
+            class="matBtn"
+            mat-raised-button
+            color="accent"
+            aria-label="Create Request for This Item"
+            matTooltip="Create Request for This Item"
+            matTooltipPosition="above"
+            [routerLink]="['/dashboard/requests/create', item.item_data['id']]"
+            routerLinkActive="router-link-active"
+          >
+            Claim This Item
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </ng-container>
+  </mat-grid-list>
+</div>

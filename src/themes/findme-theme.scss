@@ -1,0 +1,4 @@
+$findme-primary: mat-palette($mat-cyan);
+$findme-accent: mat-palette($mat-purple, A200, A100, A400);
+$findme-warn: mat-palette($mat-red);
+$findme-theme: mat-light-theme($findme-primary, $findme-accent, $findme-warn);

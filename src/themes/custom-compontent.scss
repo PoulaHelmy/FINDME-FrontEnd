@@ -1,0 +1,14 @@
+// custom-component-themes.scss
+
+// import custom componenet themes
+
+// you only have to add additional componenets here (instead of in every theme class)
+
+@import "src/app/@shared/layouts/main-nav/main-nav.theme.scss";
+@mixin custom-components-theme($theme) {
+  @include mat-button-theme($theme);
+  @include mat-button-toggle-theme($theme);
+  @include mat-card-theme($theme);
+  @include mat-table-theme($theme);
+  @include sidenav-component-theme($theme);
+}

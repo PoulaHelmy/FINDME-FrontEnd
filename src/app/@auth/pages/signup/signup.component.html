@@ -1,0 +1,127 @@
+<div class="container d-flex h-100">
+  <div class="row justify-content-center align-items-center">
+    <div class="left-content col-md-6 my-4">
+      <div class="left-content-img">
+        <img
+          src="../../../../assets/imgs/auth-images/undraw_fingerprint_swrc.svg"
+          alt="Login image"
+          class="img-fluid"
+        />
+      </div>
+    </div>
+    <div class="right-content col-md-6 my-4">
+      <div class="right-content-form">
+        <h3 class="text-center">Welcome</h3>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <p>
+            <mat-form-field>
+              <input
+                type="text"
+                matInput
+                placeholder="Name"
+                formControlName="inputName"
+              />
+              <mat-hint
+                align="end"
+                *ngIf="getName.errors?.required && getName.touched"
+                >This Field Is Required</mat-hint
+              >
+              <mat-hint align="end" *ngIf="getName.errors?.minlength"
+                >Min Length Is 3 Characters</mat-hint
+              >
+            </mat-form-field>
+          </p>
+
+          <p>
+            <mat-form-field>
+              <input
+                type="email"
+                matInput
+                placeholder="Email"
+                formControlName="email"
+              />
+              <mat-hint
+                align="end"
+                *ngIf="getEmail.errors?.required && getEmail.touched"
+                >This Field Is Required</mat-hint
+              >
+              <mat-hint align="end" *ngIf="getEmail.errors?.pattern"
+                >The Email Format Is InValid</mat-hint
+              >
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field>
+              <input
+                type="tel"
+                matInput
+                placeholder="Phone"
+                formControlName="phone"
+              />
+              <mat-hint
+                align="end"
+                *ngIf="getPhone.errors?.required && getPhone.touched"
+                >This Field Is Required</mat-hint
+              >
+              <mat-hint align="end" *ngIf="getPhone.errors?.pattern"
+                >The Phone Format Is InValid</mat-hint
+              >
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field>
+              <input
+                type="password"
+                matInput
+                placeholder="Password"
+                formControlName="password"
+              />
+              <mat-hint
+                align="end"
+                *ngIf="getPassword.errors?.required && getPassword.touched"
+                >This Field Is Required</mat-hint
+              >
+              <mat-hint align="end" *ngIf="getPassword.errors?.minlength"
+                >Min Length Is 6 Characters</mat-hint
+              >
+            </mat-form-field>
+          </p>
+          <div class="submit-btn text-center m-auto">
+            <button
+              class="login-btn"
+              mat-raised-button
+              type="submit"
+              color="primary"
+              [disabled]="
+                registerForm.untouched || registerForm.invalid || loading
+              "
+              [class.spinner]="loading"
+            >
+              SignUp
+            </button>
+          </div>
+        </form>
+        <div class="example-button-row">
+          <button
+            mat-button
+            color="primary"
+            class="float-left"
+            [routerLink]="['/auth/login']"
+            routerLinkActive="router-link-active"
+          >
+            Login
+          </button>
+          <button
+            mat-button
+            color="warn"
+            class="float-right"
+            [routerLink]="['/auth/forgetpassword']"
+            routerLinkActive="router-link-active"
+          >
+            Forget Password
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

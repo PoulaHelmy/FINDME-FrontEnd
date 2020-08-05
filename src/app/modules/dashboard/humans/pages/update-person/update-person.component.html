@@ -1,0 +1,212 @@
+<div class="container my-4">
+  <div class="row justify-content-center">
+    <mat-card class="example-card w-75">
+      <mat-card-header>
+        <mat-card-title>Persons Control</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="example-loading-shade" *ngIf="isLoadingResults">
+          <mat-spinner *ngIf="isLoadingResults"> </mat-spinner>
+        </div>
+        <div class="tags-form">
+          <form [formGroup]="personsForm" (ngSubmit)="onSubmit()">
+            <!------------------------ IS Found-------------------------->
+            <div>
+              <mat-radio-group
+                class="radio-found"
+                aria-labelledby="example-radio-group-label"
+                formControlName="is_found"
+              >
+                <mat-radio-button class="example-radio-button" [value]="1">
+                  Found
+                </mat-radio-button>
+                <mat-radio-button class="example-radio-button" [value]="0">
+                  Lost
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <!------------------------ Name-------------------------->
+            <p>
+              <mat-form-field appearance="outline" class="w-75">
+                <mat-label>Name</mat-label>
+                <input
+                  matInput
+                  formControlName="name"
+                  placeholder="Enter Input Name"
+                />
+                <mat-icon matSuffix *ngIf="!personsForm.controls.name.errors"
+                  >sentiment_very_satisfied</mat-icon
+                >
+                <mat-icon matSuffix *ngIf="personsForm.controls.name.errors"
+                  >sentiment_dissatisfied</mat-icon
+                >
+                <mat-hint
+                  align="end"
+                  *ngIf="
+                    personsForm.controls.name.errors?.required &&
+                    personsForm.controls.name.touched
+                  "
+                  >This Field Is Required</mat-hint
+                >
+                <mat-hint
+                  align="end"
+                  *ngIf="personsForm.controls.name.errors?.minlength"
+                  >Min Length Is 3 Characters</mat-hint
+                >
+              </mat-form-field>
+            </p>
+
+            <!------------------------ Sub-Category-------------------------->
+            <div>
+              <mat-radio-group
+                class="radio-found"
+                aria-labelledby="example-radio-group-label"
+                formControlName="itemsubCategory"
+              >
+                <mat-radio-button class="example-radio-button" [value]="75">
+                  Man
+                </mat-radio-button>
+                <mat-radio-button class="example-radio-button" [value]="76">
+                  Woman
+                </mat-radio-button>
+                <mat-radio-button class="example-radio-button" [value]="77">
+                  Children
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+
+            <!------------------------ Location-------------------------->
+            <p>
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  #inputLocation
+                  formControlName="location"
+                  placeholder="Choose Location..."
+                  [matAutocomplete]="auto"
+                />
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option
+                    *ngFor="let hits of filteredOptions; let hitIndex = index"
+                    [value]="
+                      hits['country']['default'] +
+                      ' ' +
+                      hits['administrative'][0] +
+                      ' ' +
+                      hits['locale_names']['default']
+                    "
+                  >
+                    <span>
+                      {{ hits["country"]["default"] }}
+                      {{ hits["administrative"][0] }}
+
+                      {{ hits["locale_names"]["default"] }}
+                    </span>
+
+                    <span #locationSpanlat style="display: none;">{{
+                      hits["_geoloc"]["lat"]
+                    }}</span>
+                    <span #locationSpanlan style="display: none;">{{
+                      hits["_geoloc"]["lng"]
+                    }}</span>
+                  </mat-option>
+                </mat-autocomplete>
+
+                <mat-icon
+                  matSuffix
+                  *ngIf="!personsForm.controls.location.errors"
+                  >sentiment_very_satisfied</mat-icon
+                >
+                <mat-icon matSuffix *ngIf="personsForm.controls.location.errors"
+                  >sentiment_dissatisfied</mat-icon
+                >
+                <mat-hint
+                  align="end"
+                  *ngIf="
+                    personsForm.controls.location.errors?.required &&
+                    personsForm.controls.location.touched
+                  "
+                  >This Field Is Required</mat-hint
+                >
+                <mat-hint
+                  align="end"
+                  *ngIf="personsForm.controls.location.errors?.minlength"
+                  >Min Length Is 5 Characters</mat-hint
+                >
+              </mat-form-field>
+            </p>
+
+            <!------------------------ Date-------------------------->
+            <p>
+              <mat-form-field>
+                <mat-label>When : </mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  formControlName="date"
+                  [min]="minDate"
+                  [max]="maxDate"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-hint
+                  align="end"
+                  *ngIf="
+                    personsForm.controls.date.errors?.required &&
+                    personsForm.controls.date.touched
+                  "
+                  >This Field Is Required</mat-hint
+                >
+              </mat-form-field>
+            </p>
+            <!------------------------ Description-------------------------->
+            <p>
+              <mat-form-field appearance="outline" class="w-75">
+                <mat-label>Description : </mat-label>
+                <textarea
+                  matInput
+                  formControlName="des"
+                  placeholder="Enter Item Description"
+                ></textarea>
+
+                <mat-icon matSuffix *ngIf="!personsForm.controls.des.errors"
+                  >sentiment_very_satisfied</mat-icon
+                >
+                <mat-icon matSuffix *ngIf="personsForm.controls.des.errors"
+                  >sentiment_dissatisfied</mat-icon
+                >
+                <mat-hint
+                  align="end"
+                  *ngIf="
+                    personsForm.controls.des.errors?.required &&
+                    personsForm.controls.des.touched
+                  "
+                  >This Field Is Required</mat-hint
+                >
+                <mat-hint
+                  align="end"
+                  *ngIf="personsForm.controls.des.errors?.minlength"
+                  >Min Length Is 30 Characters</mat-hint
+                >
+              </mat-form-field>
+            </p>
+
+            <mat-card-actions>
+              <button
+                mat-raised-button
+                type="submit"
+                [disabled]="personsForm.invalid"
+                color="accent"
+              >
+                Update
+              </button>
+            </mat-card-actions>
+          </form>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

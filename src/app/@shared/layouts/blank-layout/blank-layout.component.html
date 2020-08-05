@@ -1,0 +1,155 @@
+<!-------------------- nav ----------------------------->
+<nav
+  class="navbar nav-tabs navbar-expand-lg navbar-light nav-color fixed-top p-3"
+>
+<div class="navData">
+  <div class="findmeLogo" routerLink="../home">
+    <span>Find<span style="color: #00BFA6;">Me </span> </span>
+    <img src="../../../../assets/imgs/halloween.svg" />
+  </div>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</div>
+
+
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a
+          class="navlink mx-2"
+          routerLink="../home"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Home</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="navlink mx-2"
+          routerLink="about"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >About</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="navlink mx-2"
+          routerLink="contact"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Contact</a
+        >
+      </li>
+
+      <li class="nav-item " *ngIf="!(isAuthenticated$ | async)">
+        <a class="navlink findLogin p-1 mx-2" routerLink="../auth">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="isAuthenticated$ | async">
+        <a class="navlink mx-2" routerLink="../dashboard">Dashboard</a>
+      </li>
+      <li class="nav-item " *ngIf="isAuthenticated$ | async">
+        <a class="navlink findLogin p-1 mx-2" routerLink="" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!--------------------------------------router-outlet---------------------------------------->
+<router-outlet></router-outlet>
+<!------------------------------------------------------------------------------------------->
+<section class="connections">
+
+  <div class=" container">
+
+    <div class=" row py-5">
+
+      <div class="col-lg-3 col-md-6 col-sm-12">
+
+        <div>
+          <h3 class="founder-head">CONNECTIONS</h3>
+          <a class="connections-links" routerLink="../home">
+            <p class="connectionsp">Home</p>
+          </a>
+          <a class="connections-links">
+            <p class="connectionsp">Privacy Policy</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-12">
+
+        <div>
+          <br>
+          <a class="connections-links" routerLink="../auth">
+            <p class="connectionsp">Log in</p>
+          </a>
+          <a class="connections-links" routerLink="../auth/signup">
+            <p class="connectionsp">Sign up</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-12">
+
+        <div>
+          <br>
+          <a class="connections-links" routerLink="about">
+            <p class="connectionsp">About</p>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-12">
+
+        <div>
+          <h3 class="founder-head">Follow us<span class="colon-c">:</span> </h3>
+          <a class="connections-links"> <i class="fab fa-2x fa-facebook icon-mine2 "></i> </a>
+          <a class=" pl-4"> <i class="fab fa-2x fa-instagram icon-mine2"></i> </a>
+          <h3 class="founder-head pt-3">A Question</h3>
+          <a class="connections-links" routerLink="contact">
+            <p class="icon-mine2">@ Write Us</p>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+
+<footer class="connections">
+  <div class=" container border-top pb-0 pt-3">
+
+    <p class="footer-p d-inline">Copyright © Find Me 2019 - 2020</p>
+
+  </div>
+</footer>
+
+<!-- <span>
+  <button *ngIf="isAuthenticated$ | async" mat-mini-fab (click)="sidenav?.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="logo">
+    <img src="assets/logo.png" alt="Logo">
+  </span>
+  <span class="title">
+    {{ title }}
+  </span>
+</span>
+<span class="spacer"></span>
+<button *ngIf="isAuthenticated$ | async" (click)="logout()" class="login" mat-mini-fab>
+  <mat-icon>person</mat-icon>
+</button>
+</span> -->

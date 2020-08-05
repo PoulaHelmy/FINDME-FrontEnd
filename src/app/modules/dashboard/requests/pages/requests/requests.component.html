@@ -1,0 +1,74 @@
+<div class="container my-4">
+  <mat-card class="my-4">
+    <mat-card-header>
+      <mat-card-title>My Requests</mat-card-title>
+      <mat-card-subtitle>All Of My Requests and all Actions</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-selection-list [multiple]="false">
+        <mat-list-option *ngFor="let request of requests">
+          <div class="items-list-contanier">
+            <div class="right-content">
+              <mat-chip-list aria-label="Request Status">
+                <mat-chip color="primary" selected>{{ request.name }}</mat-chip>
+                <mat-chip color="accent" *ngIf="request.status == 1" selected
+                  >Request Approved</mat-chip
+                >
+                <mat-chip
+                  color="accent"
+                  [routerLink]="['/dashboard/chats/', request.id]"
+                  *ngIf="request.status == 1"
+                  selected
+                  >Chat...</mat-chip
+                >
+                <mat-chip color="warn" *ngIf="request.status == 0" selected
+                  >Pending</mat-chip
+                >
+                <mat-chip color="warn" *ngIf="request.status == -1" selected
+                  >Request rejected</mat-chip
+                >
+              </mat-chip-list>
+            </div>
+            <div class="left-content">
+              <button
+                class="matBtn"
+                color="warn"
+                mat-icon-button
+                aria-label="Delete Request"
+                matTooltip="Delete Request"
+                matTooltipPosition="left"
+                (click)="deleteItem(request.id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button
+                class="matBtn"
+                mat-icon-button
+                color="accent"
+                aria-label="Update Request"
+                matTooltip="Update Request"
+                matTooltipPosition="left"
+                [routerLink]="['/dashboard/requests/update', request.id]"
+                routerLinkActive="router-link-active"
+              >
+                <mat-icon>settings</mat-icon>
+              </button>
+              <button
+                class="matBtn"
+                mat-icon-button
+                color="primary"
+                aria-label="Request Item"
+                matTooltip="Request Item"
+                matTooltipPosition="left"
+                [routerLink]="['/dashboard/requests/view', request.id]"
+                routerLinkActive="router-link-active"
+              >
+                <mat-icon>visibility</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-list-option>
+      </mat-selection-list>
+    </mat-card-content>
+  </mat-card>
+</div>

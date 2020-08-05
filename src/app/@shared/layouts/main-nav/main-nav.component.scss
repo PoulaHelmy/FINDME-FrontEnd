@@ -1,0 +1,43 @@
+.mat-sidenav-container {
+  height: 100%;
+  color: #eee;
+}
+.mat-sidenav {
+  width: 250px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidenav-toolbar {
+  height: 200px;
+  padding: 0px;
+}
+
+.mat-sidenav-contentt {
+  height: 100vh;
+}
+button {
+  outline: none;
+}
+.mat-form-field {
+  margin-top: 25px;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  margin-right: 15px;
+}
+.active {
+  background-color: rgba($color: #000000, $alpha: 0.5) !important;
+  color: #fff !important;
+}
+.example-full-width {
+  width: 100%;
+}
+::ng-deep.mat-menu-panel {
+  max-width: none !important;
+}
+

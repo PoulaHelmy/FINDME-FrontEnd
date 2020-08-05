@@ -1,0 +1,74 @@
+<div class="container my-4">
+  <div class="example-loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <mat-card class="my-4">
+    <mat-card-header>
+      <mat-card-title>Person images & Faces</mat-card-title>
+      <mat-card-subtitle
+        >All Of Person Face Operation and all Actions</mat-card-subtitle
+      >
+    </mat-card-header>
+    <mat-card-content>
+      <form
+        [formGroup]="faceForm"
+        (ngSubmit)="onSubmit()"
+        enctype="multipart/form-data"
+      >
+        <div class="image-form">
+          <!------------------------ Images-------------------------->
+          <div class="parent-images">
+            <label for="file" style="margin-right: 10px;">File</label>
+            <input
+              formControlName="file"
+              style="display: none;"
+              id="file"
+              type="file"
+              #inputFile
+              multiple
+              (change)="onFileChange($event)"
+            />
+            <button
+              mat-flat-button
+              type="button"
+              color="primary"
+              (click)="inputFile.click()"
+            >
+              Upload Images
+            </button>
+            <mat-hint
+              align="end"
+              *ngIf="
+                faceForm.controls.file.errors?.required &&
+                faceForm.controls.file.touched
+              "
+              >This Field Is Required</mat-hint
+            >
+            <div class="container">
+              <div class="row justify-content-center">
+                <ng-container *ngFor="let url of images">
+                  <div class="col-md-4 my-2">
+                    <img
+                      [src]="url"
+                      class="img-fluid"
+                      style="max-width: 150px; max-height: 200px;"
+                    />
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          class="m-4"
+          mat-raised-button
+          type="submit"
+          color="accent"
+          [disabled]="faceForm.invalid"
+        >
+          Add Face
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

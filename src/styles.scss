@@ -1,0 +1,118 @@
+@import "~@angular/material/theming";
+
+@include mat-core();
+@import "./themes/themes.scss";
+
+@import "./themes/my-light-theme.scss";
+@import "./themes/my-dark-theme.scss";
+@import "./themes/custom-compontent.scss";
+@import "./themes/findme-theme.scss";
+
+.my-theme {
+  @include angular-material-theme($my-theme);
+  @include custom-components-theme($my-theme);
+}
+
+.my-light-theme {
+  @include angular-material-theme($my-light-theme);
+  @include custom-components-theme($my-light-theme);
+}
+
+.my-dark-theme {
+  @include angular-material-theme($my-dark-theme);
+  @include custom-components-theme($my-dark-theme);
+}
+.findme-theme {
+  @include angular-material-theme($findme-theme);
+  @include custom-components-theme($findme-theme);
+}
+
+@import "~bootstrap/scss/bootstrap";
+
+@import "~ngx-toastr/toastr";
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+@font-face {
+  font-family: Big_Shoulders_Display;
+  src: url(assets/fonts/Big_Shoulders_Display/BigShouldersDisplay-Regular.ttf)
+    format("opentype");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: Big_Shoulders_Display !important;
+}
+
+h1 {
+  font-size: 50px !important;
+}
+
+h2 {
+  font-size: 40px !important;
+}
+
+h3 {
+  font-size: 25px !important;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.spacer {
+  flex: 1 1 auto;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner 0.8s linear infinite;
+}
+.mat-form-field {
+  font-size: 14px;
+  width: 90%;
+  margin: 15px;
+}
+
+.mat-hint {
+  font-size: 14px;
+}
+.login-btn {
+  font-size: 18px !important;
+}
+
+.example-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

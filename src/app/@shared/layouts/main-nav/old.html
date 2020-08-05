@@ -1,0 +1,514 @@
+<mat-sidenav-container [class]="themeClass">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar class="sidenav-toolbar" color="primary">
+      <div class="user-details m-auto text-center py-2">
+        <div class="avatar-img">
+          <img
+            [src]="userDetails['photo'] | imgDefualt: defImg"
+            class="img-fluid rounded-circle"
+            alt="userDetails['name'] photo"
+            height="75px"
+            width="75px"
+          />
+        </div>
+        <h3>{{ userDetails["name"] }}</h3>
+      </div>
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <mat-list-item [routerLink]="['/dashboard']" routerLinkActive="active"
+        ><mat-icon color="primary">dashboard</mat-icon
+        ><span class="mx-2">Dashboard</span></mat-list-item
+      >
+      <mat-list-item
+        [routerLink]="['/dashboard/items']"
+        routerLinkActive="active"
+        ><mat-icon color="primary" class="mx-1">bookmarks</mat-icon
+        ><span class="mx-2">Items</span></mat-list-item
+      >
+      <mat-list-item routerLink="/dashboard/requests" routerLinkActive="active"
+        ><mat-icon color="primary">compare_arrows</mat-icon
+        ><span class="mx-2">My Requests</span></mat-list-item
+      >
+      <mat-list-item
+        routerLink="/dashboard/increquests"
+        routerLinkActive="active"
+        ><mat-icon color="primary">swap_vert</mat-icon
+        ><span class="mx-2">Incoming Requests</span></mat-list-item
+      >
+      <mat-list-item routerLink="requests" routerLinkActive="active"
+        ><mat-icon color="primary">done_all</mat-icon
+        ><span class="mx-2">My-Matchs</span></mat-list-item
+      >
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="mat-sidenav-contentt">
+    <mat-toolbar class="main-toolbar" color="primary">
+      <div class="left-options">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+        >
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+      </div>
+      <span>FindME</span>
+      <div class="spacer"></div>
+      <form class="example-form">
+        <mat-form-field class="example-full-width" appearance="legacy">
+          <input
+            type="text"
+            placeholder="Search..."
+            matInput
+            [formControl]="myControl"
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option
+              *ngFor="let option of filteredOptions | async"
+              [value]="option['name']"
+            >
+              <button
+                mat-button
+                color="primary"
+                aria-label="Make Request"
+                matTooltip="Claim This Item"
+                matTooltipPosition="right"
+                [routerLink]="['/dashboard/items/show', option['id']]"
+                routerLinkActive="router-link-active"
+              >
+                <img
+                  [src]="option['images'][0][0]['src']"
+                  width="30px"
+                  height="30px"
+                />
+                {{ option["name"] }}
+              </button>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+      <div class="right-options">
+        <!--------------------------For Notifications ------------------------ -->
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="notificationsMenu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon
+            [matBadge]="notificationsNumber != '0' ? notificationsNumber : ''"
+            matBadgeColor="warn"
+            >notifications</mat-icon
+          >
+        </button>
+        <mat-menu #notificationsMenu="matMenu">
+          <ng-container *ngFor="let notification of AllNotifications">
+            <button
+              mat-menu-item
+              [routerLink]="[notification['url']]"
+              routerLinkActive="router-link-active"
+              (click)="markAsReaded(notification['id'])"
+            >
+              {{ notification["body"] }}
+            </button>
+          </ng-container>
+        </mat-menu>
+        <!--------------------------For Notifications ------------------------ -->
+        <!--------------------------For Themeing ------------------------ -->
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="themeMenu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon>palette</mat-icon>
+        </button>
+        <mat-menu #themeMenu="matMenu">
+          <button mat-menu-item (click)="changrTheme('my-dark-theme')">
+            <mat-icon>opacity</mat-icon>
+            <span>Dark</span>
+          </button>
+          <button mat-menu-item (click)="changrTheme('my-light-theme')">
+            <mat-icon>invert_colors</mat-icon>
+            <span>Light</span>
+          </button>
+          <button mat-menu-item (click)="changrTheme('my-theme')">
+            <mat-icon>invert_colors_off</mat-icon>
+            <span>Default</span>
+          </button>
+          <button mat-menu-item (click)="changrTheme('findme-theme')">
+            <mat-icon>invert_colors_off</mat-icon>
+            <span>FindME</span>
+          </button>
+        </mat-menu>
+        <!--------------------------For Themeing ------------------------ -->
+        <!--------------------------For Account Setting And Loged-Out ------------------------ -->
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu2"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu2="matMenu">
+          <button mat-menu-item [routerLink]="['/dashboard/account']">
+            <span>Account</span>
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+        <!--------------------------For Account Setting And Loged-Out ------------------------ -->
+      </div>
+      <div class="clearfix"></div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+    <app-snackbar></app-snackbar>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+ <!--------------------------
+
+
+
+.mat-sidenav-container {
+  height: 100%;
+  color: #eee;
+}
+.mat-sidenav {
+  width: 250px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidenav-toolbar {
+  height: 150px;
+}
+.mat-sidenav-contentt {
+  height: 100vh;
+}
+button {
+  outline: none;
+}
+.mat-form-field {
+  margin-top: 25px;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  margin-right: 15px;
+}
+
+.example-full-width {
+  width: 100%;
+}
+// .avatar-img img {
+//   max-width: 150px;
+//   max-height: 150px;
+//   border-radius: 50%;
+//   width: 150px;
+//   height: 150px;
+// }
+
+
+     ------------------------ -->
+     <!--besho-->
+     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
+        <span class="findlogo">Find<span style="color: #00BFA6;"> Me </span></span>
+      </a>
+      <div class="minNavShow">
+        <button class="navbar-toggler m-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse p-2" id="navbarSupportedContent">
+          <div class="addItem m-4 p-3">
+            <i class="fas fa-plus-circle"></i>
+            Add Item
+          </div>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/dashboard']" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }">
+                <i class="fa fa-home"></i>
+                Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/dashboard/items']" [routerLinkActive]="['active']"
+                [routerLinkActiveOptions]="{ exact: true }">
+                <i class="fa fa-box"></i>
+                Items
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/dashboard/requests" [routerLinkActive]="['active']"
+                [routerLinkActiveOptions]="{ exact: true }">
+                <i class="fas fa-angle-double-left"></i>
+                My Requests
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/dashboard/increquests" [routerLinkActive]="['active']"
+                [routerLinkActiveOptions]="{ exact: true }">
+                <i class="fas fa-angle-double-right"></i>
+                Incoming Requests
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="requests" [routerLinkActive]="['active']"
+                [routerLinkActiveOptions]="{ exact: true }">
+                <i class="far fa-hand-peace"></i>
+                My Matchs
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/dashboard/account']" [routerLinkActive]="['active']"
+                [routerLinkActiveOptions]="{ exact: true }">
+                <i class="far fa-user-circle"></i>
+                My Profile
+              </a>
+            </li>
+            <li class="nav-item">
+              <a (click)="logout()" class="nav-link text-nowrap" href="#">
+                <i class="fas fa-power-off"></i>
+                Sign out
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <div class="addItem m-4 p-3" [routerLink]="['/dashboard/items/create']">
+              <i class="fas fa-plus-circle"></i>
+              <span> Add Item </span>
+            </div>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/dashboard']" routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }">
+                  <i class="fa fa-home"></i>
+                  Dashboard
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/dashboard/items']" [routerLinkActive]="['active']"
+                  [routerLinkActiveOptions]="{ exact: true }">
+                  <i class="fa fa-box"></i>
+                  Items
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/dashboard/requests" [routerLinkActive]="['active']"
+                  [routerLinkActiveOptions]="{ exact: true }">
+                  <i class="fas fa-angle-double-left"></i>
+                  My Requests
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/dashboard/increquests" [routerLinkActive]="['active']"
+                  [routerLinkActiveOptions]="{ exact: true }">
+                  <i class="fas fa-angle-double-right"></i>
+                  Incoming Requests
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="requests" [routerLinkActive]="['active']"
+                  [routerLinkActiveOptions]="{ exact: true }">
+                  <i class="far fa-hand-peace"></i>
+                  My Matchs
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/dashboard/account']" [routerLinkActive]="['active']"
+                  [routerLinkActiveOptions]="{ exact: true }">
+                  <i class="far fa-user-circle"></i>
+                  My Profile
+                </a>
+              </li>
+              <li class="nav-item">
+                <a (click)="logout()" class="nav-link text-nowrap" href="#">
+                  <i class="fas fa-power-off"></i>
+                  Sign out
+                </a>
+              </li>
+            </ul>
+    
+          </div>
+        </nav>
+    
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 p-3 my-5">
+          <router-outlet></router-outlet>
+        </main>
+      </div>
+    </div>  
+<!-- 
+$firstColor:#00BFA6;
+$secondColor:#F9A826;
+
+body {
+    font-size: .875rem;
+  }
+  
+  .feather {
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
+  }
+  .active
+{
+    color: $secondColor !important;
+    font-weight: bold !important;
+}
+
+
+.nav-link:hover
+{
+    font-weight: bolder !important;
+}
+  /*
+   * Sidebar
+   */
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100; /* Behind the navbar */
+    padding: 48px 0 0; /* Height of navbar */
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  }
+  
+  .sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  }
+  
+  @supports ((position: -webkit-sticky) or (position: sticky)) {
+    .sidebar-sticky {
+      position: -webkit-sticky;
+      position: sticky;
+    }
+  }
+  
+  .sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .sidebar .nav-link .feather {
+    margin-right: 4px;
+    color: #999;
+  }
+  
+  .sidebar .nav-link.active {
+    color: #007bff;
+  }
+  
+  .sidebar .nav-link:hover .feather,
+  .sidebar .nav-link.active .feather {
+    color: inherit;
+  }
+  
+  .sidebar-heading {
+    font-size: .75rem;
+    text-transform: uppercase;
+  }
+  /*----------------findlogo-------------------*/
+  .findlogo{
+    font-family: Big_Shoulders_Display;
+    font-size: 25px;
+    cursor: pointer;    
+    font-weight: bold;
+    padding: 0px;
+    margin: 0px;
+}
+.addItem
+{
+  border-radius: 12px;
+  border: 2px solid $firstColor;
+  background-color: white;
+  font-size: 18px;
+  font-weight: bolder;
+  cursor: pointer;
+}
+.minNavShow
+{
+  display: none;
+}
+  /*
+   * Content
+   */
+  
+  [role="main"] {
+    padding-top: 133px; /* Space for fixed navbar */
+  }
+  
+  @media (min-width: 768px) {
+    [role="main"] {
+      padding-top: 48px; /* Space for fixed navbar */
+    }
+  }
+  
+  /*
+   * Navbar
+   */
+  
+  .navbar-brand {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, .25);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+  }
+  
+  .navbar .form-control {
+    padding: .75rem 1rem;
+    border-width: 0;
+    border-radius: 0;
+  }
+  
+  .form-control-dark {
+    color: #fff;
+    background-color: rgba(255, 255, 255, .1);
+    border-color: rgba(255, 255, 255, .1);
+  }
+  
+  .form-control-dark:focus {
+    border-color: transparent;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+  }
+  
+  @media screen and (max-width:768px)
+{
+  .minNavShow
+  {
+    display: contents;
+  }
+
+}
+-->

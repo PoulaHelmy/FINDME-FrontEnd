@@ -1,0 +1,59 @@
+<!--
+<div class="container p-5">
+  <div class="row justify-content-center align-items-center">
+    <div class="border text-center py-2">
+      <img [src]="userDetails['photo'] | imgDefualt: defImg" class="img-fluid rounded-circle w-50 h-50 p-3" alt="...">
+      <div class="">
+        <h2>Name: {{userDetails["name"] ? userDetails["name"] : ""}}</h2>
+        <h3>E-mail: {{ userDetails["email"] }}</h3>
+        <p class="card-text">Phone Number : {{ userDetails["phone"] }}</p>
+        <a [routerLink]="['/dashboard/account/update']" class="btn btn-primary">Update</a>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+
+
+
+<!---->
+<section class=" container p-3 PROFILE">
+  <h1 class="p-head mt-4">PROFILE</h1>
+  <div class="p-5 row">
+    <div class=" col-lg-8 col-md-12 mt-4 bg-mine p-2 ">
+      <div class=" container-fluid">
+        <div class="">
+          <div class=" row">
+            <div>
+              <div>
+                <h1>Name:</h1>
+                <br>
+                <h2>{{userDetails["name"] ? userDetails["name"] : ""}}</h2>
+                <br>
+                <h1>E-mail:</h1>
+                <br>
+                <h2>{{ userDetails["email"] }}</h2>
+                <br>
+                <h1>Phone Number: </h1> <br>
+                <h2>{{ userDetails["phone"] }}</h2>
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
+      <div class="p-2 d-flex justify-content-center align-content-center">
+        <button [routerLink]="['/dashboard/account/update']" class="rounded-pill btn-mine">Update</button>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-12 p-2">
+
+      <div class="border container bg-mine p-5 text-center">
+        <h1>Picture</h1>
+        <div class=" text-center">
+          <img [src]="userDetails['photo'] | imgDefualt: defImg" class="img-fluid" alt="...">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

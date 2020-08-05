@@ -1,0 +1,117 @@
+<div class="container my-4">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>My Items</mat-card-title>
+      <mat-card-subtitle>All Of My Items and all Actions</mat-card-subtitle>
+      <div class="spacer"></div>
+      <button
+        mat-button
+        color="primary"
+        aria-label="Add Item"
+        matTooltip="Add Item"
+        matTooltipPosition="left"
+        [routerLink]="['/dashboard/items/create']"
+        routerLinkActive="router-link-active"
+      >
+        <mat-icon>add_box</mat-icon>Add Item
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-selection-list [multiple]="false">
+        <mat-list-option *ngFor="let item of items">
+          <div class="items-list-contanier">
+            <!---->
+            <div class="right-content">
+              <mat-chip-list aria-label="Item Status">
+                <mat-chip color="primary" selected>{{ item.name }}</mat-chip>
+                <mat-chip color="accent" *ngIf="item.is_found == 1" selected
+                  >Found Item</mat-chip
+                >
+                <mat-chip color="warn" *ngIf="item.is_found == 0" selected
+                  >Lost Item</mat-chip
+                >
+              </mat-chip-list>
+            </div>
+            <div class="left-content">
+              <button
+                class="matBtn"
+                color="warn"
+                mat-icon-button
+                aria-label="Delete Item"
+                matTooltip="Delete Item"
+                matTooltipPosition="left"
+                (click)="deleteItem(item.id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button
+                class="matBtn"
+                mat-icon-button
+                color="accent"
+                aria-label="Update Item"
+                matTooltip="Update Item"
+                matTooltipPosition="left"
+                [routerLink]="['/dashboard/items/update', item.id]"
+                routerLinkActive="router-link-active"
+              >
+                <mat-icon>settings</mat-icon>
+              </button>
+              <button
+                class="matBtn"
+                mat-icon-button
+                color="primary"
+                aria-label="View Item"
+                matTooltip="View Item"
+                matTooltipPosition="left"
+                [routerLink]="['/dashboard/items/view', item.id]"
+                routerLinkActive="router-link-active"
+              >
+                <mat-icon>visibility</mat-icon>
+              </button>
+            </div>
+            <!---->
+          </div>
+        </mat-list-option>
+      </mat-selection-list>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- 
+<div ng-app="MyApp" class="gridListdemoBasicUsage" ng-controller="AppCtrl as appCtrl">
+
+  <h1>User List</h1>
+  <div class='md-padding' layout="row" layout-wrap>
+    <md-card flex-sm="25" flex-gt-sm="30" flex="100" ng-repeat="n in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]">
+      <img ng-src="https://i.ytimg.com/vi/ANM-dq5USTc/mqdefault_live.jpg">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">The title...</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <p>
+          The description of Washed...
+        </p>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button>Action 1</md-button>
+        <md-button>Action 2</md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
+</div>
+</div>
+</div>
+</div>
+.gridListdemoBasicUsage md-grid-list {
+  margin: 8px;
+}
+
+.gridListdemoBasicUsage .gray {
+  background: #f5f5f5;
+}
+
+.gridListdemoBasicUsage md-grid-tile {
+  transition: all 400ms ease-out 50ms;
+} -->

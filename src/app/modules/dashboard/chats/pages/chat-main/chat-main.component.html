@@ -1,0 +1,72 @@
+<mat-card class="chat-container">
+  <mat-card-header class="chat-headers">
+    <mat-card-title>Chat Room</mat-card-title>
+    <mat-card-subtitle>This the Chat Room For The Request</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-card [style.overflow]="'auto'" [style.height.px]="'400'">
+      <mat-card-content>
+        <div>
+          <div class="chat-row">
+            <mat-list>
+              <ng-container *ngFor="let message of AllMsgs; let i = index">
+                <mat-list-item class="mat-list-sender my-3">
+                  <img
+                    [src]="message['sender_id'] === myId ? myImage : otherImage"
+                    class="sender-chat"
+                  />
+                  <span
+                    class="namePerson mx-1"
+                    *ngIf="message['sender_id'] === myId; else elseBlock"
+                    >{{ myName }} :
+                  </span>
+                  <ng-template #elseBlock>
+                    <span class="namePerson mx-1"> {{ otherName }} : </span>
+                  </ng-template>
+                  <span class="sender-data mx-1">{{ message["body"] }}</span>
+                </mat-list-item>
+              </ng-container>
+            </mat-list>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+  <div class="chat-form">
+    <form [formGroup]="chatForm" (ngSubmit)="onSubmit()">
+      <!------------------------ Message-------------------------->
+
+      <mat-form-field appearance="outline">
+        <mat-label>Message : </mat-label>
+        <textarea
+          matInput
+          formControlName="msgContent"
+          placeholder="Enter Your Message"
+        ></textarea>
+        <mat-hint
+          align="end"
+          *ngIf="
+            chatForm.controls.msgContent.errors?.required &&
+            chatForm.controls.msgContent.touched
+          "
+          >This Field Is Required</mat-hint
+        >
+        <mat-hint
+          align="end"
+          *ngIf="chatForm.controls.msgContent.errors?.minlength"
+          >Min Length Is 1 Character</mat-hint
+        >
+      </mat-form-field>
+      <button
+        mat-icon-button
+        type="submit"
+        color="accent"
+        matTooltip="Send Message"
+        matTooltipPosition="above"
+        [disabled]="chatForm.invalid"
+      >
+        <mat-icon class="mat-18">send</mat-icon>
+      </button>
+    </form>
+  </div>
+</mat-card>

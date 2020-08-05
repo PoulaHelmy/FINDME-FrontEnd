@@ -1,0 +1,104 @@
+<div class="container my-4">
+  <div class="row justify-content-center">
+    <mat-card class="example-card w-100">
+      <mat-card-header>
+        <mat-card-title>Questions Control</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="tags-form">
+          <form [formGroup]="questionsForm" (ngSubmit)="onSubmit()">
+            <div
+              class="inputs-validators"
+              formArrayName="questions"
+              *ngIf="getquestions().controls.length"
+            >
+              <ng-container
+                *ngFor="
+                  let ques of getquestions().controls;
+                  let questionIndex = index
+                "
+              >
+                <div
+                  class="inputs-validators-content"
+                  [formGroupName]="questionIndex"
+                >
+                  <!------------------------ Name-------------------------->
+                  <p>
+                    <mat-form-field appearance="outline" class="w-75">
+                      <mat-label>Question</mat-label>
+                      <input
+                        matInput
+                        formControlName="name"
+                        placeholder="Enter Your Question"
+                      />
+                      <mat-icon
+                        matSuffix
+                        *ngIf="
+                          !getOneQuestion(questionIndex).get('name').errors
+                        "
+                        >sentiment_very_satisfied</mat-icon
+                      >
+                      <mat-icon
+                        matSuffix
+                        *ngIf="getOneQuestion(questionIndex).get('name').errors"
+                        >sentiment_dissatisfied</mat-icon
+                      >
+                      <mat-hint
+                        align="end"
+                        *ngIf="
+                          getOneQuestion(questionIndex).get('name').errors
+                            ?.required &&
+                          getOneQuestion(questionIndex).get('name').touched
+                        "
+                        >This Field Is Required</mat-hint
+                      >
+                      <mat-hint
+                        align="end"
+                        *ngIf="
+                          getOneQuestion(questionIndex).get('name').errors
+                            ?.minlength
+                        "
+                        >Min Length Is 10 Characters</mat-hint
+                      >
+                    </mat-form-field>
+                  </p>
+
+                  <button
+                    class="float-right"
+                    mat-raised-button
+                    type="button"
+                    color="warn"
+                    class="btn-operations"
+                    (click)="removeQuestion(questionIndex)"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+            <button
+              mat-raised-button
+              type="button"
+              color="primary"
+              class="btn-operations"
+              (click)="addQuestion()"
+            >
+              Submit
+            </button>
+
+            <mat-card-actions>
+              <button
+                mat-button
+                type="submit"
+                color="accent"
+                [disabled]="questionsForm.invalid"
+              >
+                Add All Questions
+              </button>
+            </mat-card-actions>
+          </form>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

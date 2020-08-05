@@ -1,0 +1,444 @@
+<div class="container-fluid my-4">
+  <div class="row justify-content-center">
+    <mat-card class="example-card w-100">
+      <mat-card-header>
+        <mat-card-title><h1>Item Control</h1></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="example-loading-shade" *ngIf="isLoadingResults">
+          <mat-spinner *ngIf="isLoadingResults">
+            Uploadind....
+          </mat-spinner>
+        </div>
+        <div class="tags-form">
+          <form
+            class="text-center"
+            [formGroup]="itemsForm"
+            (ngSubmit)="onSubmit()"
+          >
+            <!------------------------ IS Found-------------------------->
+            <div class="container">
+              <div class="form cf">
+                <section class="plan cf">
+                  <input
+                    formControlName="is_found"
+                    type="radio"
+                    id="free"
+                    [value]="1"
+                  /><label class="free-label four col" for="free">Found</label>
+                  <input
+                    formControlName="is_found"
+                    type="radio"
+                    id="basic"
+                    [value]="0"
+                  /><label class="basic-label four col" for="basic">Lost</label>
+                </section>
+              </div>
+            </div>
+            <!------------------------ Name-------------------------->
+            <p>
+              <mat-form-field appearance="outline" class="w-75">
+                <mat-label>Name</mat-label>
+                <input
+                  matInput
+                  formControlName="name"
+                  placeholder="Enter Input Name"
+                />
+                <mat-icon matSuffix *ngIf="!itemsForm.controls.name.errors"
+                  >sentiment_very_satisfied</mat-icon
+                >
+                <mat-icon matSuffix *ngIf="itemsForm.controls.name.errors"
+                  >sentiment_dissatisfied</mat-icon
+                >
+                <mat-hint
+                  align="end"
+                  *ngIf="
+                    itemsForm.controls.name.errors?.required &&
+                    itemsForm.controls.name.touched
+                  "
+                  >This Field Is Required</mat-hint
+                >
+                <mat-hint
+                  align="end"
+                  *ngIf="itemsForm.controls.name.errors?.minlength"
+                  >Min Length Is 3 Characters</mat-hint
+                >
+              </mat-form-field>
+            </p>
+            <!------------------------ Category-------------------------->
+            <p>
+              <mat-form-field>
+                <mat-label>Category</mat-label>
+                <mat-select
+                  formControlName="itemCategory"
+                  placeholder="Select Category"
+                >
+                  <ng-container *ngFor="let cat of categories">
+                    <mat-option [value]="cat.id" *ngIf="cat.id != 11">
+                      <img
+                        src="./../../../../../../assets/imgs/categories/{{
+                          cat.name
+                        }}.svg"
+                        alt="item"
+                        class="imgCat"
+                      />
+                      {{ cat.name }}
+                    </mat-option>
+                  </ng-container>
+                </mat-select>
+                <mat-icon
+                  matSuffix
+                  *ngIf="!itemsForm.controls.itemCategory.errors"
+                  >sentiment_very_satisfied</mat-icon
+                >
+                <mat-icon
+                  matSuffix
+                  *ngIf="itemsForm.controls.itemCategory.errors"
+                  >sentiment_dissatisfied</mat-icon
+                >
+                <mat-hint
+                  align="end"
+                  *ngIf="
+                    itemsForm.controls.itemCategory.errors?.required &&
+                    itemsForm.controls.itemCategory.touched
+                  "
+                  >This Field Is Required</mat-hint
+                >
+              </mat-form-field>
+            </p>
+            <!------------------------ Sub-Category-------------------------->
+            <p>
+              <mat-form-field>
+                <mat-label>Sub-Category</mat-label>
+                <mat-select
+                  formControlName="itemsubCategory"
+                  placeholder="Select Category"
+                >
+                  <mat-option
+                    *ngFor="let subcat of subCategories"
+                    [value]="subcat.id"
+                  >
+                    {{ subcat.name }}
+                  </mat-option>
+                </mat-select>
+                <mat-icon
+                  matSuffix
+                  *ngIf="!itemsForm.controls.itemsubCategory.errors"
+                  >sentiment_very_satisfied</mat-icon
+                >
+                <mat-icon
+                  matSuffix
+                  *ngIf="itemsForm.controls.itemsubCategory.errors"
+                  >sentiment_dissatisfied</mat-icon
+                >
+                <mat-hint
+                  align="end"
+                  *ngIf="
+                    itemsForm.controls.itemsubCategory.errors?.required &&
+                    itemsForm.controls.itemsubCategory.touched
+                  "
+                  >This Field Is Required</mat-hint
+                >
+              </mat-form-field>
+            </p>
+            <!------------------------ Location-------------------------->
+            <p>
+              <mat-form-field class="example-full-width">
+                <input
+                  matInput
+                  #inputLocation
+                  formControlName="location"
+                  placeholder="Choose Location..."
+                  [matAutocomplete]="auto"
+                />
+
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option
+                    *ngFor="let hits of filteredOptions; let hitIndex = index"
+                    [value]="
+                      hits['country']['default'] +
+                      ' ' +
+                      hits['administrative'][0] +
+                      ' ' +
+                      hits['locale_names']['default']
+                    "
+                  >
+                    <span>
+                      {{ hits["country"]["default"] }}
+                      {{ hits["administrative"][0] }}
+
+                      {{ hits["locale_names"]["default"] }}
+                    </span>
+
+                    <span #locationSpanlat style="display: none;">{{
+                      hits["_geoloc"]["lat"]
+                    }}</span>
+                    <span #locationSpanlan style="display: none;">{{
+                      hits["_geoloc"]["lng"]
+                    }}</span>
+                  </mat-option>
+                </mat-autocomplete>
+
+                <mat-icon matSuffix *ngIf="!itemsForm.controls.location.errors"
+                  >sentiment_very_satisfied</mat-icon
+                >
+                <mat-icon matSuffix *ngIf="itemsForm.controls.location.errors"
+                  >sentiment_dissatisfied</mat-icon
+                >
+                <mat-hint
+                  align="end"
+                  *ngIf="
+                    itemsForm.controls.location.errors?.required &&
+                    itemsForm.controls.location.touched
+                  "
+                  >This Field Is Required</mat-hint
+                >
+                <mat-hint
+                  align="end"
+                  *ngIf="itemsForm.controls.location.errors?.minlength"
+                  >Min Length Is 5 Characters</mat-hint
+                >
+              </mat-form-field>
+            </p>
+            <!------------------------ Date-------------------------->
+            <p>
+              <mat-form-field>
+                <mat-label>When : </mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  formControlName="date"
+                  [min]="minDate"
+                  [max]="maxDate"
+                />
+                <mat-datepicker-toggle
+                  matSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-hint
+                  align="end"
+                  *ngIf="
+                    itemsForm.controls.date.errors?.required &&
+                    itemsForm.controls.date.touched
+                  "
+                  >This Field Is Required</mat-hint
+                >
+              </mat-form-field>
+            </p>
+            <!------------------------ Description-------------------------->
+            <p>
+              <mat-form-field appearance="outline" class="w-75">
+                <mat-label>Description : </mat-label>
+                <textarea
+                  matInput
+                  formControlName="des"
+                  placeholder="Enter Item Description"
+                  rows="6"
+                ></textarea>
+
+                <mat-icon matSuffix *ngIf="!itemsForm.controls.des.errors"
+                  >sentiment_very_satisfied</mat-icon
+                >
+                <mat-icon matSuffix *ngIf="itemsForm.controls.des.errors"
+                  >sentiment_dissatisfied</mat-icon
+                >
+                <mat-hint
+                  align="end"
+                  *ngIf="
+                    itemsForm.controls.des.errors?.required &&
+                    itemsForm.controls.des.touched
+                  "
+                  >This Field Is Required</mat-hint
+                >
+                <mat-hint
+                  align="end"
+                  *ngIf="itemsForm.controls.des.errors?.minlength"
+                  >Min Length Is 30 Characters</mat-hint
+                >
+              </mat-form-field>
+            </p>
+
+            <!------------------------ Images-------------------------->
+            <div class="parent-images">
+              <mat-progress-bar
+                *ngIf="isLoadingImages"
+                mode="indeterminate"
+              ></mat-progress-bar>
+
+              <label for="file" style="margin-right: 10px;">File</label>
+              <input
+                formControlName="file"
+                style="display: none;"
+                id="file"
+                type="file"
+                #inputFile
+                multiple=""
+                (change)="onFileChange($event)"
+              />
+              <button
+                mat-flat-button
+                type="button"
+                color="primary"
+                (click)="inputFile.click()"
+                class="w-75"
+              >
+                Upload Images
+              </button>
+              <mat-hint
+                align="end"
+                *ngIf="
+                  itemsForm.controls.file.errors?.required &&
+                  itemsForm.controls.file.touched
+                "
+                >This Field Is Required</mat-hint
+              >
+              <div class="container">
+                <div class="row justify-content-center">
+                  <ng-container *ngFor="let url of images">
+                    <div class="col-md-4 my-2">
+                      <img
+                        [src]="url"
+                        class="img-fluid"
+                        style="max-width: 150px; max-height: 200px;"
+                      />
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <!--  -->
+
+            <mat-card-actions>
+              <button
+                mat-raised-button
+                type="submit"
+                [disabled]="itemsForm.invalid"
+                class="w-100 addBtn"
+              >
+                Submit
+              </button>
+            </mat-card-actions>
+          </form>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<!-- import { HttpEventType, HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
+
+constructor(private http: HttpClient) {}
+
+this.http.get(someUrl).subscribe((event: HttpEvent) => {
+
+  if (event.type === HttpEventType.DownloadProgress) {
+    const totalLoaded = event.loaded;
+    const totalToLoad = event.total;
+    // here is the ratio
+    const ratio = 100 / totalToLoad * totalLoaded;
+  }
+
+  // you have finished
+  if (event.type === HttpEventType.Response) {
+    console.log('done');
+  }
+
+}) -->
+
+<!-- 
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ImageUpload</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+ integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html> -->
+
+<!-- <div class="container row">
+  <div class="col-md-12">
+      <h1>Upload Image</h1>
+  </div>
+</div>
+<div class="container row">
+  <div class="col-md-6">
+      <input type="file" (change)="onFileChanged($event)">
+  </div>
+  <div class="col-md-6">
+      <input type="button" (click)="onUpload()" value="upload">
+  </div>
+</div>
+<hr />
+<div class="container row">
+  <div class="col-md-12">
+      <div *ngIf=message>{{message}}</div>
+  </div>
+</div>
+<div class="container row">
+  <div class="col-md-6">
+      <input type="text" class="form-control" id="name" placeholder="image name" [(ngModel)]="imageName"
+          name="name" />
+  </div>
+  <div class="col-md-6">
+      <input type="button" (click)="getImage()" value="Get Image">
+  </div>
+</div>
+<div class="container row">
+  <div class="col-md-12">
+      <div *ngIf=retrievedImage>
+          <img [src]="retrievedImage">
+      </div>
+  </div>
+</div> -->
+
+<!-- 
+selectedFile: File;
+  retrievedImage: any;
+  base64Data: any;
+  retrieveResonse: any;
+  message: string;
+  imageName: any;
+  //Gets called when the user selects an image
+  public onFileChanged(event) {
+    //Select File
+    this.selectedFile = event.target.files[0];
+  }
+  //Gets called when the user clicks on submit to upload the image
+  onUpload() {
+    console.log(this.selectedFile);
+    
+    //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
+    const uploadImageData = new FormData();
+    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+  
+    //Make a call to the Spring Boot Application to save the image
+    this.httpClient.post('http://localhost:8080/image/upload', uploadImageData, { observe: 'response' })
+      .subscribe((response) => {
+        if (response.status === 200) {
+          this.message = 'Image uploaded successfully';
+        } else {
+          this.message = 'Image not uploaded successfully';
+        }
+      }
+      );
+  }
+    //Gets called when the user clicks on retieve image button to get the image from back end
+    getImage() {
+    //Make a call to Sprinf Boot to get the Image Bytes.
+    this.httpClient.get('http://localhost:8080/image/get/' + this.imageName)
+      .subscribe(
+        res => {
+          this.retrieveResonse = res;
+          this.base64Data = this.retrieveResonse.picByte;
+          this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+        }
+      );
+  } -->

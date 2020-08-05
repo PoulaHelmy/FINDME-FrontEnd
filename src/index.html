@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>FindME</title>
+    <base href="/"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" type="image/x-icon" href="./assets/imgs/halloween.svg"/>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <!-- <script type="application/javascript">
+      window.tiledeskSettings = {
+        projectid: "5ed393df77baa00012b0dc50",
+      };
+      (function (d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://widget.tiledesk.com/v4/launch.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      })(document, "script", "tiledesk-jssdk");
+    </script> -->
+    <!-- <script
+      type="text/javascript"
+      src="http://findme.test:6001/socket.io/socket.io.js"
+    ></script> -->
+    <!-- AngularJS -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script> -->
+
+    <!-- pusher-js -->
+    <!-- <script src="//js.pusher.com/3.0/pusher.min.js"></script> -->
+
+    <!-- pusher-angular -->
+    <!-- <script src="//cdn.jsdelivr.net/npm/pusher-angular@latest/lib/pusher-angular.min.js"></script> -->
+    <script>
+      if ('serviceWorker' in navigator){
+        navigator.serviceWorker.register('/ngsw-worker.js')
+      }
+    </script>
+    <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#1976d2">
+</head>
+  <body class="mat-typography">
+    <app-root></app-root>
+    <noscript>Please enable JavaScript to continue using this application.</noscript>
+</body>
+</html>

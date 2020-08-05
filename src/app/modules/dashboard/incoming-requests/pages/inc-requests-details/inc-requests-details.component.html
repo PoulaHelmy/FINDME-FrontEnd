@@ -1,0 +1,131 @@
+<div class="container my-3">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Request Details</mat-card-title>
+      <mat-card-subtitle
+        >here all data for this Request and all actions</mat-card-subtitle
+      >
+    </mat-card-header>
+    <mat-card-content>
+      <div class="container my-4">
+        <div class="row justify-content-center">
+          <div class="table-tag w-100">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>
+                    Name
+                  </td>
+                  <td>{{ requestDetails["name"] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>
+                    Status
+                  </td>
+                  <td>
+                    <mat-chip-list aria-label="Request Status">
+                      <mat-chip
+                        color="accent"
+                        *ngIf="requestDetails['status'] == 1"
+                        selected
+                        >Request Approved</mat-chip
+                      >
+                      <mat-chip
+                        color="accent"
+                        [routerLink]="[
+                          '/dashboard/chats/',
+                          requestDetails['id']
+                        ]"
+                        *ngIf="requestDetails['status'] == 1"
+                        selected
+                        >Chat...</mat-chip
+                      >
+                      <mat-chip
+                        color="warn"
+                        *ngIf="requestDetails['status'] == 0"
+                        selected
+                        >Pending</mat-chip
+                      >
+                    </mat-chip-list>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th scope="row">3</th>
+                  <td>
+                    Description
+                  </td>
+                  <td>{{ requestDetails["description"] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    4
+                  </th>
+                  <td>
+                    Created_AT
+                  </td>
+                  <td>{{ requestDetails["created_at"] | date }}</td>
+                </tr>
+
+                <tr
+                  *ngFor="
+                    let question of requestDetails['AllQuestions'];
+                    let i = index
+                  "
+                >
+                  <th scope="row">Question #{{ i + 5 }}</th>
+                  <td>{{ question["question"] }}</td>
+                  <td>{{ question["answer"] }}</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">
+                    #
+                  </th>
+                  <td>
+                    Actions
+                  </td>
+                  <td>
+                    <div class="example-flex-container">
+                      <button
+                        class="matBtn"
+                        mat-icon-button
+                        color="primary"
+                        aria-label="Approve This Request"
+                        matTooltip="Approve This Request"
+                        matTooltipPosition="left"
+                        (click)="approveRequest(requestDetails['id'], 1)"
+                      >
+                        <mat-icon>done_outline</mat-icon>
+                      </button>
+                      <button
+                        class="matBtn"
+                        mat-icon-button
+                        color="warn"
+                        aria-label="Reject This Request"
+                        matTooltip="Reject This Request"
+                        matTooltipPosition="left"
+                        (click)="approveRequest(requestDetails['id'], -1)"
+                      >
+                        <mat-icon>clear</mat-icon>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

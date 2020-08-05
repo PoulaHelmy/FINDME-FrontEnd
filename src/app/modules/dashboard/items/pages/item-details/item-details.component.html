@@ -1,0 +1,196 @@
+<div class="container my-3">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Item Details</mat-card-title>
+      <mat-card-subtitle
+        >here all data for this Item and all actions</mat-card-subtitle
+      >
+    </mat-card-header>
+    <mat-card-content>
+      <div class="container my-4">
+        <div class="row justify-content-center">
+          <div class="table-tag w-100">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>
+                    Item Status
+                  </td>
+                  <td>
+                    {{ itemDetails["is_found"] === 1 ? "Founded" : "Losted" }}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>
+                    Name
+                  </td>
+                  <td>{{ itemDetails["name"] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>
+                    Category
+                  </td>
+                  <td>{{ itemDetails["category"] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">4</th>
+                  <td>
+                    SubCategory
+                  </td>
+                  <td>{{ itemDetails["subcat"] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">5</th>
+                  <td>
+                    Location
+                  </td>
+                  <td>{{ itemDetails["location"] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">6</th>
+                  <td>
+                    Description
+                  </td>
+                  <td>{{ itemDetails["description"] }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">7</th>
+                  <td>
+                    Date
+                  </td>
+                  <td>{{ itemDetails["date"] }}</td>
+                </tr>
+                <tr
+                  *ngFor="
+                    let option of itemDetails['dynamicValues'];
+                    let i = index
+                  "
+                >
+                  <th scope="row">{{ i + 8 }}</th>
+                  <td>{{ option[0]["name"] }}</td>
+                  <td>{{ option[0]["value"] }}</td>
+                </tr>
+                <tr
+                  *ngFor="
+                    let question of itemDetails['AllQuestions'];
+                    let i = index
+                  "
+                >
+                  <th scope="row">
+                    {{ i + 8 + itemDetails["optionsCount"] }}
+                  </th>
+                  <td>Question# {{ i + 1 }}</td>
+                  <td>{{ question[0]["name"] }}</td>
+                </tr>
+                <tr *ngFor="let image of itemDetails['images']; let i = index">
+                  <th scope="row">
+                    {{
+                      i +
+                        8 +
+                        +itemDetails["questionsCount"] +
+                        itemDetails["optionsCount"]
+                    }}
+                  </th>
+                  <td>Image#{{ i + 1 }}</td>
+                  <td>
+                    <div class="col-md-6 my-2">
+                      <img
+                        [src]="image[0]['src']"
+                        class="img-fluid"
+                        style="max-width: 200px; max-height: 300px;"
+                      />
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    {{
+                      8 +
+                        itemDetails["questionsCount"] +
+                        itemDetails["imagesCount"] +
+                        itemDetails["optionsCount"]
+                    }}
+                  </th>
+                  <td>
+                    Created_AT
+                  </td>
+                  <td>{{ itemDetails["created_at"] | date }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    {{
+                      9 +
+                        itemDetails["questionsCount"] +
+                        itemDetails["imagesCount"] +
+                        itemDetails["optionsCount"]
+                    }}
+                  </th>
+                  <td>
+                    Actions
+                  </td>
+                  <td>
+                    <div class="example-flex-container">
+                      <button
+                        class="matBtn"
+                        color="accent"
+                        mat-icon-button
+                        aria-label="Delete Item"
+                        matTooltip="Delete Item"
+                        matTooltipPosition="left"
+                        (click)="deleteItem(itemDetails['id'])"
+                      >
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                      <button
+                        class="matBtn"
+                        mat-icon-button
+                        color="primary"
+                        aria-label="Update Item"
+                        matTooltip="Update Item"
+                        matTooltipPosition="right"
+                        [routerLink]="[
+                          '/dashboard/items/update',
+                          itemDetails['id']
+                        ]"
+                        routerLinkActive="router-link-active"
+                      >
+                        <mat-icon>settings</mat-icon>
+                      </button>
+
+                      <button
+                        *ngIf="isRequested"
+                        class="matBtn"
+                        mat-icon-button
+                        color="warn"
+                        aria-label="Update Item"
+                        matTooltip="Update Item"
+                        matTooltipPosition="right"
+                        [routerLink]="[
+                          '/dashboard/requests/create',
+                          itemDetails['id']
+                        ]"
+                        routerLinkActive="router-link-active"
+                      >
+                        <mat-icon>fingerprint</mat-icon>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

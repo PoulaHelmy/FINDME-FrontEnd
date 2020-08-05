@@ -1,0 +1,16 @@
+<div class="header">
+  <h1 mat-dialog-title>{{ data.title }}</h1>
+</div>
+<div mat-dialog-content>
+  <p class="dialog-message">{{ data.message }}</p>
+</div>
+<section mat-dialog-actions>
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="confirm()">
+      {{ data.confirmText }}
+    </button>
+    <button mat-raised-button color="accent" (click)="cancel()">
+      {{ data.cancelText }}
+    </button>
+  </div>
+</section>

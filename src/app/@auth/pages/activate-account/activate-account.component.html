@@ -1,0 +1,39 @@
+<div class="container d-flex h-100">
+  <div class="row justify-content-center align-items-center">
+    <div class="left-content col-md-6 my-4">
+      <div class="left-content-img">
+        <img
+          src="../../../../assets/imgs/auth-images/undraw_enter_uhqk.svg"
+          alt="Login image"
+          class="img-fluid"
+        />
+      </div>
+    </div>
+    <div class="right-content col-md-6 my-4">
+      <div class="right-content-form">
+        <h3 class="text-center">Account Activation</h3>
+        <p class="text-center activation-msg">
+          {{ message }}
+        </p>
+        <button
+          mat-button
+          color="primary"
+          class="float-left"
+          [routerLink]="['/auth/login']"
+          routerLinkActive="router-link-active"
+        >
+          Login
+        </button>
+        <button
+          mat-button
+          color="warn"
+          class="float-right"
+          [routerLink]="['/auth/forgetpassword']"
+          routerLinkActive="router-link-active"
+        >
+          Forget Password
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

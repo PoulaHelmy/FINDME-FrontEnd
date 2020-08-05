@@ -1,0 +1,241 @@
+<mat-sidenav-container [class]="themeClass">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <div class="layout2">
+      <mat-toolbar class="sidenav-toolbar" color="primary">
+        <div class="user-details mx-auto text-center">
+          <div class="layout">
+            <div class="avatar-img">
+              <img
+                [src]="userDetails['photo'] | imgDefualt: defImg"
+                class="img-fluid rounded-circle my-2"
+                alt="userDetails['name'] photo"
+                height="100px"
+                width="100px"
+              />
+            </div>
+            <h3>{{ userDetails["name"] }}</h3>
+          </div>
+        </div>
+      </mat-toolbar>
+
+      <mat-nav-list>
+        <mat-list-item
+          [routerLink]="['/dashboard']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          ><mat-icon color="primary">dashboard</mat-icon
+          ><span class="mx-2">Dashboard</span></mat-list-item
+        >
+        <mat-list-item
+          [routerLink]="['/dashboard/items']"
+          routerLinkActive="active"
+          ><mat-icon color="primary" class="mx-1">bookmarks</mat-icon
+          ><span class="mx-2">Items</span></mat-list-item
+        >
+        <mat-list-item
+          routerLink="/dashboard/requests"
+          routerLinkActive="active"
+          ><mat-icon color="primary">compare_arrows</mat-icon
+          ><span class="mx-2">My Requests</span></mat-list-item
+        >
+        <mat-list-item
+          routerLink="/dashboard/increquests"
+          routerLinkActive="active"
+          ><mat-icon color="primary">swap_vert</mat-icon
+          ><span class="mx-2">Incoming Requests</span></mat-list-item
+        >
+        <mat-list-item
+          routerLink="/dashboard/matching"
+          routerLinkActive="active"
+          ><mat-icon color="primary">done_all</mat-icon
+          ><span class="mx-2">My-Matchs</span></mat-list-item
+        >
+      </mat-nav-list>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content class="mat-sidenav-contentt">
+    <mat-toolbar class="main-toolbar" color="primary">
+      <div class="left-options">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+        >
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+      </div>
+      <span>FindME</span>
+      <div class="spacer"></div>
+
+      <div class="right-options">
+        <!--------------------------For Notifications ------------------------ -->
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="notificationsMenu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon
+            [matBadge]="notificationsNumber != 0 ? notificationsNumber : ''"
+            matBadgeColor="warn"
+            >notifications</mat-icon
+          >
+        </button>
+        <mat-menu #notificationsMenu="matMenu" class="my-menu">
+          <ng-container *ngFor="let notification of AllNotifications">
+            <button
+              mat-menu-item
+              [routerLink]="[notification['url']]"
+              routerLinkActive="router-link-active"
+              (click)="markAsReaded(notification['id'])"
+            >
+              <mat-icon class="mat-18">{{ notification["icon"] }}</mat-icon
+              >{{ notification["body"] }}
+            </button>
+          </ng-container>
+        </mat-menu>
+        <!--------------------------For Notifications ------------------------ -->
+        <!--------------------------For Themeing ------------------------ -->
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="themeMenu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon>palette</mat-icon>
+        </button>
+        <mat-menu #themeMenu="matMenu">
+          <button mat-menu-item (click)="changeTheme('my-dark-theme')">
+            <mat-icon>opacity</mat-icon>
+            <span>Dark</span>
+          </button>
+          <button mat-menu-item (click)="changeTheme('my-light-theme')">
+            <mat-icon>invert_colors</mat-icon>
+            <span>Light</span>
+          </button>
+          <button mat-menu-item (click)="changeTheme('my-theme')">
+            <mat-icon>invert_colors_off</mat-icon>
+            <span>Default</span>
+          </button>
+          <button mat-menu-item (click)="changeTheme('findme-theme')">
+            <mat-icon>invert_colors_off</mat-icon>
+            <span>FindME</span>
+          </button>
+        </mat-menu>
+        <!--------------------------For Themeing ------------------------ -->
+        <!--------------------------For Account Setting And Loged-Out ------------------------ -->
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu2"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu2="matMenu">
+          <button mat-menu-item [routerLink]="['/dashboard/account']">
+            <span>Account</span>
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+        <!--------------------------For Account Setting And Loged-Out ------------------------ -->
+      </div>
+      <div class="clearfix"></div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+    <app-snackbar></app-snackbar>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- <nav style="background-color: #212121 !important;" class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-2 ">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
+    <span class="findlogo">Find<span style="color: #00BFA6;"> Me </span></span>
+  </a>
+  <div class="navIco d-flex justify-content-center align-items-center px-2 ">  
+    <div style="background-color: white;" class="rounded-circle notif">
+      <button mat-icon-button [matMenuTriggerFor]="notificationsMenu" aria-label="Example icon-button with a menu">
+        <mat-icon style="color: #212121;" [matBadge]="notificationsNumber != '0' ? notificationsNumber : ''" matBadgeColor="warn">notifications
+        </mat-icon>
+      </button>
+      <mat-menu  #notificationsMenu="matMenu">
+        <ng-container *ngFor="let notification of AllNotifications">
+          <button  mat-menu-item [routerLink]="[notification['url']]" routerLinkActive="router-link-active"
+            (click)="markAsReaded(notification['id'])">
+            {{ notification["body"] }}
+          </button>
+        </ng-container>
+      </mat-menu>
+    </div>
+    <div class="mx-2">
+      <a (click)="logout()" class="navOut">
+        <i style="color: white;" class="fa fa-power-off fa-2x nOut"></i>
+      </a>
+    </div>
+    
+  </div>
+  
+    
+ 
+
+</nav>
+<nav class="main-menu py-5">
+  <ul class="pt-5">
+    <li>
+      <a [routerLink]="['/dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <i class="fa fa-home fa-2x"></i>
+        <span class="nav-text">
+          Dashboard
+        </span>
+      </a>
+
+    </li>
+    <li>
+      <a [routerLink]="['/dashboard/account']" [routerLinkActive]="['active']">
+        <i class="fa fa-user-circle fa-2x"></i>
+        <span class="nav-text">
+          My Profile
+        </span>
+      </a>
+    </li>
+    <li class="has-subnav">
+      <a [routerLink]="['/dashboard/items']" [routerLinkActive]="['active']"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <i class="fa fa-info fa-2x"></i>
+        <span class="nav-text">
+          Items
+        </span>
+      </a>
+
+    </li>
+    <li class="has-subnav">
+      <a routerLink="/dashboard/requests" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">
+        <i class="fa fa-angle-double-left fa-2x"></i>
+        <span class="nav-text">
+          My Requests
+        </span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/dashboard/increquests" [routerLinkActive]="['active']"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <i class="fa fa-angle-double-right fa-2x"></i>
+        <span class="nav-text">
+          Incoming Requests
+        </span>
+      </a>
+    </li>
+    <li class="px-2">
+    
+  </li>
+  </ul>
+</nav>
+<main class="mx-5 p-5">
+  <router-outlet></router-outlet>
+</main> -->

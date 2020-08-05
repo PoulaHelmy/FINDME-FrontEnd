@@ -1,0 +1,19 @@
+//-------------------------------contact HEADER------------------------------------------------------
+.contactHeader{
+    height: 600px;
+    background-image: url(../../../../assets/imgs/undraw_typewriter_i8xd.svg);
+    background-size: 100% 100%;
+}
+.contact label{
+    font-family: Big_Shoulders_Display;
+    font-size: 24px;
+}
+.contact button{
+    font-family: Big_Shoulders_Display;
+    font-size: 24px;
+    background-color:rgba(0, 199, 161, 0.8);;
+    color: whitesmoke;
+}
+.contact button:hover{
+    background-color:rgba(0, 199, 161, 1);
+}
