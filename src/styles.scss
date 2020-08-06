@@ -1,41 +1,54 @@
 @import "~@angular/material/theming";
 
 @include mat-core();
-@import "./themes/themes.scss";
-
-@import "./themes/my-light-theme.scss";
-@import "./themes/my-dark-theme.scss";
+@import "~bootstrap/scss/bootstrap";
+@import "~ngx-toastr/toastr";
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 @import "./themes/custom-compontent.scss";
-@import "./themes/findme-theme.scss";
 
+//THEME ONE
+$my-theme: mat-light-theme(mat-palette($mat-indigo, 700, 300, 900), mat-palette($mat-pink, A200, A100, A400), mat-palette($mat-red));
 .my-theme {
   @include angular-material-theme($my-theme);
   @include custom-components-theme($my-theme);
 }
 
+//THEME TWO
+///////////////////////////////////////////////////////////////
+$my-light-theme: mat-light-theme(
+    mat-palette($mat-purple, 700, 300, 900),
+    mat-palette($mat-amber),
+    mat-palette($mat-deep-orange, A200)
+);
 .my-light-theme {
   @include angular-material-theme($my-light-theme);
   @include custom-components-theme($my-light-theme);
 }
 
+//THEME THREE
+///////////////////////////////////////////////////////////////
+$my-dark-theme: mat-dark-theme(
+    mat-palette($mat-indigo),
+    mat-palette($mat-amber, A200, A100, A400),
+    $mat-red
+);
 .my-dark-theme {
   @include angular-material-theme($my-dark-theme);
   @include custom-components-theme($my-dark-theme);
 }
+
+//THEME FOUR
+///////////////////////////////////////////////////////////////
+$findme-theme: mat-light-theme(mat-palette($mat-cyan), mat-palette($mat-purple, A200, A100, A400), mat-palette($mat-red));
 .findme-theme {
   @include angular-material-theme($findme-theme);
   @include custom-components-theme($findme-theme);
 }
 
-@import "~bootstrap/scss/bootstrap";
-
-@import "~ngx-toastr/toastr";
-@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
-@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 @font-face {
   font-family: Big_Shoulders_Display;
-  src: url(assets/fonts/Big_Shoulders_Display/BigShouldersDisplay-Regular.ttf)
-    format("opentype");
+  src: url(assets/fonts/Big_Shoulders_Display/BigShouldersDisplay-Regular.ttf) format("opentype");
 }
 
 h1,
@@ -62,10 +75,12 @@ html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
 .spacer {
   flex: 1 1 auto;
 }
@@ -91,6 +106,7 @@ body {
   border-top-color: #000000;
   animation: spinner 0.8s linear infinite;
 }
+
 .mat-form-field {
   font-size: 14px;
   width: 90%;
@@ -100,6 +116,7 @@ body {
 .mat-hint {
   font-size: 14px;
 }
+
 .login-btn {
   font-size: 18px !important;
 }
