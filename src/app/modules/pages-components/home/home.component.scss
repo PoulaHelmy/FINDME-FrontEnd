@@ -3,44 +3,53 @@ $secondColor: #f9a826;
 
 //-------------------------------HOME HEADER------------------------------------------------------
 .homeHeader {
-  height: 600px;
+  height: 100vh;
   background-image: url(../../../../assets/imgs/home.svg);
   background-size: 100% 100%;
-}
-.pHeader {
-  font-family: Big_Shoulders_Display !important;
-  font-size: 50px !important;
+
+  .homeData {
+    height: 100%;
+    width: 100%;
+
+    h1 {
+      line-height: 3rem;
+      font-size: 3rem;
+      font-weight: 800;
+    }
+
+    button {
+      padding: 1.2rem;
+      margin: 1rem;
+    }
+
+    .btn-home {
+      box-shadow: 5px 10px 18px #888888;
+      background-color: $firstColor;
+      border-radius: 12px;
+      font-family: Big_Shoulders_Display;
+      width: 200px;
+      font-size: 26px;
+      transition: transform 1s;
+    }
+
+    .btn-home2 {
+      box-shadow: 5px 10px 18px #888888;
+      background-color: white;
+      border-radius: 12px;
+      width: 200px;
+      font-size: 26px;
+      transition: transform 1s;
+    }
+
+    button:hover {
+      transform: scale(1.2, 1.2);
+    }
+  }
 }
 
-.homeData {
-  height: 100%;
-  width: 100%;
-}
-.homeHeader h1 {
-  font-size: 55px;
-  font-weight: 1000;
-}
-.btn-home {
-  box-shadow: 5px 10px 18px #888888;
-  background-color: $firstColor;
-  border-radius: 12px;
-  font-family: Big_Shoulders_Display;
-  width: 200px;
-  font-size: 26px;
-  transition: transform 1s;
-}
-.btn-home2 {
-  box-shadow: 5px 10px 18px #888888;
-  background-color: white;
-  border-radius: 12px;
-  font-family: Big_Shoulders_Display;
-  width: 200px;
-  font-size: 26px;
-  transition: transform 1s;
-}
-.homeHeader button:hover {
-  transform: scale(1.2, 1.2);
-}
+//-------------------------------END HOME HEADER------------------------------------------------------
+
+//-------------------------------HOW WORK------------------------------------------------------
 //-------------------------------HOW WORK------------------------------------------------------
 .howWorkIco {
   box-shadow: 5px 10px 18px #888888;
@@ -53,60 +62,79 @@ $secondColor: #f9a826;
   transform: scale(1.2, 1.2);
   color: $secondColor;
 }
+
 //-------------------------------YOU SHOULD KNOW------------------------------------------------------
 .YSK img {
   height: 70%;
   width: 70%;
 }
+
 .YSKsec {
   box-shadow: 5px 10px 18px #888888;
 }
+
 .YSKsec p {
   font-size: large;
 }
+
 .YSKsec span {
   color: $firstColor;
   font-weight: bolder;
 }
+
 /*-----------------------member---------------------------*/
 .numbers {
   background-color: whitesmoke;
+
+  h1 {
+    line-height: 3rem;
+  }
 }
+
 .icon-mine1,
 .star-mine {
   color: $secondColor;
 }
+
 .icon-mine {
   color: gray;
 }
+
 .findmeNum img {
   width: 40%;
   height: 40%;
 }
+
 .num {
   font-weight: 600;
   color: $firstColor;
 }
+
 .member {
   transition: box-shadow 0.3s;
   width: 90%;
   margin: auto;
 }
+
 .member img {
   width: 40%;
   height: 40%;
   transition: width 1s;
 }
+
 .member:hover {
   box-shadow: 0px 0px 20px rgba(33, 33, 33, 0.2);
 }
+
 .member:hover h2 {
   color: $secondColor;
 }
+
 .member:hover img {
   width: 60%;
   height: 60%;
 }
+
 /*--------------------------------------------------*/
 @media screen and (max-width: 1168px) {
   .homeData h1 {
@@ -115,3 +143,5 @@ $secondColor: #f9a826;
     text-align: center;
   }
 }
+
+
