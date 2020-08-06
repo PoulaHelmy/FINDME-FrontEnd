@@ -1,24 +1,23 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, ErrorHandler, Injectable } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgModule, ErrorHandler, Injectable} from '@angular/core';
+import {HttpErrorResponse} from '@angular/common/http';
 
-import { environment } from '../environments/environment';
-import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {environment} from '../environments/environment';
+import {HttpClientModule} from '@angular/common/http';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 
-import { SharedModule } from '@@shared/shared.module';
-import { AuthModule } from 'app/@auth/auth.module';
+import {SharedModule} from '@@shared/shared.module';
+import {AuthModule} from 'app/@auth/auth.module';
 
-import { ToastrModule } from 'ngx-toastr';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DashboardModule } from './modules/dashboard/dashboard.module';
-import { CarouselModule } from 'ngx-owl-carousel-o';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import {ToastrModule} from 'ngx-toastr';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {DashboardModule} from './modules/dashboard/dashboard.module';
+import {CarouselModule} from 'ngx-owl-carousel-o';
+
 import * as Sentry from '@sentry/browser';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import {ServiceWorkerModule} from '@angular/service-worker';
 
 Sentry.init({
   dsn:
@@ -35,7 +34,8 @@ Sentry.init({
 
 @Injectable()
 export class SentryErrorHandler implements ErrorHandler {
-  constructor() {}
+  constructor() {
+  }
 
   extractError(error) {
     // Try to unwrap zone.js error.
@@ -86,7 +86,7 @@ export class SentryErrorHandler implements ErrorHandler {
     }
 
     // Optionally show user dialog to provide details on what happened.
-    Sentry.showReportDialog({ eventId });
+    Sentry.showReportDialog({eventId});
   }
 }
 
@@ -103,11 +103,11 @@ export class SentryErrorHandler implements ErrorHandler {
     AuthModule,
     DashboardModule,
     CarouselModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ChatService} from '@@core/services/chat.service';
-import {AuthService} from 'app/@auth/services/auth.service';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 
 @Component({
@@ -19,39 +18,15 @@ export class ChatMainComponent implements OnInit {
   requestId;
   myId;
   chatForm: FormGroup;
-  // messagesList: any;
-  // usersList: any;
-  // agent: {
-  //   _id: any,
-  //   name: string,
-  // };
-  // chatMessage: any;
-  // selectedUser: any;
+
 
   constructor(
     private chatService: ChatService,
     private actRoute: ActivatedRoute
   ) {
-    // this.chatService.getMessagesList().subscribe(messagesList => {
-    //   this.messagesList = messagesList;
-    //   this.usersList = Object.keys(this.messagesList).map(val => {
-    //     return val;
-    //   });
-    // });
+
   }
 
-  //
-  // postMessage() {
-  //   const user = {
-  //     id: this.agent._id,
-  //     name: this.agent.name
-  //   };
-  //   this.chatService.SendMessage(user, this.chatMessage, this.selectedUser);
-  // }
-  //
-  // endConversation() {
-  //   this.chatService.endConversation(this.selectedUser);
-  // }
 
   ngOnInit(): void {
     this.actRoute.data.subscribe((res) => {

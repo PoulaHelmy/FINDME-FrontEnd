@@ -21,6 +21,7 @@ export class BlankLayoutComponent implements AfterViewInit {
   @ViewChild('stickyMenu') menuElement: ElementRef;
   sticky = false;
   elementPosition: any;
+  isShown = false;
 
   ngAfterViewInit() {
     this.elementPosition = this.menuElement.nativeElement.offsetTop;
@@ -34,6 +35,7 @@ export class BlankLayoutComponent implements AfterViewInit {
       this.sticky = false;
     }
   }
+
 
   logout() {
     if (localStorage.getItem('isAuth') == 'false') {

@@ -48,38 +48,76 @@ $secondColor: #f9a826;
 }
 
 //-------------------------------END HOME HEADER------------------------------------------------------
+.sec__head {
+  h4 {
+    line-height: 3rem;
+    font-size: 3rem;
+    font-weight: 500;
+    display: block;
+  }
 
-//-------------------------------HOW WORK------------------------------------------------------
-//-------------------------------HOW WORK------------------------------------------------------
-.howWorkIco {
-  box-shadow: 5px 10px 18px #888888;
-  color: $firstColor;
-  transition: transform 1s;
-  border-radius: 25px;
+  span {
+    font-size: 1.2rem;
+    display: block;
+  }
 }
 
-.howWorkSec:hover .howWorkIco {
-  transform: scale(1.2, 1.2);
-  color: $secondColor;
+//-------------------------------HOW WORK------------------------------------------------------
+.how__works {
+
+  .how__work-section {
+    text-align: center;
+
+    .fas {
+      box-shadow: 5px 10px 18px #888888;
+      color: $firstColor;
+      transition: transform 1s;
+      border-radius: 25px;
+      padding: 3rem;
+      margin: 1rem 0px;
+    }
+
+    &:hover .fas {
+      transform: scale(1.2, 1.2);
+      color: $secondColor;
+    }
+
+    h2 {
+      line-height: 2.5rem;
+    }
+
+    .last-p {
+      padding-top: 2.8rem;
+    }
+  }
+
+
 }
 
 //-------------------------------YOU SHOULD KNOW------------------------------------------------------
-.YSK img {
-  height: 70%;
-  width: 70%;
-}
-
-.YSKsec {
+.you__should__know {
+  background: #fff;
   box-shadow: 5px 10px 18px #888888;
-}
+  max-width: 90%;
 
-.YSKsec p {
-  font-size: large;
-}
+  img {
+    max-height: 250px;
+    max-width: 250px;
+    min-width: 150px;
+    min-height: 150px;
 
-.YSKsec span {
-  color: $firstColor;
-  font-weight: bolder;
+  }
+
+  h2 {
+    line-height: 3rem;
+    font-weight: 600;
+  }
+
+  span {
+    color: $firstColor;
+    font-weight: 500;
+    font-size: 1.2rem;
+  }
 }
 
 /*-----------------------member---------------------------*/
@@ -144,4 +182,13 @@ $secondColor: #f9a826;
   }
 }
 
+//for Galaxy Fold
+@media screen and (max-width: 280px) {
+  .you__should__know {
+    img {
+      width: 150px;
+      height: 200px;
+    }
+  }
+}
 
