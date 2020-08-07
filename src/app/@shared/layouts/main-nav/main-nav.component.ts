@@ -120,9 +120,9 @@ export class MainNavComponent implements OnInit {
 
   /*------------------LogOut------------------------ */
   logout() {
-    if (localStorage.getItem('isAuth') == 'false') {
+    if (localStorage.getItem('isAuth') === 'false') {
       this.snackbar.show(
-        '   Unauthorized Request You Not Logged in yet   ',
+        'Unauthorized Request You Not Logged in yet   ',
         'danger'
       );
     } else {

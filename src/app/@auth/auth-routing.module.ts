@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
-import { SignupComponent } from './pages/signup/signup.component';
-import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
-import { NotFoundComponent } from '@@shared/pages/not-found/not-found.component';
-import { ActivateAccountComponent } from './pages/activate-account/activate-account.component';
-import { AcountActivatedResolver } from '@@core/guards/resolvers/UserAuthResolvers/account-activate.resolver';
-import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
-import { RequestPasswordResolver } from '@@core/guards/resolvers/UserAuthResolvers/request-password.resolver';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {LoginComponent} from './pages/login/login.component';
+import {SignupComponent} from './pages/signup/signup.component';
+import {ResetPasswordComponent} from './pages/reset-password/reset-password.component';
+import {NotFoundComponent} from '@@shared/pages/not-found/not-found.component';
+import {ActivateAccountComponent} from './pages/activate-account/activate-account.component';
+import {AcountActivatedResolver} from '@@core/guards/resolvers/UserAuthResolvers/account-activate.resolver';
+import {ForgetPasswordComponent} from './pages/forget-password/forget-password.component';
+import {RequestPasswordResolver} from '@@core/guards/resolvers/UserAuthResolvers/request-password.resolver';
 
 const routes: Routes = [
   {
@@ -22,24 +22,21 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignupComponent,
-    pathMatch: 'full',
   },
   {
     path: 'resetpassword',
     component: ResetPasswordComponent,
-    resolve: { item: RequestPasswordResolver },
+    resolve: {item: RequestPasswordResolver},
   },
   {
     path: 'forgetpassword',
     component: ForgetPasswordComponent,
-    pathMatch: 'full',
   },
   {
     path: 'activate',
     component: ActivateAccountComponent,
-    resolve: { item: AcountActivatedResolver },
+    resolve: {item: AcountActivatedResolver},
   },
-
   {
     path: '**',
     component: NotFoundComponent,
@@ -50,4 +47,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class authRoutingModule {}
+export class authRoutingModule {
+}
