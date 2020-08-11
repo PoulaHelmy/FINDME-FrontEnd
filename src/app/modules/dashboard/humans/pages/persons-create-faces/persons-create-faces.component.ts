@@ -1,7 +1,7 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {FaceApiService} from 'app/modules/dashboard/humans/services/face-api.service';
-import {ToastrService, Toast} from 'ngx-toastr';
+import {ToastrService} from 'ngx-toastr';
 import {
   FormGroup,
   Validators,
@@ -9,7 +9,7 @@ import {
   FormControl,
 } from '@angular/forms';
 import {ItemsService} from '@@core/services/items.service';
-import {delay, switchMap} from 'rxjs/operators';
+import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'app-persons-create-faces',
@@ -52,54 +52,32 @@ export class PersonsCreateFacesComponent implements OnInit {
       images: this.images,
     };
     for (let i = 0; i < this.images.length; i++) {
-      this.faceApi
-        .addPersonFace('maingroup', this.selectedPersonId, this.b64toFile(this.images[i]))
-        .subscribe(
-          (res) => {
-            // console.log('.addPersonFace', res);
-            // console.log('.addPersonFac i : ', i);
-          },
-          (err) => {
-            this.toastr.error(
-              err['error']['message'],
-              'Some Thing Wrong Please Try Again'
-            );
-
-            this.isLoadingResults = false;
-          }
-        );
-      this.faceApi
-        .addFaceFromLocal(
-          'mainlist',
-          this.b64toFile(this.images[i])
-        )
-        .subscribe(
-          (res) => {
-            // console.log('.addFaceFromLocal', res);
-            // console.log('.addFaceFromLocal  i : ', i);
-          },
-          (err) => {
-            this.toastr.error(
-              err['error']['message'],
-              'Some Thing Wrong Please Try Again'
-            );
-            this.isLoadingResults = false;
-          }
-        );
+      this.faceApi.addPersonFace('maingroup', this.selectedPersonId, this.b64toFile(this.images[i])).subscribe(
+        (res) => {
+          console.log('in Face # ', i);
+          console.log(res);
+          console.log('--------------');
+        },
+        (err) => {
+          this.toastr.error(
+            err['error']['message'],
+            'Some Thing Wrong Please Try Again'
+          );
+          this.isLoadingResults = false;
+        }
+      );
     } //end of for loop
 
-    this.itemServ
-      .uploadPersonFaces(data)
-      .pipe(delay(2))
+    this.itemServ.uploadPersonFaces(data).pipe(delay(10000))
       .subscribe((res) => {
         this.isLoadingResults = false;
-        this.router.navigateByUrl(
-          `/dashboard/humans/persons/questions/${this.item_id}`
-        );
+        console.log('in Uploading to DataBAse');
+        console.log('--------------');
+        this.router.navigateByUrl(`/dashboard/humans/persons/questions/${this.item_id}`);
       });
-  }
+  }//On Submit
 
-  /****************** File uploading Function************************/
+  /****************** File uploading Function ************************/
   onFileChange(event) {
     if (event.target.files && event.target.files[0]) {
       var filesAmount = event.target.files.length;
@@ -145,56 +123,3 @@ export class PersonsCreateFacesComponent implements OnInit {
     return <File> blob;
   }
 } //end of Class
-
-// addPersonFaceByUrl() {
-//   // this.formDialog.open(this.addByUrl);
-//   // this.dialogService.confirmed().subscribe((confirmed) => {
-//   //   console.log('sd : ', confirmed);
-//   // });
-
-//   this.fileNameDialogRef = this.dialog.open(FormDialogComponent, {
-//     hasBackdrop: false,
-//   });
-//   this.fileNameDialogRef.afterClosed().subscribe((res) => {
-//     console.log('res', res);
-//   });
-// }
-// addPersonFaceFromLocal() {
-//   this.router.navigateByUrl(
-//     `/humans/addface/${this.selectedPersonId}/group/${this.selectedGroupId}`
-//   );
-// }
-
-// deletePersonFace(persistedFaceId) {
-//   this.dialogService.open(this.options);
-//   this.dialogService.confirmed().subscribe((confirmed) => {
-//     if (confirmed) {
-//       this.isLoadingResults = true;
-//       this.faceApi
-//         .deletePersonFace(
-//           this.selectedGroupId,
-//           this.selectedPersonId,
-//           persistedFaceId
-//         )
-//         .subscribe(
-//           (data) => {
-//             this.popToast({
-//               type: 'success',
-//               title: 'Person Face Deleted Sussessfully',
-//               showCloseButton: true,
-//             });
-//             this.isLoadingResults = false;
-//             location.reload();
-//           },
-//           (err) => {
-//             this.popToast({
-//               type: 'error',
-//               title: 'Some Thing Wrong Please Try Again',
-//               showCloseButton: true,
-//             });
-//             this.isLoadingResults = false;
-//           }
-//         );
-//     }
-//   });
-// }

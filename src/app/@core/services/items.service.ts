@@ -82,17 +82,6 @@ export class ItemsService {
       );
   }
 
-  getItemOptionsValues(id: string) {
-    return this.http
-      .get(`${env.apiRoot}/auth/items/upoptions/${id}`, httpOptions)
-      .pipe(
-        map((res) => {
-          return res;
-        }),
-        catchError((e) => throwError(e))
-      );
-  }
-
   deleteItem(id: number, endPoint: string) {
     return this.http
       .delete(`${env.apiRoot}/auth/${endPoint}/${id}`, httpOptions)
@@ -120,17 +109,6 @@ export class ItemsService {
       .pipe(
         map((res) => {
           return res;
-        }),
-        catchError((e) => throwError(e))
-      );
-  }
-
-  getItemByName(data: object) {
-    return this.http
-      .post(`${env.apiRoot}/auth/getitembyname`, data, httpOptions)
-      .pipe(
-        map((res) => {
-          return res['data'];
         }),
         catchError((e) => throwError(e))
       );

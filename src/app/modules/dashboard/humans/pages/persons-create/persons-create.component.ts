@@ -7,11 +7,10 @@ import {
 } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SnackbarService} from '@@shared/pages/snackbar/snackbar.service';
-import {Router, ActivatedRoute} from '@angular/router';
+import {Router} from '@angular/router';
 import {ItemsService} from '@@core/services/items.service';
 import {ConfirmDialogService} from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
 import {DatePipe} from '@angular/common';
-import {Subscription, Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {FaceApiService} from 'app/modules/dashboard/humans/services/face-api.service';
 
@@ -81,16 +80,8 @@ export class PersonsCreateComponent implements OnInit, OnDestroy {
           )
           .subscribe((locations) => {
             this.filteredOptions = locations['hits'];
-            // console.log('dsddd ', this.filteredOptions);
           });
       }
-      //       The Algolia Places REST API supports HTTPS and is available via the https://places-dsn.algolia.net domain (leveraging our Distributed Search Network infrastructure).
-
-      // In order to guarantee a very high-availability, we recommend to implement a retry strategy on the following hosts if the https://places-dsn.algolia.net call fails:
-
-      // https://places-1.algolianet.com,
-      // then https://places-2.algolianet.com,
-      // then https://places-3.algolianet.com.
     });
   } //end of ngOnInit
 
@@ -109,12 +100,10 @@ export class PersonsCreateComponent implements OnInit, OnDestroy {
       des: this.personsForm.get('des').value,
       date: newDate,
     };
-    let newPersonData = {
-      name: this.personsForm.get('name').value,
-      userData: this.personsForm.get('des').value,
-    };
-    // console.log('dsd ', this.data);
-
+    // let newPersonData = {
+    //   name: this.personsForm.get('name').value,
+    //   userData: this.personsForm.get('des').value,
+    // };
     this.dialogService.open(this.options);
     this.dialogService.confirmed().subscribe((confirmed) => {
       if (confirmed) {
@@ -123,6 +112,10 @@ export class PersonsCreateComponent implements OnInit, OnDestroy {
           .addItem(this.data, 'items')
           .toPromise()
           .then((next) => {
+            const newPersonData = {
+              name: next['data']['name'],
+              userData: next['data']['id'],
+            };
             this.faceApi.createPerson('maingroup', newPersonData).subscribe((result) => {
               this.isLoadingResults = false;
               this.snackbarService.show(

@@ -13,7 +13,6 @@ import {OwlOptions, SlidesOutputData} from 'ngx-owl-carousel-o';
 })
 export class PersonDetailsComponent implements OnInit {
   isLoadingResults = false;
-  personId;
   itemDetails;
 
   constructor(
@@ -28,8 +27,7 @@ export class PersonDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.actRoute.data.subscribe((res) => {
-      this.itemDetails = res['item'][0]['data'];
-      this.personId = res['item'][0]['personId'];
+      this.itemDetails = res['item'][0]['data']['data'];
     });
   }
 

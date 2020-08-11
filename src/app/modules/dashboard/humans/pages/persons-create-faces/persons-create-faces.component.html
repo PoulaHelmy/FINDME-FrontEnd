@@ -6,7 +6,8 @@
     <mat-card-header>
       <mat-card-title>Person images & Faces</mat-card-title>
       <mat-card-subtitle
-        >All Of Person Face Operation and all Actions</mat-card-subtitle
+      >All Of Person Face Operation and all Actions
+      </mat-card-subtitle
       >
     </mat-card-header>
     <mat-card-content>
@@ -26,6 +27,7 @@
               type="file"
               #inputFile
               multiple
+              accept="image/x-png,image/jpeg"
               (change)="onFileChange($event)"
             />
             <button
@@ -42,7 +44,8 @@
                 faceForm.controls.file.errors?.required &&
                 faceForm.controls.file.touched
               "
-              >This Field Is Required</mat-hint
+            >This Field Is Required
+            </mat-hint
             >
             <div class="container">
               <div class="row justify-content-center">

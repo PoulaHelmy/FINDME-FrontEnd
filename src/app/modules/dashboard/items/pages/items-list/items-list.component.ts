@@ -50,7 +50,7 @@ export class ItemsListComponent implements OnInit, OnDestroy {
           (res) => {
             this.isLoadingResults = false;
             this.snackbarService.show('Item Deleted Successfully', 'success');
-            this.router.navigate(['/dashboard/items']);
+            location.reload();
           },
           (err) => {
             this.isLoadingResults = false;

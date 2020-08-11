@@ -18,7 +18,6 @@ import {ConfirmedValidator} from '@@shared/validatores/confirmed.validator';
 export class ChangePasswordComponent implements OnInit {
   resetForm: FormGroup;
   loading = false;
-  passwordToken: string;
   email: string;
   data: {};
 
@@ -27,7 +26,6 @@ export class ChangePasswordComponent implements OnInit {
     private router: Router,
     private snackbarService: SnackbarService,
     private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute
   ) {
   }
 
@@ -76,8 +74,6 @@ export class ChangePasswordComponent implements OnInit {
       .changePassword(this.data)
       .toPromise()
       .then((res) => {
-        // console.log('res', res);
-        // console.log('this.data', this.data);
         this.snackbarService.show('Password Changed Successfully');
         this.authService.logout().subscribe((result) => {
           localStorage.removeItem('access_token');

@@ -36,13 +36,6 @@ export class ApiService {
   ) {
   }
 
-  doGet() {
-    return this.http.get(`${env.apiRoot}/tags`, {
-      params: {page: '30'},
-      headers: {guest: 'True', Accept: 'application/json'},
-    });
-  }
-
   getItem(id: string, endPoint: string): Observable<any> {
     return this.http.get<any>(`${env.apiRoot}/${endPoint}/${id}`).pipe(
       map((response) => {
@@ -92,26 +85,6 @@ export class ApiService {
     });
   }
 
-  addItem(data: object, endPoint: string) {
-    return this.http.post(`${env.apiRoot}/${endPoint}`, data, httpOptions).pipe(
-      map((res) => {
-        return res;
-      }),
-      catchError((e) => throwError(e))
-    );
-  }
-
-  updateItem(id: number, data: object, endPoint: string) {
-    return this.http
-      .patch(`${env.apiRoot}/${endPoint}/${id}`, data, httpOptions)
-      .pipe(
-        map((response) => {
-          return response;
-        }),
-        catchError((e) => throwError(e))
-      );
-  }
-
   deleteCheck(id: number, apiEndpoint: string) {
     this.dialogService.open(this.options);
     this.dialogService.confirmed().subscribe((confirmed) => {
@@ -143,17 +116,6 @@ export class ApiService {
   getAllInputsBySubcategory(id: string) {
     return this.http
       .get(`${env.apiRoot}/subcatsinputs/${id}`, httpOptions)
-      .pipe(
-        map((res) => {
-          return res;
-        }),
-        catchError((e) => throwError(e))
-      );
-  }
-
-  getItemOptionsValues(id: string) {
-    return this.http
-      .get(`${env.apiRoot}/auth/items/upoptions/${id}`, httpOptions)
       .pipe(
         map((res) => {
           return res;

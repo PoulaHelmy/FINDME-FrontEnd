@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'app/@auth/services/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from 'app/@auth/services/auth.service';
+
 @Component({
   selector: 'app-account-details',
   templateUrl: './account-details.component.html',
@@ -14,12 +15,12 @@ export class AccountDetailsComponent implements OnInit {
   };
   defImg = '../../../../assets/imgs/undraw_profile_pic_ic5t.svg';
 
-  constructor(private authServ: AuthService) {}
+  constructor(private authServ: AuthService) {
+  }
 
   ngOnInit(): void {
     this.authServ.getDetails().subscribe((res) => {
       this.userDetails = res['data'];
-      console.log(this.userDetails);
     });
   }
 }

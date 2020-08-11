@@ -1,16 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {FaceApiService} from 'app/modules/dashboard/humans/services/face-api.service';
-import {ToastrService, Toast} from 'ngx-toastr';
+import {ToastrService} from 'ngx-toastr';
 import {
   FormGroup,
   Validators,
   FormBuilder,
   FormControl,
 } from '@angular/forms';
-import {ItemsService} from '@@core/services/items.service';
-import {delay, switchMap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-test-face-identification',
@@ -22,8 +19,6 @@ export class TestFaceIdentificationComponent implements OnInit {
   faceForm: FormGroup;
   images = [];
   persons = [];
-  confidence;
-  numberOfPersons;
   itemDetails;
 
   constructor(
@@ -32,7 +27,6 @@ export class TestFaceIdentificationComponent implements OnInit {
     private toastr: ToastrService,
     private actRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private itemServ: ItemsService
   ) {
   }
 
@@ -62,8 +56,7 @@ export class TestFaceIdentificationComponent implements OnInit {
                 );
                 this.router.navigateByUrl('/dashboard/humans/persons/details', {
                   state: {
-                    itemName: data['name'],
-                    personId: data['personId'],
+                    userData: data['userData']
                   },
                 });
               });

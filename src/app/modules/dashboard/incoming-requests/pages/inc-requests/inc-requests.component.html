@@ -37,28 +37,30 @@
               </mat-chip-list>
             </div>
             <div class="left-content">
-              <button
-                class="matBtn"
-                mat-icon-button
-                color="accent"
-                aria-label="Approve This Request"
-                matTooltip="Approve This Request"
-                matTooltipPosition="left"
-                (click)="approveRequest(request.id, 1)"
-              >
-                <mat-icon>done_outline</mat-icon>
-              </button>
-              <button
-                class="matBtn"
-                mat-icon-button
-                color="accent"
-                aria-label="Reject This Request"
-                matTooltip="Reject This Request"
-                matTooltipPosition="left"
-                (click)="approveRequest(request.id, -1)"
-              >
-                <mat-icon>clear</mat-icon>
-              </button>
+              <ng-template *ngif="request.status == 0">
+                <button
+                  class="matBtn"
+                  mat-icon-button
+                  color="accent"
+                  aria-label="Approve This Request"
+                  matTooltip="Approve This Request"
+                  matTooltipPosition="left"
+                  (click)="approveRequest(request.id, 1)"
+                >
+                  <mat-icon>done_outline</mat-icon>
+                </button>
+                <button
+                  class="matBtn"
+                  mat-icon-button
+                  color="accent"
+                  aria-label="Reject This Request"
+                  matTooltip="Reject This Request"
+                  matTooltipPosition="left"
+                  (click)="approveRequest(request.id, -1)"
+                >
+                  <mat-icon>clear</mat-icon>
+                </button>
+              </ng-template>
               <button
                 class="matBtn"
                 mat-icon-button
