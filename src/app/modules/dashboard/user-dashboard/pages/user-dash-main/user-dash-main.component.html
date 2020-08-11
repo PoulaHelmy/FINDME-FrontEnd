@@ -18,8 +18,10 @@
             [routerLink]="['/dashboard/items/test']"
             routerLinkActive="router-link-active"
           >
-            <mat-icon>model_training</mat-icon>Search For Item
-          </button></mat-list-option
+            <mat-icon>model_training</mat-icon>
+            Search For Item
+          </button>
+        </mat-list-option
         >
         <mat-list-option>
           <button
@@ -32,9 +34,12 @@
             [routerLink]="['/dashboard/humans/persons/identfy']"
             routerLinkActive="router-link-active"
           >
-            <mat-icon>perm_identity</mat-icon>Search For Person By Image
-          </button></mat-list-option
-        ></mat-selection-list
+            <mat-icon>perm_identity</mat-icon>
+            Search For Person By Image
+          </button>
+        </mat-list-option
+        >
+      </mat-selection-list
       >
     </mat-card-content>
     <mat-card-actions class="bts-controls">
@@ -48,7 +53,8 @@
         [routerLink]="['/dashboard/items/create']"
         routerLinkActive="router-link-active"
       >
-        <mat-icon>add_box</mat-icon>Add Item
+        <mat-icon>add_box</mat-icon>
+        Add Item
       </button>
       <button
         class="m-2"
@@ -60,13 +66,10 @@
         [routerLink]="['/dashboard/humans/persons/create']"
         routerLinkActive="router-link-active"
       >
-        <mat-icon>add_box</mat-icon>Add Person
+        <mat-icon>add_box</mat-icon>
+        Add Person
       </button>
     </mat-card-actions>
   </mat-card>
-  <div class="example-loading-shade" *ngIf="isLoadingResults">
-    <mat-spinner *ngIf="isLoadingResults" color="accent">
-      Uploadind....
-    </mat-spinner>
-  </div>
+  
 </div>
