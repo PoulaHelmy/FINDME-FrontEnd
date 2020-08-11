@@ -98,21 +98,6 @@
                 </mat-hint>
               </mat-form-field>
             </p>
-
-            <mat-card-actions>
-              <div
-                class="py-3 d-flex justify-content-center align-content-center"
-              >
-                <button
-                  class="rounded-pill btn-mine"
-                  mat-raised-button
-                  type="submit"
-                  [disabled]="userForm.invalid"
-                >
-                  Confirm
-                </button>
-              </div>
-            </mat-card-actions>
           </div>
         </div>
         <div class="col-lg-4 col-md-12 border-white rounded-lg">
@@ -125,83 +110,67 @@
               <div
                 class="mine d-flex justify-content-center align-items-center text-center"
               >
-                <div class="">
+                <div class="w-75 h-75">
                   <img [src]="data['photo']" class="img-fluid" />
                 </div>
               </div>
               <div class="">
-                <input
-                  formControlName="file"
-                  style="display: none;"
-                  id="file"
-                  type="file"
-                  #inputFile
-                  (change)="onFileChange($event)"
-                />
-                <button
-                  mat-flat-button
-                  type="button"
-                  class="btn-default btn-file border mt-5 rounded-pill browse-mine"
-                  (click)="inputFile.click()"
-                >
-                  Upload Profile Picture
-                </button>
-                <mat-hint
-                  align="end"
-                  *ngIf="
-                    userForm.controls.file.errors?.required &&
-                    userForm.controls.file.touched
-                  "
-                  >This Field Is Required</mat-hint
+                <div>
+                  <input
+                    formControlName="file"
+                    style="display: none;"
+                    id="file"
+                    type="file"
+                    #inputFile
+                    (change)="onFileChange($event)"
+                  />
+                </div>
+
+                <div class="pb-3 col-lg-12">
+                  <button
+                    mat-flat-button
+                    type="button"
+                    class="btn-default btn-file border mt-5 rounded-pill browse-mine"
+                    (click)="inputFile.click()"
+                  >
+                    Upload Profile Picture
+                  </button>
+                  <mat-hint
+                    align="end"
+                    *ngIf="
+                      userForm.controls.file.errors?.required &&
+                      userForm.controls.file.touched
+                    "
+                    >This Field Is Required</mat-hint
+                  >
+                </div>
+              </div>
+              <div class="py-3 col-lg-12">
+                <span
+                  style="cursor: pointer;"
+                  id="confirmChangePass"
+                  class="rounded-pill p-4 btn-profile1"
+                  [routerLink]="['/dashboard/account/changepass']"
+                  routerLinkActive="router-link-active"
+                  >ChangePassword</span
                 >
               </div>
-              <span
-                style="cursor: pointer;"
-                id="confirmChangePass"
-                class="rounded-pill mt-3 btn-profile1"
-                [routerLink]="['/dashboard/account/changepass']"
-                routerLinkActive="router-link-active"
-                >Change password</span
-              >
-            </div>
-
-            <div class="hide" id="showChangePassword">
-              <form method="POST" action="">
-                <div class="form-group">
-                  <label class="mt-3">Old password</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    name="oldPassowrd"
-                  />
-                </div>
-
-                <div class="form-group">
-                  <label>New password</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    name="newPassword"
-                  />
-                </div>
-
-                <div class="form-group">
-                  <label>Confirm new password</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    name="confirmNewPassword"
-                  />
-                </div>
-
-                <div class="d-flex justify-content-center">
-                  <button class="rounded-pill btn-mine">Confirm</button>
-                </div>
-              </form>
             </div>
           </div>
         </div>
       </div>
+      <mat-card-actions>
+        <div class="py-3 d-flex justify-content-center align-content-center">
+          <button
+            class="rounded-pill btn-mine"
+            mat-raised-button
+            type="submit"
+            [disabled]="userForm.invalid"
+          >
+            Confirm
+          </button>
+        </div>
+      </mat-card-actions>
     </form>
   </section>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -6,10 +6,10 @@ import {
   Validators,
   FormArray,
 } from '@angular/forms';
-import { SnackbarService } from '@@shared/pages/snackbar/snackbar.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ItemsService } from '@@core/services/items.service';
-import { Subscription } from 'rxjs';
+import {SnackbarService} from '@@shared/pages/snackbar/snackbar.service';
+import {Router, ActivatedRoute} from '@angular/router';
+import {ItemsService} from '@@core/services/items.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-create-request',
@@ -29,7 +29,8 @@ export class CreateRequestComponent implements OnInit, OnDestroy {
     private router: Router,
     private itemsService: ItemsService,
     private actRoute: ActivatedRoute
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.actRoute.data.subscribe((res) => {
@@ -46,19 +47,19 @@ export class CreateRequestComponent implements OnInit, OnDestroy {
       this.addQuestion();
       this.getquestions().at(i).patchValue(this.data[i]['name']);
       this.getquestions().at(i).get('question').disable();
-
       this.newData.push({
         question: this.data[i]['name'],
         answer: '',
       });
     }
-
     this.requestForm.get('questions').patchValue(this.newData);
   }
+
   /****************** Get Questions************************/
   getquestions() {
     return this.requestForm.get('questions') as FormArray;
   }
+
   /****************** add Question************************/
   addQuestion() {
     this.questionItem = this.fb.group({
@@ -67,14 +68,17 @@ export class CreateRequestComponent implements OnInit, OnDestroy {
     });
     this.getquestions().push(this.questionItem);
   }
+
   /****************** remove  Question************************/
   removeQuestion(index: number) {
     this.getquestions().removeAt(index);
   }
+
   /****************** Get One Question************************/
   getOneQuestion(index) {
     return this.getquestions().at(index);
   }
+
   /**************** Submit Function************************/
 
   onSubmit() {
@@ -89,5 +93,7 @@ export class CreateRequestComponent implements OnInit, OnDestroy {
         this.snackbarService.show(err['error']['message'], 'danger');
       });
   }
-  ngOnDestroy() {}
+
+  ngOnDestroy() {
+  }
 } //end of Class

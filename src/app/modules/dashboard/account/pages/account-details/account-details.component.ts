@@ -19,6 +19,7 @@ export class AccountDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.authServ.getDetails().subscribe((res) => {
       this.userDetails = res['data'];
+      console.log(this.userDetails);
     });
   }
 }

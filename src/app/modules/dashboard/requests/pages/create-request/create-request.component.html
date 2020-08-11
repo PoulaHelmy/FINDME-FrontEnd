@@ -17,10 +17,12 @@
                   placeholder="Request Input Name"
                 />
                 <mat-icon matSuffix *ngIf="!requestForm.controls.name.errors"
-                  >sentiment_very_satisfied</mat-icon
+                >sentiment_very_satisfied
+                </mat-icon
                 >
                 <mat-icon matSuffix *ngIf="requestForm.controls.name.errors"
-                  >sentiment_dissatisfied</mat-icon
+                >sentiment_dissatisfied
+                </mat-icon
                 >
                 <mat-hint
                   align="end"
@@ -28,19 +30,21 @@
                     requestForm.controls.name.errors?.required &&
                     requestForm.controls.name.touched
                   "
-                  >This Field Is Required</mat-hint
+                >This Field Is Required
+                </mat-hint
                 >
                 <mat-hint
                   align="end"
                   *ngIf="requestForm.controls.name.errors?.minlength"
-                  >Min Length Is 5 Characters</mat-hint
+                >Min Length Is 5 Characters
+                </mat-hint
                 >
               </mat-form-field>
             </p>
             <!------------------------ Description-------------------------->
             <p>
               <mat-form-field appearance="outline" class="w-75">
-                <mat-label>Description : </mat-label>
+                <mat-label>Description :</mat-label>
                 <textarea
                   matInput
                   formControlName="des"
@@ -48,10 +52,12 @@
                 ></textarea>
 
                 <mat-icon matSuffix *ngIf="!requestForm.controls.des.errors"
-                  >sentiment_very_satisfied</mat-icon
+                >sentiment_very_satisfied
+                </mat-icon
                 >
                 <mat-icon matSuffix *ngIf="requestForm.controls.des.errors"
-                  >sentiment_dissatisfied</mat-icon
+                >sentiment_dissatisfied
+                </mat-icon
                 >
                 <mat-hint
                   align="end"
@@ -59,12 +65,14 @@
                     requestForm.controls.des.errors?.required &&
                     requestForm.controls.des.touched
                   "
-                  >This Field Is Required</mat-hint
+                >This Field Is Required
+                </mat-hint
                 >
                 <mat-hint
                   align="end"
                   *ngIf="requestForm.controls.des.errors?.minlength"
-                  >Min Length Is 20 Characters</mat-hint
+                >Min Length Is 20 Characters
+                </mat-hint
                 >
               </mat-form-field>
             </p>
@@ -98,14 +106,16 @@
                         *ngIf="
                           !getOneQuestion(questionIndex).get('question').errors
                         "
-                        >sentiment_very_satisfied</mat-icon
+                      >sentiment_very_satisfied
+                      </mat-icon
                       >
                       <mat-icon
                         matSuffix
                         *ngIf="
                           getOneQuestion(questionIndex).get('question').errors
                         "
-                        >sentiment_dissatisfied</mat-icon
+                      >sentiment_dissatisfied
+                      </mat-icon
                       >
                       <mat-hint
                         align="end"
@@ -114,14 +124,15 @@
                             ?.required &&
                           getOneQuestion(questionIndex).get('question').touched
                         "
-                        >This Field Is Required</mat-hint
+                      >This Field Is Required
+                      </mat-hint
                       >
                     </mat-form-field>
                   </p>
                   <!------------------------ Answer-------------------------->
                   <p>
                     <mat-form-field appearance="outline" class="w-75">
-                      <mat-label>Question</mat-label>
+                      <mat-label>Answer</mat-label>
                       <input
                         matInput
                         formControlName="answer"
@@ -132,14 +143,16 @@
                         *ngIf="
                           !getOneQuestion(questionIndex).get('answer').errors
                         "
-                        >sentiment_very_satisfied</mat-icon
+                      >sentiment_very_satisfied
+                      </mat-icon
                       >
                       <mat-icon
                         matSuffix
                         *ngIf="
                           getOneQuestion(questionIndex).get('answer').errors
                         "
-                        >sentiment_dissatisfied</mat-icon
+                      >sentiment_dissatisfied
+                      </mat-icon
                       >
                       <mat-hint
                         align="end"
@@ -148,7 +161,8 @@
                             ?.required &&
                           getOneQuestion(questionIndex).get('answer').touched
                         "
-                        >This Field Is Required</mat-hint
+                      >This Field Is Required
+                      </mat-hint
                       >
                       <mat-hint
                         align="end"
@@ -156,7 +170,8 @@
                           getOneQuestion(questionIndex).get('answer').errors
                             ?.minlength
                         "
-                        >Min Length Is 3 Characters</mat-hint
+                      >Min Length Is 3 Characters
+                      </mat-hint
                       >
                     </mat-form-field>
                   </p>

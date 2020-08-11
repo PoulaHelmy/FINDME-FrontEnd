@@ -2,7 +2,6 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
   OnInit,
   Output,
 } from '@angular/core';
@@ -12,7 +11,8 @@ import {
   Validators,
   FormControl,
 } from '@angular/forms';
-import { FieldConfig, Validator } from '@@shared/models/field.interface';
+import {FieldConfig, Validator} from '@@shared/models/field.interface';
+
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
@@ -22,14 +22,18 @@ export class DynamicFormComponent implements OnInit {
   @Input() fields: FieldConfig[] = [];
   @Output() submit: EventEmitter<any> = new EventEmitter<any>();
   form: FormGroup;
-  constructor(private fb: FormBuilder) {}
+
+  constructor(private fb: FormBuilder) {
+  }
 
   ngOnInit(): void {
     this.form = this.createControl();
   }
+
   get value() {
     return this.form.value;
   }
+
   createControl() {
     const group = this.fb.group({});
     for (let i = 0; i < this.fields.length; i++) {
@@ -37,7 +41,6 @@ export class DynamicFormComponent implements OnInit {
         this.fields[i]['value'] ? this.fields[i]['value'] : '',
         this.bindValidations(this.fields[i]['validations'] || [])
       );
-
       group.addControl(this.fields[i]['name'], control);
     }
     return group;
@@ -72,12 +75,14 @@ export class DynamicFormComponent implements OnInit {
     }
     return null;
   }
+
   validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach((field) => {
       const control = formGroup.get(field);
-      control.markAsTouched({ onlySelf: true });
+      control.markAsTouched({onlySelf: true});
     });
   }
+
   onSubmit(event: Event) {
     event.preventDefault();
     event.stopPropagation();

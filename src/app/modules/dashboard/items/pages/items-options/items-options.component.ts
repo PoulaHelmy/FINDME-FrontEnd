@@ -1,14 +1,15 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { SnackbarService } from '@@shared/pages/snackbar/snackbar.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ApiService } from '@@core/http/api.service';
-import { ItemsService } from '@@core/services/items.service';
-import { DynamicFormComponent } from '@@shared/pages/dynamicForms/dynamic-form/dynamic-form.component';
-import { Subscription } from 'rxjs';
-import { FieldConfig } from '@@shared/models/field.interface';
-import { HttpClient } from '@angular/common/http';
-import { environment as env } from '../../../../../../environments/environment';
+import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
+import {FormGroup, FormBuilder} from '@angular/forms';
+import {SnackbarService} from '@@shared/pages/snackbar/snackbar.service';
+import {Router, ActivatedRoute} from '@angular/router';
+import {ApiService} from '@@core/http/api.service';
+import {ItemsService} from '@@core/services/items.service';
+import {DynamicFormComponent} from '@@shared/pages/dynamicForms/dynamic-form/dynamic-form.component';
+import {Subscription} from 'rxjs';
+import {FieldConfig} from '@@shared/models/field.interface';
+import {HttpClient} from '@angular/common/http';
+import {environment as env} from '../../../../../../environments/environment';
+
 @Component({
   selector: 'app-items-options',
   templateUrl: './items-options.component.html',
@@ -32,7 +33,8 @@ export class ItemsOptionsComponent implements OnInit, OnDestroy {
     private actRoute: ActivatedRoute,
     private itemService: ItemsService,
     private http: HttpClient
-  ) {}
+  ) {
+  }
 
   /****************** ngOnInit Function************************/
   ngOnInit(): void {
@@ -49,7 +51,8 @@ export class ItemsOptionsComponent implements OnInit, OnDestroy {
     });
   }
 
-  /****************** Submit Function************************/
+  /****************** Submit Function ************************/
+
   submit(value: any) {
     this.data = {
       item_id: this.item_id,
@@ -88,5 +91,6 @@ export class ItemsOptionsComponent implements OnInit, OnDestroy {
   } //end of submit
 
   /****************** Destroy Function************************/
-  ngOnDestroy(): void {} //end of destroy
+  ngOnDestroy(): void {
+  } //end of destroy
 } //end of  Class

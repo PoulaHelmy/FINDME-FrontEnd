@@ -11,15 +11,15 @@ import {
   Validators,
   FormControl,
 } from '@angular/forms';
-import { SnackbarService } from '@@shared/pages/snackbar/snackbar.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ApiService } from '@@core/http/api.service';
-import { Category } from '@@shared/models/category';
-import { ItemsService } from '@@core/services/items.service';
-import { ConfirmDialogService } from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
-import { DatePipe } from '@angular/common';
-import { Subscription, Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {SnackbarService} from '@@shared/pages/snackbar/snackbar.service';
+import {Router, ActivatedRoute} from '@angular/router';
+import {ApiService} from '@@core/http/api.service';
+import {Category} from '@@shared/models/category';
+import {ItemsService} from '@@core/services/items.service';
+import {ConfirmDialogService} from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
+import {DatePipe} from '@angular/common';
+import {Subscription, Observable} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -27,6 +27,7 @@ const httpOptions = {
     'X-Algolia-API-Key': 'ce287ed40c8a6f4d8579799492461dd7',
   }),
 };
+
 @Component({
   selector: 'app-items-create',
   templateUrl: './items-create.component.html',
@@ -53,6 +54,7 @@ export class ItemsCreateComponent implements OnInit, OnDestroy {
   filteredOptions;
   @ViewChild('locationSpanlat') locationSpanlat: ElementRef;
   @ViewChild('locationSpanlan') locationSpanlan: ElementRef;
+
   /****************** constructor Function************************/
   constructor(
     private fb: FormBuilder,
@@ -64,7 +66,8 @@ export class ItemsCreateComponent implements OnInit, OnDestroy {
     private actRoute: ActivatedRoute,
     private itemService: ItemsService,
     private http: HttpClient
-  ) {}
+  ) {
+  }
 
   /****************** ngOnInit Function************************/
   ngOnInit(): void {
@@ -90,7 +93,7 @@ export class ItemsCreateComponent implements OnInit, OnDestroy {
     });
     this.itemsForm.controls.location.valueChanges.subscribe((res) => {
       if (res !== '' && res !== null && res !== ' ') {
-        let data = { query: res, type: 'address' };
+        let data = {query: res, type: 'address'};
         this.http
           .post(
             'https://places-dsn.algolia.net/1/places/query',
@@ -111,7 +114,6 @@ export class ItemsCreateComponent implements OnInit, OnDestroy {
 
       for (let i = 0; i < filesAmount; i++) {
         this.isLoadingImages = true;
-
         var reader = new FileReader();
         reader.onload = (event: any) => {
           this.images.push(event.target.result);
@@ -171,5 +173,6 @@ export class ItemsCreateComponent implements OnInit, OnDestroy {
   } //end of submit
 
   /****************** DEstroy Function************************/
-  ngOnDestroy(): void {} //end of destroy
+  ngOnDestroy(): void {
+  } //end of destroy
 } //end of Class

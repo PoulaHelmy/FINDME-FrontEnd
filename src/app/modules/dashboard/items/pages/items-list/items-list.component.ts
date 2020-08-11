@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { ConfirmDialogService } from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
-import { SnackbarService } from '@@shared/pages/snackbar/snackbar.service';
-import { Item } from '@@shared/models/item';
-import { ItemsService } from '@@core/services/items.service';
-import { Router } from '@angular/router';
+import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
+import {ConfirmDialogService} from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
+import {SnackbarService} from '@@shared/pages/snackbar/snackbar.service';
+import {Item} from '@@shared/models/item';
+import {ItemsService} from '@@core/services/items.service';
+import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-items-list',
   templateUrl: './items-list.component.html',
@@ -24,18 +25,22 @@ export class ItemsListComponent implements OnInit, OnDestroy {
     cancelText: 'Cancel',
     confirmText: 'Confirm',
   };
+
   constructor(
     private dialogService: ConfirmDialogService,
     private snackbarService: SnackbarService,
     private itemService: ItemsService,
     private router: Router
-  ) {}
+  ) {
+  }
+
   ngOnInit() {
     this.itemService.getAllItems('items').subscribe((res) => {
       this.items = res['data'];
       this.isLoadingResults = false;
     });
   }
+
   deleteItem(id) {
     this.dialogService.open(this.options);
     this.dialogService.confirmed().subscribe((confirmed) => {
@@ -52,9 +57,12 @@ export class ItemsListComponent implements OnInit, OnDestroy {
             this.snackbarService.show(err['statusText'], 'danger');
           }
         );
+      } else {
+        this.isLoadingResults = false;
       }
     });
   }
+
   markAsReturned(id: number) {
     this.dialogService.open(this.options2);
     this.dialogService.confirmed().subscribe((confirmed) => {
@@ -75,5 +83,7 @@ export class ItemsListComponent implements OnInit, OnDestroy {
       }
     });
   }
-  ngOnDestroy() {}
+
+  ngOnDestroy() {
+  }
 } //end of class

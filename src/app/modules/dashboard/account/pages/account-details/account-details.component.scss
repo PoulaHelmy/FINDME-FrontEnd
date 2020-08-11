@@ -1,50 +1,21 @@
+$firstColor: #00bfa6;
+$secondColor: #f9a826;
+//------------------------------------------------------------------------------------
 
-.p-head
-{
-    font-weight: 600;
-    color: #2b4d46;
-}
-.btn-mine
-{
-    background-color: #49D4BE;
-    color: white;
-    padding: 9px 50px;
-    border: transparent;
-}
-.bg-mine
-{
-    background-color: white;
-}
-.mine
-{
-    background-color: #68DBC9;
-}
-.browse-mine
-{
-    background-color: #49D4BE;
-    color: white;
-    padding: 9px 20px;
-    border: transparent;
-    cursor: pointer;
-}
+.profileSec {
+  box-shadow: 5px 10px 18px #888888;
 
-.btn-profile
-{
-    padding: 9px 70px;
-    color: white;
-    border: transparent;
-    background-color: #F14646;
+  border-radius: 12px;
 }
-.btn-profile1
-{
-    padding: 9px 80px;
-    color: white;
-    border: transparent;
-    background-color: #23272B;
+.profileSec p {
+  font-size: large;
 }
-.PROFILE h2
-{
-  color: gray;
+.profileSec span {
+  color: $firstColor;
 }
-
-
+.btn-mine {
+  background-color: $firstColor;
+  color: white;
+  padding: 9px 50px;
+  border: transparent;
+}

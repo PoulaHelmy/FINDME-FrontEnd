@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { ConfirmDialogService } from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
-import { SnackbarService } from '@@shared/pages/snackbar/snackbar.service';
-import { Request } from '@@shared/models/request';
-import { ItemsService } from '@@core/services/items.service';
-import { Router } from '@angular/router';
+import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
+import {ConfirmDialogService} from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
+import {SnackbarService} from '@@shared/pages/snackbar/snackbar.service';
+import {Request} from '@@shared/models/request';
+import {ItemsService} from '@@core/services/items.service';
+
 @Component({
   selector: 'app-requests',
   templateUrl: './requests.component.html',
@@ -17,17 +17,20 @@ export class RequestsComponent implements OnInit, OnDestroy {
     cancelText: 'Cancel',
     confirmText: 'Confirm',
   };
+
   constructor(
     private dialogService: ConfirmDialogService,
     private snackbarService: SnackbarService,
     private itemService: ItemsService,
-    private router: Router
-  ) {}
+  ) {
+  }
+
   ngOnInit() {
     this.itemService.getAllItems('requests').subscribe((res) => {
       this.requests = res['data'];
     });
   }
+
   deleteItem(id) {
     this.dialogService.open(this.options);
     this.dialogService.confirmed().subscribe((confirmed) => {
@@ -49,5 +52,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
     });
     // this.apiserv.deleteCheck(id, value);
   }
-  ngOnDestroy() {}
+
+  ngOnDestroy() {
+  }
 } //end of class
