@@ -105,11 +105,6 @@ export class AuthService {
       .pipe(catchError((e) => throwError(e)));
   }
 
-  getUserDataById(id) {
-    return this.http
-      .get(`${env.apiRoot}/auth/userdata/${id}`, httpOptions)
-      .pipe(catchError((e) => throwError(e)));
-  }
 
   changePassword(data: object) {
     return this.http
@@ -119,12 +114,3 @@ export class AuthService {
 } //end of class
 
 
-// getDetails() {
-//   return this.http.get(`${env.apiRoot}/${this.endPoint}/user`, {
-//     headers: {
-//       Authorization: 'Bearer ' + localStorage.getItem('access_token'),
-//       Accept: 'application/json',
-//       'X-Requested-With': 'XMLHttpRequest',
-//     },
-//   });
-// }
