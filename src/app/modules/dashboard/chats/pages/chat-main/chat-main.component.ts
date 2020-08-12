@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ChatService} from '@@core/services/chat.service';
 import {ActivatedRoute} from '@angular/router';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-chat-main',
@@ -22,7 +24,8 @@ export class ChatMainComponent implements OnInit {
 
   constructor(
     private chatService: ChatService,
-    private actRoute: ActivatedRoute
+    private actRoute: ActivatedRoute,
+    private toastr: ToastrService,
   ) {
 
   }
@@ -65,17 +68,20 @@ export class ChatMainComponent implements OnInit {
     } else {
       otherId = this.chatData.user_2;
     }
-
     const data = {
       body: this.chatForm.get('msgContent').value,
       chat_id: this.chatData.id,
       sender_id: this.myId,
       receiver_id: otherId,
     };
+    this.AllMsgs.push(data);
+    this.chatForm.controls.msgContent.patchValue('');
     this.chatService.sendMessage(data).subscribe((res) => {
-      location.reload();
+      this.toastr.success(
+        'You Can Refresh Page To Get New Messages',
+        `Message Send Successfully `
+      );
     });
   }
-
 
 }// end oF ClASS

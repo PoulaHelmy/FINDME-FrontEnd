@@ -18,7 +18,7 @@
                   <span
                     class="namePerson mx-1"
                     *ngIf="message['sender_id'] === myId; else elseBlock"
-                    >{{ myName }} :
+                  >{{ myName }} :
                   </span>
                   <ng-template #elseBlock>
                     <span class="namePerson mx-1"> {{ otherName }} : </span>
@@ -37,7 +37,7 @@
       <!------------------------ Message-------------------------->
 
       <mat-form-field appearance="outline">
-        <mat-label>Message : </mat-label>
+        <mat-label>Message :</mat-label>
         <textarea
           matInput
           formControlName="msgContent"
@@ -49,12 +49,14 @@
             chatForm.controls.msgContent.errors?.required &&
             chatForm.controls.msgContent.touched
           "
-          >This Field Is Required</mat-hint
+        >This Field Is Required
+        </mat-hint
         >
         <mat-hint
           align="end"
           *ngIf="chatForm.controls.msgContent.errors?.minlength"
-          >Min Length Is 1 Character</mat-hint
+        >Min Length Is 1 Character
+        </mat-hint
         >
       </mat-form-field>
       <button
