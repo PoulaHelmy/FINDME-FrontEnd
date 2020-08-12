@@ -36,12 +36,14 @@
                         *ngIf="
                           !getOneQuestion(questionIndex).get('name').errors
                         "
-                        >sentiment_very_satisfied</mat-icon
+                      >sentiment_very_satisfied
+                      </mat-icon
                       >
                       <mat-icon
                         matSuffix
                         *ngIf="getOneQuestion(questionIndex).get('name').errors"
-                        >sentiment_dissatisfied</mat-icon
+                      >sentiment_dissatisfied
+                      </mat-icon
                       >
                       <mat-hint
                         align="end"
@@ -50,7 +52,8 @@
                             ?.required &&
                           getOneQuestion(questionIndex).get('name').touched
                         "
-                        >This Field Is Required</mat-hint
+                      >This Field Is Required
+                      </mat-hint
                       >
                       <mat-hint
                         align="end"
@@ -58,7 +61,8 @@
                           getOneQuestion(questionIndex).get('name').errors
                             ?.minlength
                         "
-                        >Min Length Is 10 Characters</mat-hint
+                      >Min Length Is 10 Characters
+                      </mat-hint
                       >
                     </mat-form-field>
                   </p>
@@ -83,7 +87,7 @@
               class="btn-operations"
               (click)="addQuestion()"
             >
-              Submit
+              ADD Question
             </button>
 
             <mat-card-actions>
@@ -93,7 +97,7 @@
                 color="accent"
                 [disabled]="questionsForm.invalid"
               >
-                Add All Questions
+                Submit All Questions
               </button>
             </mat-card-actions>
           </form>

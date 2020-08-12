@@ -41,22 +41,14 @@ export class PersonsCreateFacesComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    this.isLoadingResults = true;
-    this.toastr.success(
-      ' ',
-      'Upload Image Process May by Take Alot Of Time...'
-    );
-    let data = {
-      item_id: this.item_id,
-      images: this.images,
-    };
+  uploadImagesToCloud() {
+    let lengthChecker = this.images.length;
+    let toasterIndex = 1;
+    // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.images.length; i++) {
+      const that = this;
       this.faceApi.addPersonFace('maingroup', this.selectedPersonId, this.b64toFile(this.images[i])).subscribe(
         (res) => {
-          console.log('in Face # ', i);
-          console.log(res);
-          console.log('--------------');
         },
         (err) => {
           this.toastr.error(
@@ -64,17 +56,31 @@ export class PersonsCreateFacesComponent implements OnInit {
             'Some Thing Wrong Please Try Again'
           );
           this.isLoadingResults = false;
+        },
+        () => {
+          lengthChecker = lengthChecker - 1;
+          that.toastr.success(
+            ' ',
+            `Image ${toasterIndex++} Uploaded Successfully `
+          );
+          if (lengthChecker === 0) {
+            that.itemServ.uploadPersonFaces({item_id: this.item_id, images: this.images}).pipe(delay(2000))
+              .subscribe((res) => {
+                this.isLoadingResults = false;
+                this.router.navigateByUrl(`/dashboard/humans/persons/questions/${this.item_id}`);
+              });
+          }
         }
       );
-    } //end of for loop
-
-    this.itemServ.uploadPersonFaces(data).pipe(delay(10000))
-      .subscribe((res) => {
-        this.isLoadingResults = false;
-        console.log('in Uploading to DataBAse');
-        console.log('--------------');
-        this.router.navigateByUrl(`/dashboard/humans/persons/questions/${this.item_id}`);
-      });
+    }//end of for upload To Cloud
+  }//end of Upload To
+  onSubmit() {
+    this.isLoadingResults = true;
+    this.toastr.success(
+      ' ',
+      'Upload Image Process May by Take Alot Of Time...'
+    );
+    this.uploadImagesToCloud();
   }//On Submit
 
   /****************** File uploading Function ************************/
