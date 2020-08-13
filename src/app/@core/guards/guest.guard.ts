@@ -5,16 +5,15 @@ import {
   Router,
   CanActivateChild,
 } from '@angular/router';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class GuestGuardService implements CanActivateChild {
-  constructor(private router: Router) {}
-  canActivateChild(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean> | boolean {
+  constructor(private router: Router) {
+  }
+
+  canActivateChild(): Observable<boolean> | boolean {
     if (!localStorage.getItem('access_token')) {
       return true;
     }

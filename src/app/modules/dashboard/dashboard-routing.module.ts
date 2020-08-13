@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { NotFoundComponent } from '@@shared/pages/not-found/not-found.component';
-import { AuthGuard } from '@@core/guards/auth.guard';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {NotFoundComponent} from '@@shared/pages/not-found/not-found.component';
+import {AuthGuard} from '@@core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -11,7 +11,7 @@ const routes: Routes = [
         (m) => m.UserDashboardModule
       ),
     pathMatch: 'full',
-    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
   },
   {
     path: 'items',
@@ -19,7 +19,7 @@ const routes: Routes = [
       import('app/modules/dashboard/items/items.module').then(
         (m) => m.ItemsModule
       ),
-    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
   },
   {
     path: 'requests',
@@ -27,7 +27,7 @@ const routes: Routes = [
       import('app/modules/dashboard/requests/requests.module').then(
         (m) => m.RequestsModule
       ),
-    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
   },
   {
     path: 'account',
@@ -35,15 +35,15 @@ const routes: Routes = [
       import('app/modules/dashboard/account/account.module').then(
         (m) => m.AccountModule
       ),
-    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
   },
   {
     path: 'increquests',
     loadChildren: () =>
       import(
         'app/modules/dashboard/incoming-requests/incoming-requests.module'
-      ).then((m) => m.IncomingRequestsModule),
-    canActivate: [AuthGuard],
+        ).then((m) => m.IncomingRequestsModule),
+    canActivateChild: [AuthGuard],
   },
   {
     path: 'chats',
@@ -51,7 +51,7 @@ const routes: Routes = [
       import('app/modules/dashboard/chats/chats.module').then(
         (m) => m.ChatsModule
       ),
-    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
   },
   {
     path: 'humans',
@@ -59,7 +59,7 @@ const routes: Routes = [
       import('app/modules/dashboard/humans/humans.module').then(
         (m) => m.HumansModule
       ),
-    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
   },
   {
     path: 'matching',
@@ -67,7 +67,7 @@ const routes: Routes = [
       import('app/modules/dashboard/matching/matching.module').then(
         (m) => m.MatchingModule
       ),
-    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
   },
   {
     path: '**',
@@ -79,4 +79,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class DashboardRoutingModule {}
+export class DashboardRoutingModule {
+}
