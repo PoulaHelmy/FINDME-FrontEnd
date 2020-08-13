@@ -11,19 +11,21 @@ import {
   Validators,
   FormControl,
 } from '@angular/forms';
-import { SnackbarService } from '@@shared/pages/snackbar/snackbar.service';
-import { ConfirmDialogService } from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
-import { DatePipe } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ItemsService } from '@@core/services/items.service';
-import { Subscription } from 'rxjs';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import {SnackbarService} from '@@shared/pages/snackbar/snackbar.service';
+import {ConfirmDialogService} from '@@shared/pages/dialogs/confirm-dialog/confirm.service';
+import {DatePipe} from '@angular/common';
+import {Router, ActivatedRoute} from '@angular/router';
+import {ItemsService} from '@@core/services/items.service';
+import {Subscription} from 'rxjs';
+import {HttpHeaders, HttpClient} from '@angular/common/http';
+
 const httpOptions = {
   headers: new HttpHeaders({
     'X-Algolia-Application-Id': 'plBIPOQ7X7HA',
     'X-Algolia-API-Key': 'ce287ed40c8a6f4d8579799492461dd7',
   }),
 };
+
 @Component({
   selector: 'app-items-update',
   templateUrl: './items-update.component.html',
@@ -35,7 +37,6 @@ export class ItemsUpdateComponent implements OnInit, OnDestroy {
   itemsForm: FormGroup;
   data: {};
   isLoadingResults = false;
-  isLoadingImages = false;
   itemID;
   subcat;
   options = {
@@ -51,6 +52,7 @@ export class ItemsUpdateComponent implements OnInit, OnDestroy {
   filteredOptions;
   @ViewChild('locationSpanlat') locationSpanlat: ElementRef;
   @ViewChild('locationSpanlan') locationSpanlan: ElementRef;
+
   /****************** constructor Function************************/
   constructor(
     private fb: FormBuilder,
@@ -61,7 +63,8 @@ export class ItemsUpdateComponent implements OnInit, OnDestroy {
     private actRoute: ActivatedRoute,
     private itemService: ItemsService,
     private http: HttpClient
-  ) {}
+  ) {
+  }
 
   /****************** ngOnInit Function************************/
   ngOnInit(): void {
@@ -87,7 +90,7 @@ export class ItemsUpdateComponent implements OnInit, OnDestroy {
     });
     this.itemsForm.controls.location.valueChanges.subscribe((res) => {
       if (res !== '' && res !== null && res !== ' ') {
-        let data = { query: res, type: 'address' };
+        let data = {query: res, type: 'address'};
         this.http
           .post(
             'https://places-dsn.algolia.net/1/places/query',
@@ -103,7 +106,6 @@ export class ItemsUpdateComponent implements OnInit, OnDestroy {
 
   /****************** onFileChange Function************************/
   onFileChange(event) {
-    this.isLoadingImages = true;
     if (event.target.files && event.target.files[0]) {
       var filesAmount = event.target.files.length;
       for (let i = 0; i < filesAmount; i++) {
@@ -117,7 +119,6 @@ export class ItemsUpdateComponent implements OnInit, OnDestroy {
         reader.readAsDataURL(event.target.files[i]);
       }
     }
-    this.isLoadingImages = false;
   }
 
   /****************** Delete image from images retrived from server Function************************/
@@ -189,5 +190,6 @@ export class ItemsUpdateComponent implements OnInit, OnDestroy {
   } //end of submit
 
   /****************** ngOnDestroy Function************************/
-  ngOnDestroy() {} //end of ngOnDestroy
+  ngOnDestroy() {
+  } //end of ngOnDestroy
 } //end of Class

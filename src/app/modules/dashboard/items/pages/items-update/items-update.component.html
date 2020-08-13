@@ -22,10 +22,12 @@
                   placeholder="Enter Input Name"
                 />
                 <mat-icon matSuffix *ngIf="!itemsForm.controls.name.errors"
-                  >sentiment_very_satisfied</mat-icon
+                >sentiment_very_satisfied
+                </mat-icon
                 >
                 <mat-icon matSuffix *ngIf="itemsForm.controls.name.errors"
-                  >sentiment_dissatisfied</mat-icon
+                >sentiment_dissatisfied
+                </mat-icon
                 >
                 <mat-hint
                   align="end"
@@ -33,12 +35,14 @@
                     itemsForm.controls.name.errors?.required &&
                     itemsForm.controls.name.touched
                   "
-                  >This Field Is Required</mat-hint
+                >This Field Is Required
+                </mat-hint
                 >
                 <mat-hint
                   align="end"
                   *ngIf="itemsForm.controls.name.errors?.minlength"
-                  >Min Length Is 3 Characters</mat-hint
+                >Min Length Is 3 Characters
+                </mat-hint
                 >
               </mat-form-field>
             </p>
@@ -76,18 +80,20 @@
                     }}</span> -->
                     <span #locationSpanlat style="display: none;">{{
                       hits["_geoloc"]["lat"]
-                    }}</span>
+                      }}</span>
                     <span #locationSpanlan style="display: none;">{{
                       hits["_geoloc"]["lng"]
-                    }}</span>
+                      }}</span>
                   </mat-option>
                 </mat-autocomplete>
 
                 <mat-icon matSuffix *ngIf="!itemsForm.controls.location.errors"
-                  >sentiment_very_satisfied</mat-icon
+                >sentiment_very_satisfied
+                </mat-icon
                 >
                 <mat-icon matSuffix *ngIf="itemsForm.controls.location.errors"
-                  >sentiment_dissatisfied</mat-icon
+                >sentiment_dissatisfied
+                </mat-icon
                 >
                 <mat-hint
                   align="end"
@@ -95,19 +101,21 @@
                     itemsForm.controls.location.errors?.required &&
                     itemsForm.controls.location.touched
                   "
-                  >This Field Is Required</mat-hint
+                >This Field Is Required
+                </mat-hint
                 >
                 <mat-hint
                   align="end"
                   *ngIf="itemsForm.controls.location.errors?.minlength"
-                  >Min Length Is 5 Characters</mat-hint
+                >Min Length Is 5 Characters
+                </mat-hint
                 >
               </mat-form-field>
             </p>
             <!------------------------ Date-------------------------->
             <p>
               <mat-form-field>
-                <mat-label>When : </mat-label>
+                <mat-label>When :</mat-label>
                 <input
                   matInput
                   [matDatepicker]="picker"
@@ -126,14 +134,15 @@
                     itemsForm.controls.date.errors?.required &&
                     itemsForm.controls.date.touched
                   "
-                  >This Field Is Required</mat-hint
+                >This Field Is Required
+                </mat-hint
                 >
               </mat-form-field>
             </p>
             <!------------------------ Description-------------------------->
             <p>
               <mat-form-field appearance="outline" class="w-75">
-                <mat-label>Description : </mat-label>
+                <mat-label>Description :</mat-label>
                 <textarea
                   matInput
                   formControlName="des"
@@ -141,10 +150,12 @@
                 ></textarea>
 
                 <mat-icon matSuffix *ngIf="!itemsForm.controls.des.errors"
-                  >sentiment_very_satisfied</mat-icon
+                >sentiment_very_satisfied
+                </mat-icon
                 >
                 <mat-icon matSuffix *ngIf="itemsForm.controls.des.errors"
-                  >sentiment_dissatisfied</mat-icon
+                >sentiment_dissatisfied
+                </mat-icon
                 >
                 <mat-hint
                   align="end"
@@ -152,21 +163,20 @@
                     itemsForm.controls.des.errors?.required &&
                     itemsForm.controls.des.touched
                   "
-                  >This Field Is Required</mat-hint
+                >This Field Is Required
+                </mat-hint
                 >
                 <mat-hint
                   align="end"
                   *ngIf="itemsForm.controls.des.errors?.minlength"
-                  >Min Length Is 30 Characters</mat-hint
+                >Min Length Is 30 Characters
+                </mat-hint
                 >
               </mat-form-field>
             </p>
 
             <!------------------------ Images-------------------------->
             <div class="">
-              <div class="" *ngIf="isLoadingImages">
-                <mat-progress-bar mode="query"></mat-progress-bar>
-              </div>
               <label for="file" style="margin-right: 10px;">File</label>
               <input
                 formControlName="file"
@@ -191,7 +201,8 @@
                   itemsForm.controls.file.errors?.required &&
                   itemsForm.controls.file.touched
                 "
-                >This Field Is Required</mat-hint
+              >This Field Is Required
+              </mat-hint
               >
               <div class="container">
                 <div class="row justify-content-center">
@@ -248,26 +259,26 @@
 </div>
 
 <!-- import { HttpEventType, HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
-  
+
   constructor(private http: HttpClient) {}
-  
+
   this.http.get(someUrl).subscribe((event: HttpEvent) => {
-  
+
     if (event.type === HttpEventType.DownloadProgress) {
       const totalLoaded = event.loaded;
       const totalToLoad = event.total;
       // here is the ratio
       const ratio = 100 / totalToLoad * totalLoaded;
     }
-  
+
     // you have finished
     if (event.type === HttpEventType.Response) {
       console.log('done');
     }
-  
+
   }) -->
 
-<!-- 
+<!--
   <!doctype html>
   <html lang="en">
   <head>
@@ -276,7 +287,7 @@
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
@@ -320,7 +331,7 @@
     </div>
   </div> -->
 
-<!-- 
+<!--
   selectedFile: File;
     retrievedImage: any;
     base64Data: any;
@@ -335,11 +346,11 @@
     //Gets called when the user clicks on submit to upload the image
     onUpload() {
       console.log(this.selectedFile);
-      
+
       //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
       const uploadImageData = new FormData();
       uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-    
+
       //Make a call to the Spring Boot Application to save the image
       this.httpClient.post('http://localhost:8080/image/upload', uploadImageData, { observe: 'response' })
         .subscribe((response) => {

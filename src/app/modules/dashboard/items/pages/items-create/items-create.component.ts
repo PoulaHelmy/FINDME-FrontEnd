@@ -40,7 +40,6 @@ export class ItemsCreateComponent implements OnInit, OnDestroy {
   subCategories: [] = [];
   data: {};
   isLoadingResults = true;
-  isLoadingImages = false;
   options = {
     title: 'Are Sure To Submit This Part  ',
     message:
@@ -113,7 +112,6 @@ export class ItemsCreateComponent implements OnInit, OnDestroy {
       var filesAmount = event.target.files.length;
 
       for (let i = 0; i < filesAmount; i++) {
-        this.isLoadingImages = true;
         var reader = new FileReader();
         reader.onload = (event: any) => {
           this.images.push(event.target.result);
@@ -124,8 +122,6 @@ export class ItemsCreateComponent implements OnInit, OnDestroy {
         reader.readAsDataURL(event.target.files[i]);
       }
     }
-
-    this.isLoadingImages = false;
   }
 
   /****************** Submit Function************************/
